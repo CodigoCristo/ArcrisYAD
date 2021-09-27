@@ -1,0 +1,7 @@
+#!/bin/bash
+
+idioma () {
+locale=$(yad --window-icon="./cuadroicon.png" --center --list --radiolist --geometry=280x500 --title=" " --text "Seleccione su configuración regional/idioma.\nEl valor predeterminado es inglés americano 'en_US.UTF-8'." --column Select --column Locale TRUE en_US.UTF-8 $(cat bash/locale.gen))
+locale="$locale UTF-8" 
+printf $locale
+}

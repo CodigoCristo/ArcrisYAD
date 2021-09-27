@@ -1,0 +1,45 @@
+#!/bin/bash
+
+idioma () {
+locale=$(zenity --list --radiolist --height=500 --width=280 --title=" " --text "\nSeleccione su configuración regional/idioma.\n\nEl valor predeterminado es inglés americano\n\n\t\t\t   'en_US.UTF-8'\n" --column Select --column Locale TRUE en_US.UTF-8 $(cat bash/locale.gen))
+locale="$locale UTF-8" 
+echo $locale
+}
+
+
+zone () {
+
+zenity --question --width=250 --text="¿ Zona Horaria Automatica ?" --title="Zona Horaria" \
+       --ok-label="Automatico" \
+       --cancel-label="Manual"
+
+case $? in
+
+0)
+
+zonahoraria=$(curl https://ipapi.co/timezone)
+printf "$zonahoraria \n"
+    ;;
+
+1)
+
+zones=$(cat /usr/share/zoneinfo/zone.tab | awk '{print $3}' | grep "/" | sed "s/\/.*//g" | sort -ud | sort | awk '{ printf " FALSE ""\0"$0"\0" }')
+zone=$(zenity --list --radiolist --height=500 --width=450 --title="$title" --text "Select your country/zone." --column Select --column Zone $zones)
+
+subzones=$(cat /usr/share/zoneinfo/zone.tab | awk '{print $3}' | grep "$zone/" | sed "s/$zone\///g" | sort -ud | sort | awk '{ printf " FALSE ""\0"$0"\0" }')
+subzone=$(zenity --list --radiolist --height=500 --width=450 --title="$title" --text "Select your sub-zone." --column Select --column Zone $subzones)
+
+zonahoraria=$zone/$subzone
+printf "$zonahoraria \n"
+    ;;
+
+esac
+
+}
+
+
+
+keyX11 () {
+layout=$(zenity --list --radiolist --height=500 --width=450 --title="$title" --text="Select your layout, a two-character country code" --column Select --column Layout $(localectl list-x11-keymap-layouts | awk '{ printf " FALSE ""\0"$0"\0" }'))
+printf "$layout \n"
+}

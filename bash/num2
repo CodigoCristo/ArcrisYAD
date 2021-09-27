@@ -1,0 +1,4 @@
+#!/bin/bash
+
+inxi -CDGNm  |\
+yad --image=cpu  --text-info --tail  --text="\nInformación del Sistema\n" &

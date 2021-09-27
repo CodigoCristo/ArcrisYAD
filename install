@@ -1,0 +1,126 @@
+#! /bin/sh
+# -*- mode: sh -*-
+res1=$(mktemp --tmpdir term-tab1.XXXXXXXX)
+res2=$(mktemp --tmpdir term-tab2.XXXXXXXX)
+res3=$(mktemp --tmpdir term-tab3.XXXXXXXX)
+res4=$(mktemp --tmpdir term-tab4.XXXXXXXX)
+res5=$(mktemp --tmpdir term-tab5.XXXXXXXX)
+res6=$(mktemp --tmpdir term-tab6.XXXXXXXX)
+res7=$(mktemp --tmpdir term-tab7.XXXXXXXX)
+
+KEY=$RANDOM
+
+
+source bash/num1
+export -f idioma
+export -f zone
+export -f keyX11
+
+
+yad --plug=$KEY --tabnum=1 \
+--form  --separator="+" --item-separator="," \
+--text="\nPor favor ingrese sus datos:\n\nEvite ingresar caracteres especiales ! # $ % ( ) * +, -. / \n" \
+--field="<span color='blue'><b>Usuario Nuevo</b></span>" "usuario" \
+--field="<span color='green'><b>Contraseña de Usuario</b></span>:H" "Clave" \
+--field="Repita Contraseña:H" "Clave" \
+--field="<span color='red'><b>Contraseña de Root</b></span>:H" "Clave" \
+--field="Repita Contraseña:H" "Clave" \
+--field="Idioma:FBTN" 'bash -c "idioma"' \
+--field="Zona Horaria:FBTN" 'bash -c "zone"' \
+--field="Teclado:FBTN" 'bash -c "keyX11"' > $res1 &
+
+
+yad --plug=$KEY --tabnum=2 --align=left \
+--form  --columns=2  --separator="+" --item-separator=","   \
+--text="\nIngrese el tipo de particionado en el disco a instalar:\n" \
+--field="Particionado Automatico:FBTN" 'bash -c "zone"' \
+--field="Particionado Automatico con Cifrado:FBTN" 'bash -c "zone"' \
+--field="Particionado Manual:FBTN" 'bash -c "zone"' \
+--field="Particionado con otro Sistema Operativo:FBTN" 'bash -c "zone"' > $res2 &
+
+
+kernels=$(echo "linux-stable,linux-hardened,linux-lts,linux-zen")
+shells=$(echo "zsh,bash,dash,fish,mksh,tcsh")
+
+yad --plug=$KEY --tabnum=3 --align=left \
+--form  --separator="+" --item-separator=","   \
+--text="\nSelecciona el Kernel para tu sistema y algunos extras:\n" \
+--field="Kernel del Sistema:CB" "${kernels}" \
+--field="Shell del Sistema:CB" "${shells}" \
+--field="Selecciona los modulos que necesitas:LBL" \
+--field="Microcode del Procesador (Actualizaciones):CHK" \
+--field="Driver para Touchpad - Panel táctil (Laptop):CHK" \
+--field="\n\t\t\t\t\tApóyame en Patreon: https://www.patreon.com/codigocristo:LBL" > $res3 &
+
+
+yad --plug=$KEY --tabnum=4 --align=left \
+--form --separator="+" --item-separator="," --image="patreon.png" --image-on-top \
+--text="\n\n\tApóyame en Patreon: https://www.patreon.com/codigocristo\n" \
+--field="\nDesktop Environment (DE)\nUn entorno de escritorio proporciona una completa interfaz gráfica de usuario:LBL" \
+--field="\nWindow Manager (WM)\nUn gestor de ventanas proporciona al usuario una interfaz gráfica minimalista:LBL" \
+--field="\nGetty (TTY)\nUna consola getty es el nombre genérico que gestiona una línea de terminal:LBL" \
+--field="Elige entre un DE o WM o TTY:FBTN" 'bash -c "zone"' > $res4 &
+
+
+
+drivideo=$(echo "Automatico,Video vesa (Generic All),Intel (Open Source),AMD - ATI (Open Source),AMD - Radeon (Open Source),Nvidia (Open Source),Nvidia 440xx (Linux Stable),Nvidia 390xx (Linux Stable),Nvidia 440xx (Linux LTS),Nvidia 390xx (Linux LTS),Nvidia 440xx (Linux Hardened - Zen),Nvidia 390xx (Linux Hardened - Zen),Nvidia 440xx (Linux Stable + Intel)")
+driaudio=$(echo "Pulse Audio,Alsa Audio,Jack Audio,Pipewire Audio")
+driaur=$(echo "Ninguno,yay (Terminal),paru (Terminal),pamac (Graphical),Octopi (Graphical)")
+webs=$(echo "Ninguno,Firefox,Chromium,Brave,Google Chrome,Opera,Vivaldi")
+driofi=$(echo "Ninguno,LibreOffice,WPS Office,SoftMaker Office")
+driwifi=$(echo "Ninguno,Automatico,Broadcom 802.11 Linux Stable,Broadcom 802.11 Others Kernels")
+driblue=$(echo "Ninguno,bluetoothctl (Terminal),blueman(Graphical)")
+
+yad --plug=$KEY --tabnum=5 --align=left \
+--form  --separator="+" --item-separator=","   \
+--field="Driver de Vídeo:CB" "${drivideo}" \
+--field="Sistema de Audio:CB" "${driaudio}" \
+--field="AUR Helper:CB" "${driaur}" \
+--field="Navegador Web:CB" "${webs}" \
+--field="Ofimática:CB" "${driofi}" \
+--field="Wifi:CB" "${driwifi}" \
+--field="Bluetooth:CB" "${driblue}" > $res5 &
+
+
+
+yad --plug=$KEY --tabnum=6 --align=left \
+--form  --columns=2  --separator="+" --item-separator=","   \
+--text="\nAgrega tus programas favoritos para tu sistema Arch:\n" \
+--field="Lectura y formateo de discos incluido Android:CHK" \
+--field="Compresión y Descompresión de archivos:CHK" \
+--field="Códecs de video - lectura de todos los formatos:CHK" \
+--field="gufw - Firewall de red:CHK" \
+--field="hardinfo - Información del sistema y benchmark:CHK" \
+--field="gparted - Administrador de Discos:CHK" \
+--field="viewnior - Visor de Imagenes:CHK" \
+--field="vlc - Reproductor de Video:CHK" \
+--field="audacious - Reproductor de Audio:CHK" \
+--field="spotify - Sin Anuncios adblock:CHK" \
+--field="gnome-system-monitor - Admin de Procesos:CHK" \
+--field="htop - Administrador de Procesos:CHK" \
+--field="Telegram - telegram-desktop:CHK" \
+--field="Steam - Wine + Proton:CHK" \
+--field="Lutris - Plataforma de juegos Open Source:CHK" \
+--field="OBS-Studio - Software de código abierto:CHK" > $res6 &
+
+
+inxi -CDGNm -y 90 | yad --image=cpu  --plug=$KEY --tabnum=7 --align=left \
+--text-info --tail  --text="\nInformación del Sistema\n" > $res7 &
+
+
+yad --center --window-icon="cuadroicon.png" --image="unnamed.jpg" --image-on-top --title="Instalador Arcris" \
+--geometry=600x500   --text="\t<span size='large' color='white'><b>>_  Instalar Arch Linux - ArcriS  |  Creado en YAD y Zenity</b></span>" --borders=10 \
+--button="  Cancelar!gtk-no:0" --button="  Instalar!gtk-ok:0"  --notebook --key=$KEY --tab="Información" --tab="Disco" --tab="Kernel" --tab="DE o WM" --tab="Programas" --tab="Extras" --tab="Detalles del Sistema"
+
+cat $res1
+cat $res2
+cat $res3
+cat $res4
+cat $res5
+cat $res6
+
+#sudo pacman -Sy --noconfirm  | yad --geometry=400x500 --text-info --tail  --text="\nInstalando\n"
+
+
+#sudo pacman -Sy | yad --geometry=400x500 --listen --list --separator="" \
+#--column="GRUB Menu Entry"
