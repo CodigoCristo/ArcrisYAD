@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#sudo fdisk -l | grep /dev/ | grep ":" | awk '{if (NR=1) {print  $2, $3, $4}}' | sed -e 's/.$//' > disk.txt
+#listdevice=$()
+
+lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices2
+sed -i ':a;N;$!ba;s/\n/ !/g' devices2
+sed -i "$d" devices2
+
+devices=$(awk '{print $0 " " }' devices2 )
+echo $devices
+#truncate -s-1 devices2
+
+
+#cat disk.txt
+#echo $listdevice
+yad --center \
+--button="Seleccionar:0" \
+--title "Login to Linux Terminal Server" --form \
+--field="Disco a Seleccionar:CB" "$devices"

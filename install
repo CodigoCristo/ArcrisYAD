@@ -1,5 +1,15 @@
 #! /bin/sh
 # -*- mode: sh -*-
+# Código Cristo
+#
+# Referencias aprendidas:
+#
+# https://man.archlinux.org/man/community/yad/yad.1.en
+# https://sanana.kiev.ua/index.php/yad
+# http://smokey01.com/yad/
+# https://github.com/offternet/yaddemo
+#
+
 res1=$(mktemp --tmpdir term-tab1.XXXXXXXX)
 res2=$(mktemp --tmpdir term-tab2.XXXXXXXX)
 res3=$(mktemp --tmpdir term-tab3.XXXXXXXX)
@@ -29,11 +39,14 @@ yad --plug=$KEY --tabnum=1 \
 --field="Zona Horaria:FBTN" 'bash -c "zone"' \
 --field="Teclado:FBTN" 'bash -c "keyX11"' > $res1 &
 
+source bash/num2
+export -f partauto
+
 
 yad --plug=$KEY --tabnum=2 --align=left \
 --form  --columns=2  --separator="+" --item-separator=","   \
 --text="\nIngrese el tipo de particionado en el disco a instalar:\n" \
---field="Particionado Automatico:FBTN" 'bash -c "zone"' \
+--field="Particionado Automatico:FBTN" 'bash -c "partauto"' \
 --field="Particionado Automatico con Cifrado:FBTN" 'bash -c "zone"' \
 --field="Particionado Manual:FBTN" 'bash -c "zone"' \
 --field="Particionado con otro Sistema Operativo:FBTN" 'bash -c "zone"' > $res2 &
@@ -112,6 +125,7 @@ yad --center --window-icon="cuadroicon.png" --image="unnamed.jpg" --image-on-top
 --geometry=600x500   --text="\t<span size='large' color='white'><b>>_  Instalar Arch Linux - ArcriS  |  Creado en YAD y Zenity</b></span>" --borders=10 \
 --button="  Cancelar!gtk-no:0" --button="  Instalar!gtk-ok:0"  --notebook --key=$KEY --tab="Información" --tab="Disco" --tab="Kernel" --tab="DE o WM" --tab="Programas" --tab="Extras" --tab="Detalles del Sistema"
 
+clear 
 cat $res1
 cat $res2
 cat $res3
