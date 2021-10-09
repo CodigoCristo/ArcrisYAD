@@ -1,4 +1,16 @@
-idneo () {
-	neofetch
-}
-xfce4-terminal -e 'bash -c "idneo ; read line"'
+
+
+lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
+sed -i ':a;N;$!ba;s/\n/ !/g' devices
+sed -i "$d" devices
+
+devices=$(awk '{print $0 " " }' devices )
+
+disk=$(yad --center --geometry=400x100 --window-icon=drive-harddisk \
+--button="Seleccionar:0" \
+--title "Selecciona tu Disco Duro" --form \
+--field="Selección de Disco: :CB" "$devices")
+
+disk=$(echo $disk | awk '{print $1}')
+
+echo $disk
