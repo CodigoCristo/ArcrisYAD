@@ -1,36 +1,13 @@
-	partautoRoot () {
-	#sudo fdisk -l | grep /dev/ | grep ":" | awk '{if (NR=1) {print  $2, $3, $4}}' | sed -e 's/.$//' > disk.txt
-	#listdevice=$()
-	lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
-	sed -i ':a;N;$!ba;s/\n/ !/g' devices
-	sed -i "$d" devices
-
-	devices=$(awk '{print $0 " " }' devices )
-
-	disk=$(yad --center --geometry=400x100 --window-icon=drive-harddisk \
-	--button="Seleccionar:0" --buttons-layout="center" --borders="10" \
-	--title "Selecciona tu Disco Duro" --form \
-	--field="Selección de Disco: :CB" "$devices")
-
-	disk=$(echo $disk | awk '{print $1}')
-
-	echo $disk
-	}
+#! /bin/bash
 
 
-OUT=$(yad --on-top  --center --window-icon="drive-harddisk" \
---image="drive-harddisk" --text="Selecciona tu preferencia de configurar tu disco"  --title "Tipo de particionado"  \
---width="400" --height="250"  --list --radiolist --columns="3" \
---column "   Elección   " --column "   Tipo de particionado   " \
---column "   Commando":HD  \
---print-column="2" --print-column="3" --buttons-layout="center" --separator=" " --button="Seleccionar":2 \
-True  "Solo Root ( EXT4 )" 'partautoRoot' \
-False "Solo Root + Swap ( EXT4 )" 'partautoRoot' \
-False "Solo Root + Home ( EXT4 )" 'partautoRoot' \
-False "Solo Root + Home + Swap ( EXT4 )" 'partautoRoot')
+yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
+--form --field="Partición Root : :RO" " GiB Restantes" \
+--field="Partición Home : :NUM" "0\!10..700\!10" \
+--field="Partición Swap : :NUM" "0\!1..20\!1"  > swapdisk
 
-if [ $? = "1" ]
-  	then exit
-fi
-
-$OUT
+varSwapdisk=$(awk '{print $3 }' swapdisk )
+varHomedisk=$(awk '{print $4 }' swapdisk )
+rm swapdisk
+echo ${varSwapdisk}GB
+echo ${varHomedisk}GB
