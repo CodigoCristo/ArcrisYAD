@@ -75,7 +75,6 @@ yad --plug=$KEY --tabnum=4 --align=left \
 --field="Elige entre un DE o WM o TTY:FBTN" 'bash -c "zone"' > $res4 &
 
 
-
 drivideo=$(echo "Automatico,Video vesa (Generic All),Intel (Open Source),AMD - ATI (Open Source),AMD - Radeon (Open Source),Nvidia (Open Source),Nvidia 440xx (Linux Stable),Nvidia 390xx (Linux Stable),Nvidia 440xx (Linux LTS),Nvidia 390xx (Linux LTS),Nvidia 440xx (Linux Hardened - Zen),Nvidia 390xx (Linux Hardened - Zen),Nvidia 440xx (Linux Stable + Intel)")
 driaudio=$(echo "Pulse Audio,Alsa Audio,Jack Audio,Pipewire Audio")
 driaur=$(echo "Ninguno,yay (Terminal),paru (Terminal),pamac (Graphical),Octopi (Graphical)")
@@ -118,7 +117,7 @@ yad --plug=$KEY --tabnum=6 --align=left \
 
 
 inxi -CDGNm -y 90 | yad --image=cpu  --plug=$KEY --tabnum=7 --align=left \
---text-info --tail  --text="\nInformación del Sistema\n" > $res7 &
+--text-info --text="\nInformación del Sistema\n" > $res7 &
 
 
 yad --center --window-icon="cuadroicon.png" --image="unnamed.jpg" --image-on-top --title="Instalador Arcris" \

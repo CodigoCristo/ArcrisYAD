@@ -1,6 +1,3 @@
-
-partauto () {
-
 	partautoRoot () {
 	#sudo fdisk -l | grep /dev/ | grep ":" | awk '{if (NR=1) {print  $2, $3, $4}}' | sed -e 's/.$//' > disk.txt
 	#listdevice=$()
@@ -37,8 +34,3 @@ if [ $? = "1" ]
 fi
 
 $OUT
-
-
-
-
-}

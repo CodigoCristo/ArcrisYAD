@@ -1,19 +1,20 @@
 #!/bin/bash
 
-#sudo fdisk -l | grep /dev/ | grep ":" | awk '{if (NR=1) {print  $2, $3, $4}}' | sed -e 's/.$//' > disk.txt
-#listdevice=$()
+root () {
+	echo "HOLA MUNDO"
+}
 
-lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
-sed -i ':a;N;$!ba;s/\n/ !/g' devices
-sed -i "$d" devices
+export -f root
 
-devices=$(awk '{print $0 " " }' devices )
+yad --on-top  --center --window-icon="drive-harddisk" \
+--image="drive-harddisk" --text="Selecciona tu preferencia de configurar tu disco"  --title "Tipo de particionado"  \
+--width="400" --height="250"  --list --radiolist --columns=3 \
+--column "   Elección   " --column "   Tipo de particionado   " \
+--column "   Commando":HD  \
+True  "Solo Root ( EXT4 )" 'root' \
+False "Solo Root + Swap ( EXT4 )" 'bash -c "root"' \
+False "Solo Root + Home ( EXT4 )" 'ls $HOME/Downloads' \
+False "Solo Root + Home + Swap ( EXT4 )" 'ls $HOME/Videos' \
+--print-column 2 --print-column 3 --buttons-layout="center" --button="Seleccionar"
 
-disk=$(yad --center --geometry=400x100 --window-icon=drive-harddisk \
---button="Seleccionar:0" \
---title "Selecciona tu Disco Duro" --form \
---field="Selección de Disco: :CB" "$devices")
 
-disk=$(echo $disk | awk '{print $1}')
-
-echo $disk
