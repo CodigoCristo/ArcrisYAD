@@ -1,13 +1,53 @@
 #! /bin/bash
 
 
-yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
---form --field="Partición Root : :RO" " GiB Restantes" \
---field="Partición Home : :NUM" "0\!10..700\!10" \
---field="Partición Swap : :NUM" "0\!1..20\!1"  > swapdisk
 
-varSwapdisk=$(awk '{print $3 }' swapdisk )
-varHomedisk=$(awk '{print $4 }' swapdisk )
-rm swapdisk
-echo ${varSwapdisk}GB
-echo ${varHomedisk}GB
+lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{if (NR!=1) {print}}' | sed '/sr/d' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
+sed -i ':a;N;$!ba;s/\n/ !/g' devices
+sed -i "$d" devices
+
+devices=$(awk '{print $0 " " }' devices )
+
+disk=$(yad --skip-taskbar --center --geometry=400x100 --window-icon=drive-harddisk \
+--button="Seleccionar:0" --buttons-layout="center" --borders="10" \
+--title "Selecciona tu Disco Duro" --form \
+--field="Selección de Disco: :CB" "$devices")
+
+disco=$(echo $disk | awk '{print $1}')
+
+echo $disco
+
+sgdisk --zap-all ${disco}
+parted ${disco} mklabel gpt
+sgdisk ${disco} -n=1:0:+100M -t=1:ef00
+sgdisk ${disco} -n=3:0:0
+fdisk -l ${disco} > /tmp/partition
+echo ""
+cat /tmp/partition
+sleep 3
+
+partition="$(cat /tmp/partition | grep /dev/ | awk '{if (NR!=1) {print}}' | sed 's/*//g' | awk -F ' ' '{print $1}')"
+
+echo $partition | awk -F ' ' '{print $1}' >  boot-efi
+echo $partition | awk -F ' ' '{print $2}' >  root-efi
+
+clear
+echo ""
+echo "Formateando Particiones"
+echo ""
+mkfs.ext4 $(cat root-efi) 
+mount $(cat root-efi) /mnt 
+
+mkdir -p /mnt/efi 
+mkfs.fat -F 32 $(cat boot-efi) 
+mount $(cat boot-efi) /mnt/efi	
+rm boot-efi
+rm root-efi | yad --progress \
+--title="Discos" \
+--width=430 --height=100 \
+--text="\tFormateando y Montando discos, Porfavor espere ..." \
+--image="drive-harddisk" --window-icon="drive-harddisk" \
+--pulsate --buttons-layout="center" --borders="10" \
+--auto-close --hide-text \
+--button="Cancelar (No recomendado):0"
+
