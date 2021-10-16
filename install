@@ -92,7 +92,7 @@ driwifi=$(echo "Ninguno,Automatico,Broadcom 802.11 Linux Stable,Broadcom 802.11 
 driblue=$(echo "Ninguno,bluetoothctl (Terminal),blueman(Graphical)")
 
 yad --plug=$KEY --tabnum=5 --align=left \
---form  --separator="+" --item-separator=","   \
+--form  --separator=" " --item-separator=","   \
 --field="Driver de Vídeo:CB" "${drivideo}" \
 --field="Sistema de Audio:CB" "${driaudio}" \
 --field="AUR Helper:CB" "${driaur}" \
@@ -104,7 +104,7 @@ yad --plug=$KEY --tabnum=5 --align=left \
 
 
 yad --plug=$KEY --tabnum=6 --align=left \
---form  --columns=2  --separator="+" --item-separator=","   \
+--form  --columns=2  --separator=" " --item-separator=","   \
 --text="\nAgrega tus programas favoritos para tu sistema Arch:\n" \
 --field="Lectura y formateo de discos incluido Android:CHK" \
 --field="Compresión y Descompresión de archivos:CHK" \
