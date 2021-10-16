@@ -1,35 +1,34 @@
 #! /bin/bash
 
-partauto () {
 
-	partautoRoot () {
- sgdisk --zap-all ${disco}
- parted ${disco} mklabel gpt
- sgdisk ${disco} -n=1:0:+100M -t=1:ef00
- sgdisk ${disco} -n=2:0:0
- fdisk -l ${disco} > partition
- echo ""
- cat partition
- sleep 3
- 
- partition="$(cat partition | grep /dev/ | awk '{if (NR!=1) {print}}' | sed 's/*//g' | awk -F ' ' '{print $1}')"
- rm partition
- 
- echo $partition | awk -F ' ' '{print $1}' >  boot-efi
- echo $partition | awk -F ' ' '{print $2}' >  root-efi
- 
- clear
- echo ""
- echo "Formateando Particiones"
- echo ""
- mkfs.ext4 $(cat root-efi) 
- mount $(cat root-efi) /mnt 
- 
- mkdir -p /mnt/efi 
- mkfs.fat -F 32 $(cat boot-efi) 
- mount $(cat boot-efi) /mnt/efi	
- rm boot-efi
- rm root-efi | yad --progress \
+partautoRoot () {
+sgdisk --zap-all ${disco}
+parted ${disco} mklabel gpt
+sgdisk ${disco} -n=1:0:+100M -t=1:ef00
+sgdisk ${disco} -n=2:0:0
+fdisk -l ${disco} > partition
+echo ""
+cat partition
+sleep 3
+
+partition="$(cat partition | grep /dev/ | awk '{if (NR!=1) {print}}' | sed 's/*//g' | awk -F ' ' '{print $1}')"
+rm partition
+
+echo $partition | awk -F ' ' '{print $1}' >  boot-efi
+echo $partition | awk -F ' ' '{print $2}' >  root-efi
+
+clear
+echo ""
+echo "Formateando Particiones"
+echo ""
+mkfs.ext4 $(cat root-efi) 
+mount $(cat root-efi) /mnt 
+
+mkdir -p /mnt/efi 
+mkfs.fat -F 32 $(cat boot-efi) 
+mount $(cat boot-efi) /mnt/efi	
+rm boot-efi
+rm root-efi | yad --progress \
 --title="Discos" \
 --width=430 --height=100 \
 --text="\tFormateando y Montando discos, Porfavor espere ..." \
@@ -37,41 +36,43 @@ partauto () {
 --pulsate --buttons-layout="center" --borders="10" \
 --auto-close --hide-text \
 --button="Cancelar (No recomendado):0"
-	}
+		}
 
-	partautoSwap () {
-	yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
-	--form --field="Partición Root : :RO" " GiB Restantes" \
-	--field="Partición Swap : :NUM" "0\!1..20\!1"  > swapdisk
+partautoSwap () {
+yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
+--form --field="Partición Root : :RO" " GiB Restantes" \
+--field="Partición Swap : :NUM" "0\!1..20\!1"  > swapdisk
 
-	varSwapdisk=$(awk '{print $3 }' swapdisk )
-	rm swapdisk
-	echo ${varSwapdisk}GB
-	}
+varSwapdisk=$(awk '{print $3 }' swapdisk )
+rm swapdisk
+echo ${varSwapdisk}GB
+}
 
-	partautoHome () {
-	yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
-	--form --field="Partición Root : :RO" " GiB Restantes" \
-	--field="Partición Swap : :NUM" "0\!1..20\!1"  > homedisk
+partautoHome () {
+yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
+--form --field="Partición Root : :RO" " GiB Restantes" \
+--field="Partición Swap : :NUM" "0\!1..20\!1"  > homedisk
 
-	varHomedisk=$(awk '{print $3 }' homedisk )
-	rm homedisk
-	echo ${varHomedisk}GB
-	}
+varHomedisk=$(awk '{print $3 }' homedisk )
+rm homedisk
+echo ${varHomedisk}GB
+}
 
-	partautoHomeSwap () {
-	yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
-	--form --field="Partición Root : :RO" " GiB Restantes" \
-	--field="Partición Home : :NUM" "0\!10..700\!10" \
-	--field="Partición Swap : :NUM" "0\!1..20\!1"  > homeswapdisk
+partautoHomeSwap () {
+yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
+--form --field="Partición Root : :RO" " GiB Restantes" \
+--field="Partición Home : :NUM" "0\!10..700\!10" \
+--field="Partición Swap : :NUM" "0\!1..20\!1"  > homeswapdisk
 
-	varSwapdisk=$(awk '{print $3 }' homeswapdisk )
-	varHomedisk=$(awk '{print $4 }' homeswapdisk )
-	rm homeswapdisk
-	echo ${varSwapdisk}GB
-	echo ${varHomedisk}GB
-	}
+varSwapdisk=$(awk '{print $3 }' homeswapdisk )
+varHomedisk=$(awk '{print $4 }' homeswapdisk )
+rm homeswapdisk
+echo ${varSwapdisk}GB
+echo ${varHomedisk}GB
+}
 
+
+partauto () {
 OUT=$(yad --skip-taskbar --on-top  --center --window-icon="drive-harddisk" \
 --image="drive-harddisk" --text="Selecciona tu preferencia de configurar tu disco"  --title "Tipo de particionado"  \
 --width="400" --height="250"  --list --radiolist --columns="3" \
@@ -107,9 +108,6 @@ echo $disco
 
 
 $OUT
-
-
-
 
 }
 
