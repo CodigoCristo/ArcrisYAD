@@ -44,6 +44,7 @@ export -f partauto
 export -f partmanual
 export -f partcifrado
 export -f partwindows
+
 export -f partautoRoot
 
 
@@ -51,9 +52,9 @@ yad --plug=$KEY --tabnum=2 --align=left \
 --form  --columns=2  --separator="+" --item-separator=","   \
 --text="\nIngrese el tipo de particionado en el disco a instalar:\n" \
 --field="Particionado Automatico:FBTN" 'bash -c "partauto"' \
---field="Particionado Automatico con Cifrado:FBTN" 'bash -c "zone"' \
---field="Particionado Manual:FBTN" 'bash -c "zone"' \
---field="Particionado con otro Sistema Operativo:FBTN" 'bash -c "zone"' > $res2 &
+--field="Particionado Automatico con Cifrado:FBTN" 'bash -c "partcifrado"' \
+--field="Particionado Manual:FBTN" 'bash -c "partmanual"' \
+--field="Particionado con otro Sistema Operativo:FBTN" 'bash -c "partwindows"' > $res2 &
 
 
 kernels=$(echo "linux-stable,linux-hardened,linux-lts,linux-zen")
