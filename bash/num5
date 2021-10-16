@@ -3,5 +3,6 @@
 
 lsblk | yad --center --geometry="100x300" --window-icon="drive-harddisk"  \
 --image="drive-harddisk"  --align="center" --text-info \
---title "Disco Seleccionado" --text="\n\tParticiones Montadas\n"
+--title "Disco Seleccionado" --text="\n\tParticiones Montadas\n" \
+--button="Confirmar:0" --buttons-layout="center" --borders="10"
 
