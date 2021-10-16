@@ -2,25 +2,10 @@
 partauto () {
 
 	partautoRoot () {
-lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{if (NR!=1) {print}}' | sed '/sr/d' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
-sed -i ':a;N;$!ba;s/\n/ !/g' devices
-sed -i "$d" devices
-
-devices=$(awk '{print $0 " " }' devices )
-
-disk=$(yad --skip-taskbar --center --geometry=400x100 --window-icon=drive-harddisk \
---button="Seleccionar:0" --buttons-layout="center" --borders="10" \
---title "Selecciona tu Disco Duro" --form \
---field="Selección de Disco: :CB" "$devices")
-
-disco=$(echo $disk | awk '{print $1}')
-
-echo $disco
-
-(sgdisk --zap-all ${disco}
+ sgdisk --zap-all ${disco}
  parted ${disco} mklabel gpt
  sgdisk ${disco} -n=1:0:+100M -t=1:ef00
- sgdisk ${disco} -n=3:0:0
+ sgdisk ${disco} -n=2:0:0
  fdisk -l ${disco} > partition
  echo ""
  cat partition
@@ -43,7 +28,7 @@ echo $disco
  mkfs.fat -F 32 $(cat boot-efi) 
  mount $(cat boot-efi) /mnt/efi	
  rm boot-efi
- rm root-efi) | yad --progress \
+ rm root-efi | yad --progress \
 --title="Discos" \
 --width=430 --height=100 \
 --text="\tFormateando y Montando discos, Porfavor espere ..." \
@@ -103,6 +88,22 @@ fi
 
 export -f partauto
 export -f partautoRoot
+
+lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{if (NR!=1) {print}}' | sed '/sr/d' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
+sed -i ':a;N;$!ba;s/\n/ !/g' devices
+sed -i "$d" devices
+
+devices=$(awk '{print $0 " " }' devices )
+
+disk=$(yad --skip-taskbar --center --geometry=400x100 --window-icon=drive-harddisk \
+--button="Seleccionar:0" --buttons-layout="center" --borders="10" \
+--title "Selecciona tu Disco Duro" --form \
+--field="Selección de Disco: :CB" "$devices")
+
+disco=$(echo $disk | awk '{print $1}')
+
+echo $disco
+
 
 $OUT
 
