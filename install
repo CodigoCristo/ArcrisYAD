@@ -28,9 +28,9 @@ export -f keyX11
 
 
 yad --plug=$KEY --tabnum=1 \
---form  --separator="+" --item-separator="," \
+--form  --separator=" " --item-separator="," \
 --text="\nPor favor ingrese sus datos:\n\nEvite ingresar caracteres especiales ! # $ % ( ) * +, -. / \n" \
---field="<span color='blue'><b>Usuario Nuevo</b></span>" "usuario" \
+--field="<span color='white'><b>Usuario Nuevo</b></span>" "usuario" \
 --field="<span color='green'><b>Contraseña de Usuario</b></span>:H" "Clave" \
 --field="Repita Contraseña:H" "Clave" \
 --field="<span color='red'><b>Contraseña de Root</b></span>:H" "Clave" \
