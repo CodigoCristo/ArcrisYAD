@@ -101,6 +101,8 @@ if [ $? = "1" ]
   	then exit
 fi
 
+export -f partauto
+export -f partautoRoot
 
 $OUT
 

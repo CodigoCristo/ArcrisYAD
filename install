@@ -41,6 +41,7 @@ yad --plug=$KEY --tabnum=1 \
 
 source bash/num2
 export -f partauto
+export -f partautoRoot
 
 
 yad --plug=$KEY --tabnum=2 --align=left \
