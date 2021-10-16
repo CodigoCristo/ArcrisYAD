@@ -52,7 +52,7 @@ export -f partautoHome1
 
 partautoHome () {
 
-maxvalue=$(sudo fdisk -l ${disco} | grep "bytes," | awk '{print $5}' | cut -c -4 )
+maxvalue=$(sudo fdisk -l ${disco} | grep "bytes," | awk '{print $5}' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' )
 
 let maxvalue=$maxvalue-30
 
