@@ -1,12 +1,7 @@
 #! /bin/bash
 
-(ping -c 5 www.google.com) |
-yad --progress \
---title="Discos" \
---width=430 --height=100 \
---text="\tFormateando y Montando discos, Porfavor espere ..." \
---image="drive-harddisk" --window-icon="drive-harddisk" \
---pulsate --buttons-layout="center" --borders="10" \
---auto-close --hide-text \
---button="Cancelar (No recomendado):0"
+
+lsblk | yad --center --geometry="100x300" --window-icon="drive-harddisk"  \
+--image="drive-harddisk"  --align="center" --text-info \
+--title "Disco Seleccionado" --text="\n\tParticiones Montadas\n"
 

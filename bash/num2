@@ -1,7 +1,6 @@
 #! /bin/bash
 
 source bash/disk
-source disk
 export -f partautoRoot1
 
 
@@ -12,6 +11,10 @@ partautoRoot1 | yad --progress --title="Discos" --width=430 --height=100 \
 --pulsate --buttons-layout="center" --borders="10" \
 --auto-close --hide-text \
 --button="Cancelar (No recomendado):0"
+
+lsblk ${disco} | yad --center --geometry="100x300" --window-icon="drive-harddisk"  \
+--image="drive-harddisk"  --align="center" --text-info \
+--title "Disco Seleccionado" --text="\n\tParticiones Montadas\n"
 		}
 
 partautoSwap () {
