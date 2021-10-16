@@ -120,25 +120,24 @@ sleep 3
 partition="$(cat partition | grep /dev/ | awk '{if (NR!=1) {print}}' | sed 's/*//g' | awk -F ' ' '{print $1}')"
 rm partition
 
-echo $partition | awk -F ' ' '{print $1}' >  boot-efi
-echo $partition | awk -F ' ' '{print $2}' >  swap-efi
-echo $partition | awk -F ' ' '{print $3}' >  home-efi
-echo $partition | awk -F ' ' '{print $4}' >  root-efi
+boot_efi=$( echo $partition | sed '1q;d' ) 
+swap_efi=$( echo $partition | sed '2q;d' ) 
+home_efi=$( echo $partition | sed '3q;d' )
+root_efi=$( echo $partition | sed '4q;d' )  
 
-mkfs.ext4 $(cat root-efi) 
-mount $(cat root-efi) /mnt 
+mkfs.ext4 ${root_efi} 
+mount ${root_efi} /mnt 
 
 mkdir -p /mnt/home
-mkfs.ext4 $(cat home-efi) 
-mount $(cat home-efi) /mnt/home
+mkfs.ext4 ${home_efi} 
+mount ${home_efi} /mnt/home
 
 mkdir -p /mnt/efi 
-mkfs.fat -F 32 $(cat boot-efi) 
-mount $(cat boot-efi) /mnt/efi 
+mkfs.fat -F 32 ${boot_efi} 
+mount ${boot_efi} /mnt/efi 
 
-mkswap $(cat swap-efi) 
-swapon $(cat swap-efi)
+mkswap ${swap_efi} 
+swapon ${swap_efi}
 
-rm boot-efi && rm root-efi && rm home-efi && rm swap-efi
 		}
 
