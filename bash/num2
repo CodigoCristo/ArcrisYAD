@@ -81,8 +81,8 @@ OUT=$(yad --skip-taskbar --on-top  --center --window-icon="drive-harddisk" \
 --print-column="2" --print-column="3" --buttons-layout="center" --separator=" " --button="Seleccionar":2 \
 True  "Solo Root ( EXT4 )" 'partautoRoot' \
 False "Solo Root + Swap ( EXT4 )" 'partautoSwap' \
-False "Solo Root + Home ( EXT4 )" 'partautoRoot' \
-False "Solo Root + Home + Swap ( EXT4 )" 'partautoRoot')
+False "Solo Root + Home ( EXT4 )" 'partautoHome' \
+False "Solo Root + Home + Swap ( EXT4 )" 'partautoHomeSwap')
 
 if [ $? = "1" ]
   	then exit
@@ -90,6 +90,7 @@ fi
 
 export -f partauto
 export -f partautoRoot
+export -f partautoSwap
 
 lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{if (NR!=1) {print}}' | sed '/sr/d' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
 sed -i ':a;N;$!ba;s/\n/ !/g' devices
