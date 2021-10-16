@@ -52,7 +52,7 @@ export -f partautoHomeSwap
 
 
 yad --plug=$KEY --tabnum=2 --align=left \
---form  --columns=2  --separator="+" --item-separator=","   \
+--form  --columns=2  --separator=" " --item-separator=","   \
 --text="\nIngrese el tipo de particionado en el disco a instalar:\n" \
 --field="Particionado Automatico:FBTN" 'bash -c "partauto"' \
 --field="Particionado Automatico con Cifrado:FBTN" 'bash -c "partcifrado"' \
