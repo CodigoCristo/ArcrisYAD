@@ -2,6 +2,7 @@
 
 partautoRoot1 () {
 umount -R /mnt
+swapoff -a
 
 sgdisk --zap-all ${disco}
 parted ${disco} mklabel gpt
