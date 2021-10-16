@@ -3,6 +3,7 @@
 source bash/disk
 
 
+##################################################
 export -f partautoRoot1
 
 partautoRoot () {
@@ -20,11 +21,13 @@ lsblk ${disco} | yad --center --geometry="100x300" --window-icon="drive-harddisk
 --button="Confirmar:0" --buttons-layout="center" --borders="10"
 		}
 
+
+##################################################
 export -f partautoSwap1
 
 partautoSwap () {
 
-swap=$(yad --scale --text "  Define el tamaño en GiB para SWAP" --value="1" --min-value="1" --max-value="20" \
+swapauto=$(yad --scale --text "  Define el tamaño en GiB para SWAP" --value="1" --min-value="1" --max-value="20" \
 --inc-buttons --mark=[GiB]:10 \
 --button="Confirmar:0" --buttons-layout="center" --borders="20" \
 --image="drive-harddisk" --window-icon="drive-harddisk" \
@@ -44,15 +47,25 @@ lsblk ${disco} | yad --center --geometry="100x300" --window-icon="drive-harddisk
 
 }
 
-partautoHome () {
-yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
---form --field="Partición Root : :RO" " GiB Restantes" \
---field="Partición Swap : :NUM" "0\!1..20\!1"  > homedisk
+##################################################
+export -f partautoHome1
 
-varHomedisk=$(awk '{print $3 }' homedisk )
-rm homedisk
-echo ${varHomedisk}GB
+partautoHome () {
+
+maxvalue=$(sudo fdisk -l ${disco} | grep "bytes," | awk '{print $5}' | cut -c -4 )
+
+let maxvalue=$maxvalue-30
+
+homeauto=$(yad --scale --text "  Define el tamaño en GiB para Home" --value="10" --step="10" --min-value="1" --max-value=${maxvalue} \
+--inc-buttons --mark=[GiB]:10 \
+--button="Confirmar:0" --buttons-layout="center" --borders="20" \
+--image="drive-harddisk" --window-icon="drive-harddisk" \
+--title="Partición Home" --width=330)
+
 }
+
+
+##################################################
 
 partautoHomeSwap () {
 yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
@@ -94,7 +107,7 @@ export -f partautoSwap
 export -f partautoHome
 export -f partautoHomeSwap
 
-lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{if (NR!=1) {print}}' | sed '/sr/d' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
+lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{if (NR!=0) {print}}' | sed '/sr/d' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
 sed -i ':a;N;$!ba;s/\n/ !/g' devices
 sed -i "$d" devices
 

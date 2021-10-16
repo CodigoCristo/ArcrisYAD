@@ -1,13 +1,20 @@
 #! /bin/bash
 
+lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{if (NR!=0) {print}}' | sed '/sr/d' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
+sed -i ':a;N;$!ba;s/\n/ !/g' devices
+sed -i "$d" devices
 
-swap=$(yad --scale --text "  Define el tamaño en GiB para SWAP" --value="1" --min-value="1" --max-value="20" \
---inc-buttons --mark=[GiB]:10 \
---button="Confirmar:0" --buttons-layout="center" --borders="20" \
---image="drive-harddisk" --window-icon="drive-harddisk" \
---title="Partición Swap" --width=330)
+devices=$(awk '{print $0 " " }' devices )
 
-echo $swap
+disk=$(yad --skip-taskbar --center --geometry=400x100 --window-icon=drive-harddisk \
+--button="Seleccionar:0" --buttons-layout="center" --borders="10" \
+--title "Selecciona tu Disco Duro" --form \
+--field="Selección de Disco: :CB" "$devices")
+
+disco=$(echo $disk | awk '{print $1}')
+
+
+
 
 
 
