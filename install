@@ -64,7 +64,7 @@ kernels=$(echo "linux-stable,linux-hardened,linux-lts,linux-zen")
 shells=$(echo "zsh,bash,dash,fish,mksh,tcsh")
 
 yad --plug=$KEY --tabnum=3 --align=left \
---form  --separator="+" --item-separator=","   \
+--form  --separator=" " --item-separator=","   \
 --text="\nSelecciona el Kernel para tu sistema y algunos extras:\n" \
 --field="Kernel del Sistema:CB" "${kernels}" \
 --field="Shell del Sistema:CB" "${shells}" \
@@ -75,7 +75,7 @@ yad --plug=$KEY --tabnum=3 --align=left \
 
 
 yad --plug=$KEY --tabnum=4 --align=left \
---form --separator="+" --item-separator="," --image="patreon.png" --image-on-top \
+--form --separator=" " --item-separator="," --image="patreon.png" --image-on-top \
 --text="\n\n\tApóyame en Patreon: https://www.patreon.com/codigocristo\n" \
 --field="\nDesktop Environment (DE)\nUn entorno de escritorio proporciona una completa interfaz gráfica de usuario:LBL" \
 --field="\nWindow Manager (WM)\nUn gestor de ventanas proporciona al usuario una interfaz gráfica minimalista:LBL" \
