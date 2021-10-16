@@ -68,6 +68,7 @@ rm boot-efi && rm root-efi && rm swap-efi
 
 partautoHome1 () {
 umount -R /mnt
+swapoff -a
 
 sgdisk --zap-all ${disco}
 parted ${disco} mklabel gpt
