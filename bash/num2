@@ -54,10 +54,10 @@ partautoHome () {
 
 maxvalue=$(sudo fdisk -l ${disco} | grep "bytes," | awk '{print $5}' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' )
 
-let maxvalue=$maxvalue-20
+let maxvalue=$maxvalue-30
 
-homeauto=$(yad --scale --text "  Define el tamaño en GiB para Home" --value="20" --step="10" --min-value="20" --max-value=${maxvalue} \
---inc-buttons --mark=[GiB]:25 \
+homeauto=$(yad --scale --text "  Define el tamaño en GiB para Home" --value="10" --step="10" --min-value="1" --max-value=${maxvalue} \
+--inc-buttons --mark=[GiB]:10 \
 --button="Confirmar:0" --buttons-layout="center" --borders="20" \
 --image="drive-harddisk" --window-icon="drive-harddisk" \
 --title="Partición Home" --width=330)
@@ -92,8 +92,8 @@ maxvalue=$(sudo fdisk -l ${disco} | grep "bytes," | awk '{print $5}' | sed -e's/
 
 let maxvalue=$maxvalue-20
 
-rootauto=$(yad --scale --text "  Define el tamaño en GiB para Root" --value="10" --step="10" --min-value="1" --max-value=${maxvalue} \
---inc-buttons --mark=[GiB]:10 \
+rootauto=$(yad --scale --text "  Define el tamaño en GiB para Root" --value="20" --min-value="20" --max-value=${maxvalue} \
+--inc-buttons --mark=[GiB]:25 \
 --button="Confirmar:0" --buttons-layout="center" --borders="20" \
 --image="drive-harddisk" --window-icon="drive-harddisk" \
 --title="Partición Root" --width=330)
