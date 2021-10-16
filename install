@@ -60,7 +60,7 @@ yad --plug=$KEY --tabnum=2 --align=left \
 --field="Particionado con otro Sistema Operativo:FBTN" 'bash -c "partwindows"' > $res2 &
 
 
-kernels=$(echo "linux-stable,linux-hardened,linux-lts,linux-zen")
+kernels=$(echo "linux,linux-hardened,linux-lts,linux-zen")
 shells=$(echo "zsh,bash,dash,fish,mksh,tcsh")
 
 yad --plug=$KEY --tabnum=3 --align=left \
@@ -83,7 +83,7 @@ yad --plug=$KEY --tabnum=4 --align=left \
 --field="Elige entre un DE o WM o TTY:FBTN" 'bash -c "zone"' > $res4 &
 
 
-drivideo=$(echo "Automatico,Video vesa (Generic All),Intel (Open Source),AMD - ATI (Open Source),AMD - Radeon (Open Source),Nvidia (Open Source),Nvidia 440xx (Linux Stable),Nvidia 390xx (Linux Stable),Nvidia 440xx (Linux LTS),Nvidia 390xx (Linux LTS),Nvidia 440xx (Linux Hardened - Zen),Nvidia 390xx (Linux Hardened - Zen),Nvidia 440xx (Linux Stable + Intel)")
+drivideo=$(echo "Automático,Video vesa (Generic All),Intel (Open Source),AMD - ATI (Open Source),AMD - Radeon (Open Source),Nvidia (Open Source),Nvidia 440xx (Linux Stable),Nvidia 390xx (Linux Stable),Nvidia 440xx (Linux LTS),Nvidia 390xx (Linux LTS),Nvidia 440xx (Linux Hardened - Zen),Nvidia 390xx (Linux Hardened - Zen),Nvidia 440xx (Linux Stable + Intel)")
 driaudio=$(echo "Pulse Audio,Alsa Audio,Jack Audio,Pipewire Audio")
 driaur=$(echo "Ninguno,yay (Terminal),paru (Terminal),pamac (Graphical),Octopi (Graphical)")
 webs=$(echo "Ninguno,Firefox,Chromium,Brave,Google Chrome,Opera,Vivaldi")
