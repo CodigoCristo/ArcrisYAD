@@ -1,50 +1,46 @@
-ping -c 5 www.google.com |
-  yad --progress \
-    --title="MyProgram - Installing ffdiaporama" \
-    --width=300 \
-    --height=200 \
-    --text="A test my friend" \
-    --pulsate \
-    --auto-close \
-    --button="Cancel (Not recommended):0"
+#! /bin/bash
 
 
+desktop () {
 
+DE=$(echo "Xfce4,Gnome,KDE Plasma")
 
+yad --align=left --form  --separator=" " --item-separator="," \
+--skip-taskbar --on-top  --center --window-icon="gtk-execute" --title "Entorno de escritorio" \
+--image="gtk-about" --text="Un entorno de escritorio proporciona una completa interfaz gráfica de usuario" \
+--button="Confirmar:0" --buttons-layout="center" --borders="10" \
+--field="Desktop Environment (DE) : :CB" "${DE}" 
 
+}
 
+winmanager () {
 
+WM=$(echo "i3wm,bspwm")
 
-    yad --progress --hide-text \
---width 300 --height 150 --borders=20 \
---pulsate --auto-close \
---progress-text="Ejecutando" --align="center" \
---sticky --on-top --undecorated --center --no-buttons --tree-expanded
+yad --align=left --form  --separator=" " --item-separator="," \
+--skip-taskbar --on-top  --center --window-icon="gtk-execute" --title "Entorno de escritorio" \
+--image="gtk-about" --text="Un gestor de ventanas proporciona al usuario una interfaz gráfica minimalista" \
+--button="Confirmar:0" --buttons-layout="center" --borders="10" \
+--field="Window Manager (WM) : :CB" "${WM}" 
 
+}
 
+deorwm () {
+	
+OUT=$(yad --skip-taskbar --on-top  --center --window-icon="gtk-execute" \
+--image="gtk-about" --text="Selecciona tu Entorno para tu sistema Arch Linux"  --title "Entorno de escritorio"  \
+--width="400" --height="210"  --list --radiolist --columns="3" \
+--column "   Elección   " --column "   Entorno de escritorio   " \
+--column "   Commando":HD  \
+--print-column="2" --print-column="3" --buttons-layout="center" --separator=" " --button="Seleccionar":2 \
+True "(TTY) Getty - Terminal Virtual" 'echo "tty"' \
+False "(DE)  -  Desktop Environment" 'desktop' \
+False "(WM) - Window Manager" 'winmanager' )
 
-ping -c 5 www.google.com 2>&1 | tee -a ${logfile} |  yad --width=400 --height=300 \
-    --title="Updating debian package list ..." --progress \
-    --pulsate --text="Updating debian package list ..." \
-    --auto-kill --auto-close \
-    --percentage=10 
+if [ $? = "1" ]
+  	then exit
+fi
 
+$OUT
 
-yad --progress --enable-log --log-on-top --log-expanded --auto-close --auto-kill \
---center --width=700 --image=$ICON --image-on-top --title="Loading..." \
---text="$Settings" --percentage=0
-
-
-{
-echo 25
-ping -c 5 www.google.com
-sleep 2
-echo 50
-ping -c 5 www.facebook.com
-sleep 2
-echo 75
-ping -c 5 www.google.com
-sleep 2
-echo 100
-ping -c 5 www.facebook.com
-} | 
+}

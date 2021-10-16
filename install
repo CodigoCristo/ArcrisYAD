@@ -74,6 +74,9 @@ yad --plug=$KEY --tabnum=3 --align=left \
 --field="\n\t\t\t\t\tApóyame en Patreon: https://www.patreon.com/codigocristo:LBL" > $res3 &
 
 
+source bash/num4
+export -f deorwm
+
 yad --plug=$KEY --tabnum=4 --align=left \
 --form --separator=" " --item-separator="," --image="patreon.png" --image-on-top \
 --text="\n\n\tApóyame en Patreon: https://www.patreon.com/codigocristo\n" \

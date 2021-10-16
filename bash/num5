@@ -1,15 +1,9 @@
 #! /bin/bash
 
-yad --center --width=400 --window-icon="distributor-logo-archlinux" \
---image="distributor-logo-archlinux" --title="Arcris Install" \
---text="\t<b><span size='large' color='white'>Esta ISO es completamente ArchLinux \n\tIncluye un instalador gráfico de Arcris</span></b>" \
---undecorated --spaces --borders="25" --fixed \
---buttons-layout="center" --button=Instalar:1 --button=Cerrar:0
+WM=$(echo "i3wm,bspwm")
 
-if [ $? = "1" ] 
-  	then zenity --warning --width="250" --height="50"  --text "\nMuy pronto\n"
-fi
-
-
-
-
+yad --align=left --form  --separator=" " --item-separator="," \
+--skip-taskbar --on-top  --center --window-icon="gtk-execute" --title "Entorno de escritorio" \
+--image="gtk-about" --text="Un gestor de ventanas proporciona al usuario una interfaz gráfica minimalista" \
+--button="Confirmar:0" --buttons-layout="center" --borders="10" \
+--field="Window Manager (WM) : :CB" "${WM}" 
