@@ -83,7 +83,7 @@ yad --plug=$KEY --tabnum=4 --align=left \
 --field="\nDesktop Environment (DE)\nUn entorno de escritorio proporciona una completa interfaz gráfica de usuario:LBL" \
 --field="\nWindow Manager (WM)\nUn gestor de ventanas proporciona al usuario una interfaz gráfica minimalista:LBL" \
 --field="\nGetty (TTY)\nUna consola getty es el nombre genérico que gestiona una línea de terminal:LBL" \
---field="Elige entre un DE o WM o TTY:FBTN" 'bash -c "zone"' > $res4 &
+--field="Elige entre un DE o WM o TTY:FBTN" 'bash -c "deorwm"' > $res4 &
 
 
 drivideo=$(echo "Automático,Video vesa (Generic All),Intel (Open Source),AMD - ATI (Open Source),AMD - Radeon (Open Source),Nvidia (Open Source),Nvidia 440xx (Linux Stable),Nvidia 390xx (Linux Stable),Nvidia 440xx (Linux LTS),Nvidia 390xx (Linux LTS),Nvidia 440xx (Linux Hardened - Zen),Nvidia 390xx (Linux Hardened - Zen),Nvidia 440xx (Linux Stable + Intel)")
