@@ -1,11 +1,11 @@
 #! /bin/bash
 
 source bash/disk
+
+
 export -f partautoRoot1
 
 partautoRoot () {
-
-umount -R /mnt
 
 partautoRoot1 | yad --progress --title="Discos" --width=430 --height=100 \
 --text="\tFormateando y Montando discos, Porfavor espere ..." \
@@ -16,18 +16,32 @@ partautoRoot1 | yad --progress --title="Discos" --width=430 --height=100 \
 
 lsblk ${disco} | yad --center --geometry="100x300" --window-icon="drive-harddisk"  \
 --image="drive-harddisk"  --align="center" --text-info \
---title "Disco Seleccionado" --text="\n\tParticiones Montadas\n" \
+--title "Disco Seleccionado" --text="\n\t\tParticiones Montadas\n" \
 --button="Confirmar:0" --buttons-layout="center" --borders="10"
 		}
 
-partautoSwap () {
-yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
---form --field="Partición Root : :RO" " GiB Restantes" \
---field="Partición Swap : :NUM" "0\!1..20\!1"  > swapdisk
+export -f partautoSwap1
 
-varSwapdisk=$(awk '{print $3 }' swapdisk )
-rm swapdisk
-echo ${varSwapdisk}GB
+partautoSwap () {
+
+swap=$(yad --scale --text "  Define el tamaño en GiB para SWAP" --value="1" --min-value="1" --max-value="20" \
+--inc-buttons --mark=[GiB]:10 \
+--button="Confirmar:0" --buttons-layout="center" --borders="20" \
+--image="drive-harddisk" --window-icon="drive-harddisk" \
+--title="Partición Swap" --width=330)
+
+partautoSwap1 | yad --progress --title="Discos" --width=430 --height=100 \
+--text="\tFormateando y Montando discos, Porfavor espere ..." \
+--image="drive-harddisk" --window-icon="drive-harddisk" \
+--pulsate --buttons-layout="center" --borders="10" \
+--auto-close --hide-text \
+--button="Cancelar (No recomendado):0"
+
+lsblk ${disco} | yad --center --geometry="100x300" --window-icon="drive-harddisk"  \
+--image="drive-harddisk"  --align="center" --text-info \
+--title "Disco Seleccionado" --text="\n\t\tParticiones Montadas\n" \
+--button="Confirmar:0" --buttons-layout="center" --borders="10"
+
 }
 
 partautoHome () {
@@ -120,3 +134,43 @@ zenity --warning --width="250" --height="50"  --text "\nMuy pronto\n"
 
 #sudo fdisk -l | grep /dev/ | grep ":" | awk '{if (NR=1) {print  $2, $3, $4}}' | sed -e 's/.$//' > disk.txt
 #listdevice=$()
+
+
+
+
+
+
+
+
+#partautoSwap () {
+#yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
+#--form --field="Partición Root : :RO" " GiB Restantes" \
+#--field="Partición Swap : :NUM" "0\!1..20\!1"  > swapdisk
+
+#varSwapdisk=$(awk '{print $3 }' swapdisk )
+#rm swapdisk
+#echo ${varSwapdisk}GB
+#}
+
+#partautoHome () {
+#yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
+#--form --field="Partición Root : :RO" " GiB Restantes" \
+#--field="Partición Swap : :NUM" "0\!1..20\!1"  > homedisk
+#
+#varHomedisk=$(awk '{print $3 }' homedisk )
+#rm homedisk
+#echo ${varHomedisk}GB
+#}
+
+#partautoHomeSwap () {
+#yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
+#--form --field="Partición Root : :RO" " GiB Restantes" \
+#--field="Partición Home : :NUM" "0\!10..700\!10" \
+#--field="Partición Swap : :NUM" "0\!1..20\!1"  > homeswapdisk
+#
+#varSwapdisk=$(awk '{print $3 }' homeswapdisk )
+#varHomedisk=$(awk '{print $4 }' homeswapdisk )
+#rm homeswapdisk
+#echo ${varSwapdisk}GB
+#echo ${varHomedisk}GB
+#}

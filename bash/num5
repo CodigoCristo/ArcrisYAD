@@ -1,4 +1,13 @@
 #! /bin/bash
 
 
-zenity --warning --width="250" --height="50"  --text "\nMuy pronto\n"
+swap=$(yad --scale --text "  Define el tamaño en GiB para SWAP" --value="1" --min-value="1" --max-value="20" \
+--inc-buttons --mark=[GiB]:10 \
+--button="Confirmar:0" --buttons-layout="center" --borders="20" \
+--image="drive-harddisk" --window-icon="drive-harddisk" \
+--title="Partición Swap" --width=330)
+
+echo $swap
+
+
+
