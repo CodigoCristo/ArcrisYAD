@@ -116,7 +116,7 @@ fdisk -l ${disco} > partition
 echo ""
 cat partition
 sleep 3
-rm partition
+
 partition="$(cat partition | grep /dev/ | awk '{if (NR!=1) {print}}' | sed 's/*//g' | awk -F ' ' '{print $1}')"
 
 echo $partition | sed '1q;d' >  boot-efi
@@ -138,6 +138,7 @@ mount $(cat home-efi) /mnt/home
 mkswap $(cat swap-efi) 
 swapon $(cat swap-efi)
 
+rm partition
 rm boot-efi && rm root-efi && rm home-efi && rm swap-efi
 		}
 
