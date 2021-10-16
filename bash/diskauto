@@ -110,7 +110,7 @@ sgdisk --zap-all ${disco}
 parted ${disco} mklabel gpt
 sgdisk ${disco} -n=1:0:+150M -t=1:ef00
 sgdisk ${disco} -n=2:0:+${swapauto}G -t=2:8200
-sgdisk ${disco} -n=3:0:+${homeauto}G -t=3:8300
+sgdisk ${disco} -n=3:0:+${rootauto}G -t=3:8300
 sgdisk ${disco} -n=4:0:0
 sudo fdisk -l ${disco} > partition
 echo ""
@@ -123,8 +123,8 @@ partition="$(cat partition | grep /dev/ | awk '{if (NR!=1) {print}}' | sed 's/*/
 
 echo $partition | awk -F ' ' '{print $1}' >  boot-efi
 echo $partition | awk -F ' ' '{print $2}' >  swap-efi
-echo $partition | awk -F ' ' '{print $3}' >  home-efi
-echo $partition | awk -F ' ' '{print $4}' >  root-efi
+echo $partition | awk -F ' ' '{print $3}' >  root-efi
+echo $partition | awk -F ' ' '{print $4}' >  home-efi
 
 mkfs.ext4 $(cat root-efi) 
 mount $(cat root-efi) /mnt 
@@ -140,8 +140,8 @@ mount $(cat home-efi) /mnt/home
 mkswap $(cat swap-efi) 
 swapon $(cat swap-efi)
 
-#rm partition
-#rm boot-efi && rm root-efi && rm home-efi && rm swap-efi
+rm partition
+rm boot-efi && rm root-efi && rm home-efi && rm swap-efi
 		}
 
 
