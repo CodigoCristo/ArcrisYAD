@@ -1,7 +1,7 @@
 #! /bin/bash
 
 
-partautoRoot () {
+partautoRoot1 () {
 sgdisk --zap-all ${disco}
 parted ${disco} mklabel gpt
 sgdisk ${disco} -n=1:0:+100M -t=1:ef00
@@ -27,10 +27,11 @@ mount $(cat root-efi) /mnt
 mkdir -p /mnt/efi 
 mkfs.fat -F 32 $(cat boot-efi) 
 mount $(cat boot-efi) /mnt/efi	
-rm boot-efi && rm root-efi |
-yad --progress \
---title="Discos" \
---width=430 --height=100 \
+rm boot-efi && rm root-efi
+		}
+
+partautoRoot () {
+partautoRoot1 | yad --progress --title="Discos" --width=430 --height=100 \
 --text="\tFormateando y Montando discos, Porfavor espere ..." \
 --image="drive-harddisk" --window-icon="drive-harddisk" \
 --pulsate --buttons-layout="center" --borders="10" \
@@ -72,6 +73,10 @@ echo ${varHomedisk}GB
 }
 
 
+
+
+
+
 partauto () {
 OUT=$(yad --skip-taskbar --on-top  --center --window-icon="drive-harddisk" \
 --image="drive-harddisk" --text="Selecciona tu preferencia de configurar tu disco"  --title "Tipo de particionado"  \
@@ -105,7 +110,6 @@ disk=$(yad --skip-taskbar --center --geometry=400x100 --window-icon=drive-harddi
 disco=$(echo $disk | awk '{print $1}')
 
 echo $disco
-
 
 $OUT
 
