@@ -46,6 +46,9 @@ export -f partcifrado
 export -f partwindows
 
 export -f partautoRoot
+export -f partautoSwap
+export -f partautoHome
+export -f partautoHomeSwap
 
 
 yad --plug=$KEY --tabnum=2 --align=left \
