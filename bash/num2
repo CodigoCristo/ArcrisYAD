@@ -107,7 +107,7 @@ export -f partautoSwap
 export -f partautoHome
 export -f partautoHomeSwap
 
-lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{if (NR!=0) {print}}' | sed '/sr/d' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
+lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{if (NR!=0) {print}}' | sed '/sr/d' | sed '/fd/d' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
 sed -i ':a;N;$!ba;s/\n/ !/g' devices
 sed -i "$d" devices
 
