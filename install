@@ -132,6 +132,10 @@ yad --center --window-icon="cuadroicon.png" --image="unnamed.jpg" --image-on-top
 --geometry=600x500   --text="\t<span size='large' color='white'><b>>_  Instalar Arch Linux - ArcriS  |  Creado en YAD y Zenity</b></span>" --borders=10 \
 --button="  Cancelar!gtk-no:0" --button="  Instalar!gtk-ok:0"  --notebook --key=$KEY --tab="Información" --tab="Disco" --tab="Kernel" --tab="DE o WM" --tab="Programas" --tab="Extras" --tab="Detalles del Sistema"
 
+if [ $? = "0" ] 
+  	then killall yad
+fi
+
 clear 
 cat $res1
 cat $res2
