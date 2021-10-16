@@ -97,6 +97,26 @@ $OUT
 }
 
 
+partmanual () {
+
+zenity --warning --width="250" --height="50"  --text "\nMuy pronto\n"
+
+}
+
+
+partcifrado () {
+
+zenity --warning --width="250" --height="50"  --text "\nMuy pronto\n"
+
+}
+
+
+partwindows () {
+
+zenity --warning --width="250" --height="50"  --text "\nMuy pronto\n"
+
+}
+
 
 #sudo fdisk -l | grep /dev/ | grep ":" | awk '{if (NR=1) {print  $2, $3, $4}}' | sed -e 's/.$//' > disk.txt
 #listdevice=$()

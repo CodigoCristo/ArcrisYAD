@@ -41,6 +41,9 @@ yad --plug=$KEY --tabnum=1 \
 
 source bash/num2
 export -f partauto
+export -f partmanual
+export -f partcifrado
+export -f partwindows
 export -f partautoRoot
 
 
