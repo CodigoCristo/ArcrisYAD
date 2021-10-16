@@ -82,15 +82,15 @@ export -f partautoHomeSwap1
 
 partautoHomeSwap () {
 
-swapauto=$(yad --scale --text "  Define el tamaño en GiB para SWAP" --value="1" --min-value="1" --max-value="25" \
---inc-buttons --mark=[GiB]:10 \
+swapauto=$(yad --scale --text "  Define el tamaño en GiB para SWAP" --value="1" --min-value="1" --max-value="8" \
+--inc-buttons --mark=[GiB]:4 \
 --button="Confirmar:0" --buttons-layout="center" --borders="20" \
 --image="drive-harddisk" --window-icon="drive-harddisk" \
 --title="Partición Swap" --width=330)
 
 maxvalue=$(sudo fdisk -l ${disco} | grep "bytes," | awk '{print $5}' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' )
 
-let maxvalue=$maxvalue-25
+let maxvalue=$maxvalue-30
 
 homeauto=$(yad --scale --text "  Define el tamaño en GiB para Home" --value="10" --step="10" --min-value="1" --max-value=${maxvalue} \
 --inc-buttons --mark=[GiB]:10 \
