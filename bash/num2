@@ -1,6 +1,6 @@
 #! /bin/bash
 
-source bash/disk
+source bash/diskauto
 
 
 ##################################################
@@ -78,18 +78,38 @@ lsblk ${disco} | yad --center --geometry="100x300" --window-icon="drive-harddisk
 
 
 ##################################################
+export -f partautoHomeSwap1
 
 partautoHomeSwap () {
-yad --text-align=center --separator=" " --text="\nTodos los datos ingresados son en GiB \n" \
---form --field="Partición Root : :RO" " GiB Restantes" \
---field="Partición Home : :NUM" "0\!10..700\!10" \
---field="Partición Swap : :NUM" "0\!1..20\!1"  > homeswapdisk
 
-varSwapdisk=$(awk '{print $3 }' homeswapdisk )
-varHomedisk=$(awk '{print $4 }' homeswapdisk )
-rm homeswapdisk
-echo ${varSwapdisk}GB
-echo ${varHomedisk}GB
+swapauto=$(yad --scale --text "  Define el tamaño en GiB para SWAP" --value="1" --min-value="1" --max-value="25" \
+--inc-buttons --mark=[GiB]:10 \
+--button="Confirmar:0" --buttons-layout="center" --borders="20" \
+--image="drive-harddisk" --window-icon="drive-harddisk" \
+--title="Partición Swap" --width=330)
+
+maxvalue=$(sudo fdisk -l ${disco} | grep "bytes," | awk '{print $5}' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' )
+
+let maxvalue=$maxvalue-25
+
+homeauto=$(yad --scale --text "  Define el tamaño en GiB para Home" --value="10" --step="10" --min-value="1" --max-value=${maxvalue} \
+--inc-buttons --mark=[GiB]:10 \
+--button="Confirmar:0" --buttons-layout="center" --borders="20" \
+--image="drive-harddisk" --window-icon="drive-harddisk" \
+--title="Partición Home" --width=330)
+
+partautoHomeSwap1 | yad --progress --title="Discos" --width=430 --height=100 \
+--text="\tFormateando y Montando discos, Porfavor espere ..." \
+--image="drive-harddisk" --window-icon="drive-harddisk" \
+--pulsate --buttons-layout="center" --borders="10" \
+--auto-close --hide-text \
+--button="Cancelar (No recomendado):0"
+
+lsblk ${disco} | yad --center --geometry="100x300" --window-icon="drive-harddisk"  \
+--image="drive-harddisk"  --align="center" --text-info \
+--title "Disco Seleccionado" --text="\n\t\tParticiones Montadas\n" \
+--button="Confirmar:0" --buttons-layout="center" --borders="10"
+
 }
 
 
