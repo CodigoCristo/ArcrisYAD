@@ -13,7 +13,15 @@ disk=$(yad --skip-taskbar --center --geometry=400x100 --window-icon=drive-harddi
 
 disco=$(echo $disk | awk '{print $1}')
 
+maxvalue=$(sudo fdisk -l ${disco} | grep "bytes," | awk '{print $5}' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' )
 
+let maxvalue=$maxvalue-30
+
+homeauto=$(yad --scale --text "  Define el tamaño en GiB para Home" --value="10" --step="10" --min-value="1" --max-value=${maxvalue} \
+--inc-buttons --mark=[GiB]:10 \
+--button="Confirmar:0" --buttons-layout="center" --borders="20" \
+--image="drive-harddisk" --window-icon="drive-harddisk" \
+--title="Partición Home" --width=330)
 
 
 
