@@ -40,6 +40,7 @@ esac
 
 
 keyX11 () {
-layout=$(zenity --list --radiolist --height=500 --width=450 --title="$title" --text="Select your layout, a two-character country code" --column Select --column Layout $(localectl list-x11-keymap-layouts | awk '{ printf " FALSE ""\0"$0"\0" }'))
+#layout=$(zenity --list --radiolist --height=500 --width=450 --title="$title" --text="Select your layout, a two-character country code" --column Select --column Layout $(localectl list-x11-keymap-layouts | awk '{ printf " FALSE ""\0"$0"\0" }'))
+layout=$(zenity --list --radiolist --height=500 --width=450 --title="$title" --text="Seleccione un código de país en caracteres" --column Seleccionar --column Layout $(cat bash/localectlX11))
 printf "$layout \n"
 }

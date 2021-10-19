@@ -29,12 +29,12 @@ export -f keyX11
 
 yad --plug=$KEY --tabnum=1 \
 --form  --separator=" " --item-separator="," \
---text="\nPor favor ingrese sus datos:\n\nEvite ingresar caracteres especiales ! # $ % ( ) * +, -. / \n" \
---field="<span color='white'><b>Usuario Nuevo</b></span>" "usuario" \
---field="<span color='green'><b>Contraseña de Usuario</b></span>:H" "Clave" \
---field="Repita Contraseña:H" "Clave" \
---field="<span color='red'><b>Contraseña de Root</b></span>:H" "Clave" \
---field="Repita Contraseña:H" "Clave" \
+--text="<b>\nEvite ingresar caracteres especiales ! # $ % ( ) * +, -. / \nTendrá que volver a llenar los datos nuevamente.  Por favor ingrese sus datos:\n</b>" \
+--field="<b>Usuario Nuevo</b>" "usuario" \
+--field="<span color='#07BFFF'><b>Contraseña de Usuario</b></span>:H" "Clave" \
+--field="<span color='#07BFFF'>Repita Contraseña</span>:H" "Clave" \
+--field="<span color='#FF3333'><b>Contraseña de Root</b></span>:H" "Clave" \
+--field="<span color='#FF3333'>Repita Contraseña</span>:H" "Clave" \
 --field="Idioma:FBTN" 'bash -c "idioma"' \
 --field="Zona Horaria:FBTN" 'bash -c "zone"' \
 --field="Teclado:FBTN" 'bash -c "keyX11"' > $res1 &
@@ -53,7 +53,7 @@ export -f partautoHomeSwap
 
 yad --plug=$KEY --tabnum=2 --align=left \
 --form  --columns=2  --separator=" "  \
---text="\nIngrese el tipo de particionado en el disco a instalar:\n" \
+--text="<b>\nIngrese el tipo de particionado en el disco a instalar</b>:\n" \
 --field="Particionado Automatico:FBTN" 'bash -c "partauto"' \
 --field="Particionado Automatico con Cifrado:FBTN" 'bash -c "partcifrado"' \
 --field="Particionado Manual:FBTN" 'bash -c "partmanual"' \
@@ -65,13 +65,13 @@ shells=$(echo "zsh,bash,dash,fish,mksh,tcsh")
 
 yad --plug=$KEY --tabnum=3 --align=left \
 --form  --separator=" " --item-separator=","   \
---text="\nSelecciona el Kernel para tu sistema y algunos extras:\n" \
+--text="<b>\nSelecciona el Kernel para tu sistema y algunos extras:</b>\n" \
 --field="Kernel del Sistema:CB" "${kernels}" \
 --field="Shell del Sistema:CB" "${shells}" \
 --field="Selecciona los modulos que necesitas:LBL" \
 --field="Microcode del Procesador (Actualizaciones):CHK" \
 --field="Driver para Touchpad - Panel táctil (Laptop):CHK" \
---field="\n\t\t\t\t\tApóyame en Patreon: https://www.patreon.com/codigocristo:LBL" > $res3 &
+--field="<span color='white'><b>\n\t\t\t\tApóyame en Patreon: https://www.patreon.com/codigocristo</b></span>:LBL" > $res3 &
 
 
 source bash/num4
@@ -130,25 +130,49 @@ yad --plug=$KEY --tabnum=6 --align=left \
 --field="OBS-Studio - Software de código abierto:CHK" > $res6 &
 
 
-inxi -CDGNm -y 90 | yad --image=cpu  --plug=$KEY --tabnum=7 --align=left \
+inxi -CDGNm -y 90 | yad --image="cpu"  --plug=$KEY --tabnum=7 --align="left" \
 --text-info --text="\nInformación del Sistema\n" > $res7 &
 
 
 yad --center --window-icon="cuadroicon.png" --image="unnamed.jpg" --image-on-top --title="Instalador Arcris" \
---geometry=600x500   --text="\t<span size='large' color='white'><b>>_  Instalar Arch Linux - ArcriS  |  Creado en YAD y Zenity</b></span>" --borders=10 \
+--geometry=600x500  --text="\t\t\t\t  <span size='large' color='#07BFFF'><b>>_  Instalar Arch Linux - ArcriS</b></span>" --borders="10" \
 --button="  Cancelar!gtk-no:0" --button="  Instalar!gtk-ok:0"  --notebook --key=$KEY --tab="Información" --tab="Disco" --tab="Kernel" --tab="DE o WM" --tab="Programas" --tab="Extras" --tab="Detalles del Sistema"
 
 if [ $? = "0" ] 
-  	then sudo killall yad
+  	then killall yad
 fi
 
+
+
 clear 
-cat $res1
-cat $res2
-cat $res3
-cat $res4
-cat $res5
-cat $res6
+cat $res1 > datosuser
+cat $res2 >> datosuser
+cat $res3 >> datosuser
+cat $res4 >> datosuser 
+cat $res5 >> datosuser
+cat $res6 >> datosuser
+
+
+numerodelineas=$(cat datosuser | wc -l)
+
+username=$(cat datosuser | awk 'NR>=1&&NR<=1' |  awk '{print $1}')
+
+echo $username
+
+if printf "%s" "$username" | grep -Eoq "^[a-z][a-z0-9-]*$" && [ "${#username}" -lt 33 ]; then
+	#zenity --warning --width="250" --height="50"  --text "\nUSUARIO BIEN\n"
+	if grep -Fxq "$username" reserved_usernames ; then
+	zenity --error --width="350" --height="50"  --text "\nNOMBRE DE USUARIO RESERVADO PARA EL SISTEMA\n"
+	fi
+else
+	zenity --error --width="450" --height="100"  --text "\nNOMBRE DE USUARIO CONTIENE CARACTERES ESPECIALES\nVUELVE A LLENAR LOS CAMPOS DEL INSTALADOR\n"
+fi
+
+
+
+
+
+
 
 #sudo pacman -Sy --noconfirm  | yad --geometry=400x500 --text-info --tail  --text="\nInstalando\n"
 

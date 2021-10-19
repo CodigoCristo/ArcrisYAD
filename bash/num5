@@ -1,10 +1,12 @@
 #! /bin/bash
 
-yad --align=left \
---form --image="patreon.png" --image-on-top \
---text="\n\n\tApóyame en Patreon: https://www.patreon.com/codigocristo\n" \
---field="Elige entre un DE o WM o TTY :FBTN" 'bash -c "echo hola"' \
---field="\nDesktop Environment (DE)\nUn entorno de escritorio proporciona una completa interfaz gráfica de usuario:LBL" \
---field="\nWindow Manager (WM)\nUn gestor de ventanas proporciona al usuario una interfaz gráfica minimalista:LBL" \
---field="\nGetty (TTY)\nUna consola getty es el nombre genérico que gestiona una línea de terminal:LBL" \
-
+if [[ $numerodelineas != 10 ]]; then
+	zenity --warning --width="250" --height="50"  --text "\nInformación incompleta\n"
+	sh install
+else 
+	if printf "%s" "$username" | grep -Eoq "^[a-z][a-z0-9-]*$" && [ "${#username}" -lt 33 ]; then
+	if grep -Fxq "$username" reserved_usernames ; then
+		zenity --warning --width="250" --height="50"  --text "\nERROR DE USUARIO\n"
+		fi
+	fi
+fi
