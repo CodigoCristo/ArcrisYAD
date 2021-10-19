@@ -29,7 +29,7 @@ export -f keyX11
 
 yad --plug=$KEY --tabnum=1 \
 --form  --separator=" " --item-separator="," \
---text="<b>\nEvite ingresar caracteres especiales ! # $ % ( ) * +, -. / \nTendrá que volver a llenar los datos nuevamente.  Por favor ingrese sus datos:\n</b>" \
+--text="<b>\nEvite ingresar caracteres especiales ! # $ % ( ) * +, -. / \nTendrá que volver a llenar todos los campos nuevamente.  Por favor ingrese sus datos:\n</b>" \
 --field="<b>Usuario Nuevo</b>" "usuario" \
 --field="<span color='#07BFFF'><b>Contraseña de Usuario</b></span>:H" "Clave" \
 --field="<span color='#07BFFF'>Repita Contraseña</span>:H" "Clave" \
@@ -63,7 +63,7 @@ yad --plug=$KEY --tabnum=2 --align=left \
 kernels=$(echo "linux,linux-hardened,linux-lts,linux-zen")
 shells=$(echo "zsh,bash,dash,fish,mksh,tcsh")
 
-yad --plug=$KEY --tabnum=3 --align=left \
+yad --plug=$KEY --tabnum=3 --align=left --print-uri \
 --form  --separator=" " --item-separator=","   \
 --text="<b>\nSelecciona el Kernel para tu sistema y algunos extras:</b>\n" \
 --field="Kernel del Sistema:CB" "${kernels}" \
@@ -80,8 +80,8 @@ export -f desktop
 export -f winmanager
 
 yad --plug=$KEY --tabnum=4 --align=left \
---form --separator=" " --item-separator="," --image="patreon.png" --image-on-top \
---text="<span color='white'><b>\n\n\tApóyame en Patreon: https://www.patreon.com/codigocristo\n</b></span>" \
+--form --separator=" " --item-separator=","  \
+--text="<span color='white'><b>\n\n\t\t\t\tApóyame en Patreon: https://www.patreon.com/codigocristo\n</b></span>" \
 --field="Elige entre un DE o WM o TTY :FBTN" 'bash -c "deorwm"' \
 --field="<span color='white'><b>\nDesktop Environment (DE)</b></span>\nUn entorno de escritorio proporciona una completa interfaz gráfica de usuario:LBL" \
 --field="<span color='white'><b>\nWindow Manager (WM)</b></span>\nUn gestor de ventanas proporciona al usuario una interfaz gráfica minimalista:LBL" \
@@ -136,14 +136,14 @@ inxi -CDGNm -y 90 | yad --image="cpu"  --plug=$KEY --tabnum=7 --align="left" \
 
 yad --center --window-icon="cuadroicon.png" --image="unnamed.jpg" --image-on-top --title="Instalador Arcris" \
 --geometry=600x500  --text="\t\t\t\t  <span size='large' color='#07BFFF'><b>>_  Instalar Arch Linux - ArcriS</b></span>" --borders="10" \
---button="  Cancelar!gtk-no:0" --button="  Instalar!gtk-ok:0"  --notebook --key=$KEY --tab="Información" --tab="Disco" --tab="Kernel" --tab="DE o WM" --tab="Programas" --tab="Extras" --tab="Detalles del Sistema"
+--button="  Cancelar!gtk-no:1" --button="  Confirmar!gtk-ok:0"  --notebook --key=$KEY --tab="Información" --tab="Disco" --tab="Kernel" --tab="DE o WM" --tab="Programas" --tab="Extras" --tab="Detalles del Sistema"
 
-if [ $? = "0" ] 
+if [ $? = "1" ] 
   	then killall yad
 fi
 
 
-
+rm datosuser
 clear 
 cat $res1 > datosuser
 cat $res2 >> datosuser
@@ -153,31 +153,151 @@ cat $res5 >> datosuser
 cat $res6 >> datosuser
 
 
+
+
+##### CONFIRMANDO DATOS ####################################
+
+
 numerodelineas=$(cat datosuser | wc -l)
 
-username=$(cat datosuser | awk 'NR>=1&&NR<=1' |  awk '{print $1}')
-
-echo $username
+username=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $1}')
 
 
 if [[ $numerodelineas != 10 ]]; then
 	zenity --warning --width="250" --height="50"  --text "\nInformación incompleta\n"
 	sh install
 else 
-	if printf "%s" "$username" | grep -Eoq "^[a-z][a-z0-9-]*$" && [ "${#username}" -lt 33 ]; then
+	if printf "%s" "$username" | grep -Eoq "^[a-z][a-z0-9-]*$" && [ "${#username}" -lt 30 ]; then
+		  echo $username
+		inputs_match_user=false
+          while ! $inputs_match_user; do
+
+            input=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $2}')
+            confirm_input=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $3}')
+
+            if [ -z "$input" ]; then
+
+              zenity --error --width="350" --height="50"  --text "\nNo se le permite tener una contraseña vacía.\n"
+            	sh install
+
+            elif [ "$input" != "$confirm_input" ]; then
+              
+              zenity --error --width="400" --height="50"  --text "\nLas dos contraseñas de usuario que ha introducido no coinciden.\n"
+              	sh install
+
+            else
+              userpasswd="$input"
+              inputs_match_user=true
+            fi
+          done
+          
+
+        inputs_match_root=false
+		  while ! $inputs_match_root; do
+
+		    input=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $4}')
+            confirm_input=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $5}')   
+
+		    if [ -z "$input" ]; then
+		      
+		      zenity --error --width="350" --height="50"  --text "\nNo se le permite tener una contraseña vacía.\n"
+		      	sh install
+
+		    elif [ "$input" != "$confirm_input" ]; then
+
+		      zenity --error --width="400" --height="50"  --text "\nLas dos contraseñas de usuario que ha introducido no coinciden.\n"
+		    	sh install
+
+		    else
+		      rootpasswd="$input"
+		      inputs_match_root=true
+		    fi
+		  done
+		  
 	#zenity --warning --width="250" --height="50"  --text "\nUSUARIO BIEN\n"
 	if grep -Fxq "$username" reserved_usernames ; then
 	zenity --error --width="350" --height="50"  --text "\nNOMBRE DE USUARIO RESERVADO PARA EL SISTEMA\n"
+		sh install
 	fi
 	else
+
 		zenity --error --width="450" --height="100"  --text "\nNOMBRE DE USUARIO CONTIENE CARACTERES ESPECIALES\nVUELVE A LLENAR LOS CAMPOS DEL INSTALADOR\n"
+		sh install
+
 	fi
 fi
 
+######################################################################
 
 
 
+logoline1='                             -`                        '
+logoline2='                           .o+`                        '
+logoline3='                           `ooo/                       '
+logoline4='                          `+oooo:                      '
+logoline5='                         `+oooooo:                     ' 
+logoline6='                         -+oooooo+:                    '
+logoline7='                       `/:-:++oooo+:                   '
+logoline8='                      `/++++/+++++++:                  '
+logoline9='                     `/++++++++++++++:                 '
+logoline11='                    `/+++ooooooooooooo/`               '
+logoline12='                   ./ooosssso++osssssso+`              '
+logoline13='                  .oossssso-````/ossssss+`             '
+logoline14='                 -osssssso.      :ssssssso.            '
+logoline15='                :osssssss/        osssso+++.           '
+logoline16='               /ossssssss/        +ssssooo/-           '
+logoline17='             `/ossssso+/:-        -:/+osssso+-         '
+logoline18='            `+sso+:-`                 `.-/+oso:        '
+logoline19='           `++:.                           `-/+/       '
+logoline20='           .`                                 `/       '
+logoline21="                          _                  _         "
+logoline22="  .--.                   / \   _ __ ___ _ __(_)___     "
+logoline23=" / _.-' .-.  .-.  .-.   / _ \ | '__/ __| '__| / __|    "
+logoline24=" \  '-. '-'  '-'  '-'  / ___ \| | | (__| |  | \__ \    "
+logoline25="  '--'                /_/   \_\_|  \___|_|  |_|___/    "
 
+
+kernel_select=$(cat datosuser | awk 'NR>=6&&NR<=6' |  awk '{print $1}')
+keymapx=$(cat datosuser | awk 'NR>=3&&NR<=3' |  awk '{print $1}')
+zonahoraria=$(cat datosuser | awk 'NR>=2&&NR<=2' |  awk '{print $1}')
+localefrom=$(cat datosuser | awk 'NR>=1&&NR<=1' |  awk '{print $1}')
+video=$(cat datosuser | awk 'NR>=9&&NR<=9' |  awk '{print $1}')
+environment=$(cat datosuser | awk 'NR>=7&&NR<=7' |  awk '{print $1}')
+
+
+echo -e "${logoline1}" > final
+echo -e "${logoline2}" >> final
+echo -e "${logoline3} Kernel  : ${kernel_select}" >> final
+echo -e "${logoline4}" >> final
+echo -e "${logoline5} Disco   : ${disco}" >> final
+echo -e "${logoline6}" >> final
+echo -e "${logoline7} Usuario : ${username}" >> final
+echo -e "${logoline8}" >> final
+echo -e "${logoline9} Idioma  : ${keymapx}" >> final
+echo -e "${logoline11}" >> final
+echo -e "${logoline12} Zona Horaria : ${zonahoraria}" >> final
+echo -e "${logoline13}" >> final
+echo -e "${logoline14} Ubicación : ${localefrom}" >> final
+echo -e "${logoline15}" >> final
+echo -e "${logoline16} Driver de Vídeo : ${video}" >> final
+echo -e "${logoline17}" >> final
+echo -e "${logoline18} Entorno Gráfico : ${environment}" >> final
+echo -e "${logoline19}" >> final
+echo -e "${logoline20}" >> final
+echo -e "${logoline21}" >> final
+echo -e "${logoline22}" >> final 
+echo -e "${logoline23}" >> final
+echo -e "${logoline24}" >> final
+echo -e "${logoline25}" >> final
+echo "" >> final 
+echo "" >> final
+echo "  Arcris Instalación fácil de ArchLinux - Donaciones en: www.patreon.com/codigocristo" >> final
+
+
+
+cat final | yad  --geometry=780x530 --center --align="left" \
+--text-info --window-icon="gtk-execute" --title="Información de Instalación" \
+--button=" Cancelar!gtk-no:1" --button=" Instalar Arch Linux!gtk-ok:0" --buttons-layout="center" --borders="10"
 
 
 

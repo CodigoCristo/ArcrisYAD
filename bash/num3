@@ -1,20 +1,5 @@
 #!/bin/bash
 
-root () {
-	echo "HOLA MUNDO"
-}
 
-export -f root
-
-yad --on-top  --center --window-icon="drive-harddisk" \
---image="drive-harddisk" --text="Selecciona tu preferencia de configurar tu disco"  --title "Tipo de particionado"  \
---width="400" --height="250"  --list --radiolist --columns=3 \
---column "   Elección   " --column "   Tipo de particionado   " \
---column "   Commando":HD  \
-True  "Solo Root ( EXT4 )" 'root' \
-False "Solo Root + Swap ( EXT4 )" 'bash -c "root"' \
-False "Solo Root + Home ( EXT4 )" 'ls $HOME/Downloads' \
-False "Solo Root + Home + Swap ( EXT4 )" 'ls $HOME/Videos' \
---print-column 2 --print-column 3 --buttons-layout="center" --button="Seleccionar"
 
 

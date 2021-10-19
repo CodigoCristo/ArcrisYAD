@@ -1,6 +1,10 @@
-usuario# Clave Clave Clave Clave    
+en_US.UTF-8 UTF-8
+America/Lima 
+latam 
+usuario Clave Clave Clave Clave    
     
 linux zsh  FALSE FALSE  
+tty
     
 Automático Pulse Audio Ninguno Ninguno Ninguno Ninguno Ninguno 
 FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE 

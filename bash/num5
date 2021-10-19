@@ -1,12 +1,2 @@
 #! /bin/bash
 
-if [[ $numerodelineas != 10 ]]; then
-	zenity --warning --width="250" --height="50"  --text "\nInformación incompleta\n"
-	sh install
-else 
-	if printf "%s" "$username" | grep -Eoq "^[a-z][a-z0-9-]*$" && [ "${#username}" -lt 33 ]; then
-	if grep -Fxq "$username" reserved_usernames ; then
-		zenity --warning --width="250" --height="50"  --text "\nERROR DE USUARIO\n"
-		fi
-	fi
-fi
