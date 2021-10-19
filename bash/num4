@@ -26,14 +26,13 @@ yad --align=left --form  --separator=" " --item-separator="," \
 }
 
 deorwm () {
-	
-OUT=$(yad --skip-taskbar --on-top  --center --window-icon="gtk-execute" \
+deorwm1=$(yad --skip-taskbar --on-top  --center --window-icon="gtk-execute" \
 --image="gtk-about" --text="Selecciona tu Entorno para tu sistema Arch Linux"  --title "Entorno de escritorio"  \
 --width="400" --height="210"  --list --radiolist --columns="3" \
 --column "   Elección   " --column "   Entorno de escritorio   " \
 --column "   Commando":HD  \
 --print-column="2" --print-column="3" --buttons-layout="center" --separator=" " --button="Seleccionar":2 \
-True "(TTY) Getty - Terminal Virtual" 'echo "tty"' \
+True "(TTY) Getty - Terminal Virtual" 'echo tty' \
 False "(DE)  -  Desktop Environment" 'desktop' \
 False "(WM) - Window Manager" 'winmanager' )
 
@@ -41,6 +40,10 @@ if [ $? = "1" ]
   	then exit
 fi
 
-$OUT
+export -f deorwm
+export -f desktop
+export -f winmanager
+
+$deorwm1
 
 }
