@@ -1,0 +1,317 @@
+#!/bin/bash
+
+###########################################
+####### FUNCION DE BARRA ##################
+###########################################
+
+function barra_progreso {
+
+clear    
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' "_"
+echo -e ""
+echo -e "\t\t\t$titulo_progreso"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+
+#INICIO PROGRESS BARR
+function ProgressBar {
+    let _progress=(${1}*100/${2}*100)/100
+    let _done=(${_progress}*6)/10
+    let _left=60-$_done
+    _fill=$(printf "%${_done}s")
+    _empty=$(printf "%${_left}s")
+# 1.2.1.1 Progreso : [########################################] 100%
+printf "\r > Cargando : |${_fill// /║}${_empty// /-}| ${_progress}%%"
+
+}
+# Variables
+_start=1
+
+_end=100
+
+for number in $(seq ${_start} ${_end})
+do
+    sleep 0.065
+    ProgressBar ${number} ${_end}
+done
+#FIN PROGRESS BARR
+echo ""
+echo ""
+}
+
+
+function mensaje_install {
+echo ""
+echo ""
+echo -e '\033[38;2;255;0;02m'
+echo " █████╗ ██████╗  ██████╗██████╗ ██╗███████╗";
+echo "██╔══██╗██╔══██╗██╔════╝██╔══██╗██║██╔════╝";
+echo "███████║██████╔╝██║     ██████╔╝██║███████╗";
+echo "██╔══██║██╔══██╗██║     ██╔══██╗██║╚════██║";
+echo "██║  ██║██║  ██║╚██████╗██║  ██║██║███████║";
+echo "╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝╚══════╝";
+echo "                                           ";
+echo -e '\033[m'
+echo ""
+echo ""
+sleep 3
+}
+
+
+
+
+function ProgressBar {
+    let _progress=(${1}*100/${2}*100)/100
+    let _done=(${_progress}*6)/10
+    let _left=60-$_done
+    _fill=$(printf "%${_done}s")
+    _empty=$(printf "%${_left}s")
+# 1.2.1.1 Progreso : [########################################] 100%
+printf "\r   |${_fill// /║}${_empty// /-}| ${_progress}%%"
+
+}
+# Variables
+_start=1
+
+_end=101
+
+for number in $(seq ${_start} ${_end})
+do
+    sleep 0.25
+    ProgressBar ${number} ${_end}
+done
+
+
+
+
+
+
+
+
+echo ""
+echo ""
+echo ""
+echo -e $red '                             -`                  '
+echo -e $red '                           .o+`                  '
+echo -e $red '                           `ooo/                   '
+echo -e $red '                          `+oooo:                 '
+echo -e $red '                         `+oooooo:                 ' 
+echo -e $red '                         -+oooooo+:                '
+echo -e $red '                       `/:-:++oooo+:              '
+echo -e $red '                      `/++++/+++++++:              '
+echo -e $red '                     `/++++++++++++++:             '
+echo -e $red '                    `/+++ooooooooooooo/`           '
+echo -e $red '                   ./ooosssso++osssssso+`          '
+echo -e $red '                  .oossssso-````/ossssss+`         '
+echo -e $red '                 -osssssso.      :ssssssso.        '
+echo -e $red '                :osssssss/        osssso+++.       '
+echo -e $red '               /ossssssss/        +ssssooo/-       '
+echo -e $red '             `/ossssso+/:-        -:/+osssso+-     '
+echo -e $red '            `+sso+:-`                 `.-/+oso:    '
+echo -e $red '           `++:.                           `-/+/   '
+echo -e $red '           .`                                 `/   '
+echo ""
+echo -e $red "            Visita el Canal de Youtube de Código Cristo"
+
+sleep 5
+
+
+
+
+clear
+timedatectl set-timezone $zonahoraria
+hwclock -w
+hwclock --hctosys
+hwclock --systohc
+clear
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Actualizando Hora Actual en LiveCD |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+sleep 2
+timedatectl status
+echo ""
+date +' %A, %B %d, %Y - %r'
+sleep 5
+clear
+
+
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Actualizando lista de Keys en LiveCD |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+sleep 2
+pacman -Sy archlinux-keyring --noconfirm 
+sleep 2
+clear
+
+
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Actualizando MirrorList en LiveCD |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+sleep 3
+pacman -Sy reflector --noconfirm 
+pacman -Sy python3 --noconfirm 
+pacman -Sy rsync --noconfirm 
+clear
+echo -e "\t\t\t| Actualizando mejores listas de Mirrors |"
+echo ""
+reflector --verbose --latest 6 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+sleep 3
+clear
+cat /etc/pacman.d/mirrorlist
+sleep 3
+clear
+
+
+titulo_progreso="| Instalando: Base y Base-devel |"
+barra_progreso
+pacstrap /mnt base
+pacstrap /mnt base-devel
+pacstrap /mnt reflector python3 rsync
+pacstrap /mnt nano 
+pacstrap /mnt xdg-user-dirs
+clear
+
+
+titulo_progreso="| Actualizando mejores listas de Mirrors del sistema instalado |"
+barra_progreso
+arch-chroot /mnt /bin/bash -c "reflector --verbose --latest 6 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+clear
+cat /mnt/etc/pacman.d/mirrorlist
+sleep 3
+clear
+echo ""
+arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+echo ""
+echo " Agregando Repositorio de Arcris :"
+echo ""
+cp pacman.conf /mnt/etc/pacman.conf
+arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+clear
+
+
+titulo_progreso="| Archivo FSTAB |"
+barra_progreso
+genfstab -U /mnt > /mnt/etc/fstab
+echo ""
+arch-chroot /mnt /bin/bash -c "cat /etc/fstab"
+sleep 3
+clear
+
+
+titulo_progreso="| Usuario y Administrador |"
+barra_progreso
+echo -e ""
+echo -e ""
+echo "$hostname" > /mnt/etc/hostname
+echo "127.0.1.1 $hostname.localdomain $hostname" > /mnt/etc/hosts
+echo ""
+echo "Hostname: $(cat /mnt/etc/hostname)"
+echo ""
+echo "Hosts: $(cat /mnt/etc/hosts)"
+echo ""
+sleep 5
+arch-chroot /mnt /bin/bash -c "(echo $rootpasswd ; echo $rootpasswd) | passwd root"
+arch-chroot /mnt /bin/bash -c "useradd -m -g users -s /bin/bash $username"
+arch-chroot /mnt /bin/bash -c "(echo $userpasswd ; echo $userpasswd) | passwd $username"
+#arch-chroot /mnt /bin/sh -c "echo root:$rootpasswd | chpasswd"
+#arch-chroot /mnt /bin/bash -c "echo $user:$userpasswd | chpasswd"
+sed -i "80i $username ALL=(ALL) NOPASSWD: ALL"  /mnt/etc/sudoers
+
+
+
+# Idioma
+titulo_progreso="| Actualizando Idioma del Sistema |"
+barra_progreso
+echo -e ""
+echo -e ""
+echo "${localefrom} UTF-8" > /mnt/etc/locale.gen
+arch-chroot /mnt /bin/bash -c "locale-gen" 
+echo ""
+echo "LANG=$localefrom" > /mnt/etc/locale.conf && cat /mnt/etc/locale.conf 
+echo "KEYMAP=$keymap" > /mnt/etc/vconsole.conf && cat /mnt/etc/vconsole.conf 
+echo ""
+arch-chroot /mnt /bin/bash -c "export $(cat /mnt/etc/locale.conf)" 
+export $(cat /mnt/etc/locale.conf)
+#arch-chroot /mnt /bin/bash -c "sudo -u $username export $(cat /etc/locale.conf)"
+#export $(cat /mnt/etc/locale.conf)
+sleep 3
+
+
+## DIRECTORIOS
+titulo_progreso="| Actualizando lista de Directoros |"
+barra_progreso
+echo -e ""
+echo -e ""
+arch-chroot /mnt /bin/bash -c "xdg-user-dirs-update"
+arch-chroot /mnt /bin/bash -c "sudo -u $username xdg-user-dirs-update"
+echo ""
+arch-chroot /mnt /bin/bash -c "ls -l /root/"
+echo ""
+echo ""
+arch-chroot /mnt /bin/bash -c "ls -l /home/$username/"
+echo ""
+sleep 5
+clear
+
+
+## ZONA HORARIA 
+titulo_progreso="| Actualizando Zona Horaria |"
+barra_progreso
+echo -e ""
+echo -e ""
+ln -sf /usr/share/zoneinfo/$zonahoraria /mnt/etc/localtime
+arch-chroot /mnt /bin/bash -c "timedatectl set-timezone $zonahoraria"
+arch-chroot /mnt /bin/bash -c "hwclock -w"
+arch-chroot /mnt /bin/bash -c "hwclock --hctosys"
+arch-chroot /mnt /bin/bash -c "hwclock --systohc"
+sleep 2
+arch-chroot /mnt /bin/bash -c "timedatectl status"
+echo ""
+arch-chroot /mnt /bin/bash -c "date +' %A, %B %d, %Y - %I:%M %p'"
+sleep 5
+clear
+
+## KERNEL SELECCIONADO
+source lib/installkernel
+installkernel
+clear
+echo ""
+echo ""
+echo "Quitando repo cristo:"
+echo ""
+cp pacman-chroot.conf /mnt/etc/pacman.conf
+arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm" 
+arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm" 
+
+## GRUB
+source lib/installgrub
+installgrub
+clear
+
+echo ""
+echo ""
+arch-chroot /mnt /bin/bash -c "sudo -u $username alsi -l"
+
+
+####################################################################
+clear
+arch-chroot /mnt /bin/bash -c "systemctl enable dhcpcd NetworkManager"
+clear
+arch-chroot /mnt /bin/bash -c "systemctl start dhcpcd NetworkManager"
+clear
+echo "noipv6rs" >> /mnt/etc/dhcpcd.conf
+echo "noipv6" >> /mnt/etc/dhcpcd.conf
+
+sed -i '80d' /mnt/etc/sudoers
+sed -i "80i $nombre_usuario ALL=(ALL) ALL" /mnt/etc/sudoers
+clear
+
+reboot
+####################################################################
