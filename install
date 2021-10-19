@@ -296,9 +296,15 @@ echo "  Arcris Instalación fácil de ArchLinux - Donaciones en: www.patreon.com
 
 
 
-cat final | yad  --geometry=780x450 --center --align="left" \
+cat final | yad  --geometry=775x455 --center --align="left" \
 --text-info --window-icon="gtk-execute" --title="Información de Instalación" \
 --button=" Cancelar!gtk-no:1" --button=" Instalar Arch Linux!gtk-ok:0" --buttons-layout="center" --borders="10"
+
+if [ $? = "1" ] 
+  	then killall yad
+fi
+
+
 
 
 
