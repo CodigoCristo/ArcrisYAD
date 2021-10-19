@@ -258,10 +258,11 @@ logoline25="  '--'                /_/   \_\_|  \___|_|  |_|___/    "
 
 
 kernel_select=$(cat datosuser | awk 'NR>=7&&NR<=7' |  awk '{print $1}')
+disk=$(cat datosuser | awk 'NR>=5&&NR<=5' |  awk '{print $1}')
 keymapx=$(cat datosuser | awk 'NR>=3&&NR<=3' |  awk '{print $1}')
 zonahoraria=$(cat datosuser | awk 'NR>=2&&NR<=2' |  awk '{print $1}')
 localefrom=$(cat datosuser | awk 'NR>=1&&NR<=1' |  awk '{print $1}')
-video=$(cat datosuser | awk 'NR>=9&&NR<=9' |  awk '{print $1}')
+video=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $1}')
 environment=$(cat datosuser | awk 'NR>=8&&NR<=8' |  awk '{print $1}')
 
 
@@ -269,7 +270,7 @@ echo -e "${logoline1}" > final
 echo -e "${logoline2}" >> final
 echo -e "${logoline3} Kernel  : ${kernel_select}" >> final
 echo -e "${logoline4}" >> final
-echo -e "${logoline5} Disco   : ${disco}" >> final
+echo -e "${logoline5} Disco   : ${disk}" >> final
 echo -e "${logoline6}" >> final
 echo -e "${logoline7} Usuario : ${username}" >> final
 echo -e "${logoline8}" >> final
@@ -295,7 +296,7 @@ echo "  Arcris Instalación fácil de ArchLinux - Donaciones en: www.patreon.com
 
 
 
-cat final | yad  --geometry=780x530 --center --align="left" \
+cat final | yad  --geometry=780x450 --center --align="left" \
 --text-info --window-icon="gtk-execute" --title="Información de Instalación" \
 --button=" Cancelar!gtk-no:1" --button=" Instalar Arch Linux!gtk-ok:0" --buttons-layout="center" --borders="10"
 

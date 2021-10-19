@@ -1,5 +1,7 @@
 #!/bin/bash
 
-
+cat final | yad  --geometry=780x430 --center --align="left" \
+--text-info --window-icon="gtk-execute" --title="Información de Instalación" \
+--button=" Cancelar!gtk-no:0" --button=" Instalar Arch Linux!gtk-ok:0" --buttons-layout="center" --borders="10"
 
 
