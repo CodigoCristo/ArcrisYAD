@@ -159,14 +159,21 @@ username=$(cat datosuser | awk 'NR>=1&&NR<=1' |  awk '{print $1}')
 
 echo $username
 
-if printf "%s" "$username" | grep -Eoq "^[a-z][a-z0-9-]*$" && [ "${#username}" -lt 33 ]; then
+
+if [[ $numerodelineas != 10 ]]; then
+	zenity --warning --width="250" --height="50"  --text "\nInformación incompleta\n"
+	sh install
+else 
+	if printf "%s" "$username" | grep -Eoq "^[a-z][a-z0-9-]*$" && [ "${#username}" -lt 33 ]; then
 	#zenity --warning --width="250" --height="50"  --text "\nUSUARIO BIEN\n"
 	if grep -Fxq "$username" reserved_usernames ; then
 	zenity --error --width="350" --height="50"  --text "\nNOMBRE DE USUARIO RESERVADO PARA EL SISTEMA\n"
 	fi
-else
-	zenity --error --width="450" --height="100"  --text "\nNOMBRE DE USUARIO CONTIENE CARACTERES ESPECIALES\nVUELVE A LLENAR LOS CAMPOS DEL INSTALADOR\n"
+	else
+		zenity --error --width="450" --height="100"  --text "\nNOMBRE DE USUARIO CONTIENE CARACTERES ESPECIALES\nVUELVE A LLENAR LOS CAMPOS DEL INSTALADOR\n"
+	fi
 fi
+
 
 
 
