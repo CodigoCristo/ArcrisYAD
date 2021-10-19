@@ -163,7 +163,7 @@ numerodelineas=$(cat datosuser | wc -l)
 username=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $1}')
 
 
-if [[ $numerodelineas != 10 ]]; then
+if [[ $numerodelineas != 11 ]]; then
 	zenity --warning --width="250" --height="50"  --text "\nInformación incompleta\n"
 	sh install
 else 
@@ -257,12 +257,12 @@ logoline24=" \  '-. '-'  '-'  '-'  / ___ \| | | (__| |  | \__ \    "
 logoline25="  '--'                /_/   \_\_|  \___|_|  |_|___/    "
 
 
-kernel_select=$(cat datosuser | awk 'NR>=6&&NR<=6' |  awk '{print $1}')
+kernel_select=$(cat datosuser | awk 'NR>=7&&NR<=7' |  awk '{print $1}')
 keymapx=$(cat datosuser | awk 'NR>=3&&NR<=3' |  awk '{print $1}')
 zonahoraria=$(cat datosuser | awk 'NR>=2&&NR<=2' |  awk '{print $1}')
 localefrom=$(cat datosuser | awk 'NR>=1&&NR<=1' |  awk '{print $1}')
 video=$(cat datosuser | awk 'NR>=9&&NR<=9' |  awk '{print $1}')
-environment=$(cat datosuser | awk 'NR>=7&&NR<=7' |  awk '{print $1}')
+environment=$(cat datosuser | awk 'NR>=8&&NR<=8' |  awk '{print $1}')
 
 
 echo -e "${logoline1}" > final
