@@ -3,7 +3,6 @@
 
 function mensaje_install {
 echo ""
-echo ""
 echo " █████╗ ██████╗  ██████╗██████╗ ██╗███████╗";
 echo "██╔══██╗██╔══██╗██╔════╝██╔══██╗██║██╔════╝";
 echo "███████║██████╔╝██║     ██████╔╝██║███████╗";
@@ -11,8 +10,6 @@ echo "██╔══██║██╔══██╗██║     ██╔═
 echo "██║  ██║██║  ██║╚██████╗██║  ██║██║███████║";
 echo "╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝╚══════╝";
 echo "                                           ";
-echo ""
-echo ""
 }
 
 
@@ -163,7 +160,6 @@ echo -e '           .`                                 `/   '
 echo ""
 echo -e "                    Instalación Completa            " 
 echo -e "         Visita el Canal de Youtube de Código Cristo"
-echo ""
 echo ""
 mensaje_install
 
