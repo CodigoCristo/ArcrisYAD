@@ -1,2 +1,5 @@
 #! /bin/bash
 
+cat final | yad  --geometry=775x455 --center --align="left" \
+--text-info --tail --window-icon="gtk-execute" --title="Instalando Arch Linux" \
+--no-buttons --borders="10"
