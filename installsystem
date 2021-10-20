@@ -22,8 +22,6 @@ echo ""
 
 
 echo ""
-echo ""
-echo ""
 echo -e '                             -`                  '
 echo -e '                           .o+`                  '
 echo -e '                           `ooo/                   '
@@ -50,8 +48,6 @@ sleep 5
 
 source install
 
-echo "" 
-echo ""
 echo -e ""
 echo -e "\t\t\t| Zona Horaria en LiveCD |"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
@@ -170,6 +166,5 @@ echo -e "         Visita el Canal de Youtube de Código Cristo"
 echo ""
 echo ""
 mensaje_install
-echo ""
-echo ""
+
 sleep 5
