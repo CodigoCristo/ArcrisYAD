@@ -123,7 +123,7 @@ timedatectl set-timezone ${zonahoraria}
 hwclock -w
 hwclock --hctosys
 hwclock --systohc
-sudo ntpd -qg
+ntpd -qg
 clear
 echo "" 
 echo -e ""
