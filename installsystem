@@ -51,13 +51,19 @@ sleep 5
 
 source install
 
-clear
+echo "" 
+echo ""
+echo -e ""
+echo -e "\t\t\t| Zona Horaria en LiveCD |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+echo ""
 timedatectl set-timezone ${zonahoraria}
 hwclock -w
 hwclock --hctosys
 hwclock --systohc
 ntpd -qg
-clear
+echo "" 
 echo "" 
 echo -e ""
 echo -e "\t\t\t| Actualizando Hora Actual en LiveCD |"
@@ -68,7 +74,8 @@ timedatectl status
 echo ""
 date +' %A, %B %d, %Y - %r'
 sleep 5
-clear
+echo "" 
+echo "" 
 
 
 echo "" 
@@ -79,7 +86,8 @@ echo -e ""
 sleep 2
 pacman -Sy archlinux-keyring --noconfirm 
 sleep 2
-clear
+echo "" 
+echo "" 
 
 
 echo "" 
@@ -92,11 +100,18 @@ pacman -Sy reflector --noconfirm
 pacman -Sy python3 --noconfirm 
 pacman -Sy rsync --noconfirm 
 
+echo "" 
+echo "" 
+echo -e ""
 echo -e "\t\t\t| Actualizando mejores listas de Mirrors |"
-echo ""
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+sleep 3
 reflector --verbose --latest 6 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 sleep 3
-
+echo "" 
+echo "" 
 cat /etc/pacman.d/mirrorlist
 sleep 3
-
+echo "" 
+echo "" 
