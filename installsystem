@@ -24,28 +24,27 @@ echo ""
 echo ""
 echo ""
 echo ""
-echo -e $red '                             -`                  '
-echo -e $red '                           .o+`                  '
-echo -e $red '                           `ooo/                   '
-echo -e $red '                          `+oooo:                 '
-echo -e $red '                         `+oooooo:                 ' 
-echo -e $red '                         -+oooooo+:                '
-echo -e $red '                       `/:-:++oooo+:              '
-echo -e $red '                      `/++++/+++++++:              '
-echo -e $red '                     `/++++++++++++++:             '
-echo -e $red '                    `/+++ooooooooooooo/`           '
-echo -e $red '                   ./ooosssso++osssssso+`          '
-echo -e $red '                  .oossssso-````/ossssss+`         '
-echo -e $red '                 -osssssso.      :ssssssso.        '
-echo -e $red '                :osssssss/        osssso+++.       '
-echo -e $red '               /ossssssss/        +ssssooo/-       '
-echo -e $red '             `/ossssso+/:-        -:/+osssso+-     '
-echo -e $red '            `+sso+:-`                 `.-/+oso:    '
-echo -e $red '           `++:.                           `-/+/   '
-echo -e $red '           .`                                 `/   '
+echo -e '                             -`                  '
+echo -e '                           .o+`                  '
+echo -e '                           `ooo/                   '
+echo -e '                          `+oooo:                 '
+echo -e '                         `+oooooo:                 ' 
+echo -e '                         -+oooooo+:                '
+echo -e '                       `/:-:++oooo+:              '
+echo -e '                      `/++++/+++++++:              '
+echo -e '                     `/++++++++++++++:             '
+echo -e '                    `/+++ooooooooooooo/`           '
+echo -e '                   ./ooosssso++osssssso+`          '
+echo -e '                  .oossssso-````/ossssss+`         '
+echo -e '                 -osssssso.      :ssssssso.        '
+echo -e '                :osssssss/        osssso+++.       '
+echo -e '               /ossssssss/        +ssssooo/-       '
+echo -e '             `/ossssso+/:-        -:/+osssso+-     '
+echo -e '            `+sso+:-`                 `.-/+oso:    '
+echo -e '           `++:.                           `-/+/   '
+echo -e '           .`                                 `/   '
 echo ""
-echo -e $red "         Visita el Canal de Youtube de Código Cristo"
-
+echo -e "         Visita el Canal de Youtube de Código Cristo"
 sleep 5
 
 
@@ -115,3 +114,62 @@ cat /etc/pacman.d/mirrorlist
 sleep 3
 echo "" 
 echo "" 
+
+
+
+
+
+
+
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo ""
+echo -e '                             -`                  '
+echo -e '                           .o+`                  '
+echo -e '                           `ooo/                   '
+echo -e '                          `+oooo:                 '
+echo -e '                         `+oooooo:                 ' 
+echo -e '                         -+oooooo+:                '
+echo -e '                       `/:-:++oooo+:              '
+echo -e '                      `/++++/+++++++:              '
+echo -e '                     `/++++++++++++++:             '
+echo -e '                    `/+++ooooooooooooo/`           '
+echo -e '                   ./ooosssso++osssssso+`          '
+echo -e '                  .oossssso-````/ossssss+`         '
+echo -e '                 -osssssso.      :ssssssso.        '
+echo -e '                :osssssss/        osssso+++.       '
+echo -e '               /ossssssss/        +ssssooo/-       '
+echo -e '             `/ossssso+/:-        -:/+osssso+-     '
+echo -e '            `+sso+:-`                 `.-/+oso:    '
+echo -e '           `++:.                           `-/+/   '
+echo -e '           .`                                 `/   '
+echo ""
+echo -e "                    Instalación Completa            " 
+echo -e "         Visita el Canal de Youtube de Código Cristo"
+echo ""
+echo ""
+mensaje_install
+echo ""
+echo ""
+sleep 5
