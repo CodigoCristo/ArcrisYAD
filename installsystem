@@ -1,49 +1,9 @@
 #!/bin/bash
 
-###########################################
-####### FUNCION DE BARRA ##################
-###########################################
-
-function barra_progreso {
-
-clear    
-printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' "_"
-echo -e ""
-echo -e "\t\t\t$titulo_progreso"
-printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
-echo -e ""
-
-#INICIO PROGRESS BARR
-function ProgressBar {
-    let _progress=(${1}*100/${2}*100)/100
-    let _done=(${_progress}*6)/10
-    let _left=60-$_done
-    _fill=$(printf "%${_done}s")
-    _empty=$(printf "%${_left}s")
-# 1.2.1.1 Progreso : [########################################] 100%
-printf "\r > Cargando : |${_fill// /║}${_empty// /-}| ${_progress}%%"
-
-}
-# Variables
-_start=1
-
-_end=100
-
-for number in $(seq ${_start} ${_end})
-do
-    sleep 0.065
-    ProgressBar ${number} ${_end}
-done
-#FIN PROGRESS BARR
-echo ""
-echo ""
-}
-
 
 function mensaje_install {
 echo ""
 echo ""
-echo -e '\033[38;2;255;0;02m'
 echo " █████╗ ██████╗  ██████╗██████╗ ██╗███████╗";
 echo "██╔══██╗██╔══██╗██╔════╝██╔══██╗██║██╔════╝";
 echo "███████║██████╔╝██║     ██████╔╝██║███████╗";
@@ -51,36 +11,9 @@ echo "██╔══██║██╔══██╗██║     ██╔═
 echo "██║  ██║██║  ██║╚██████╗██║  ██║██║███████║";
 echo "╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝╚══════╝";
 echo "                                           ";
-echo -e '\033[m'
 echo ""
 echo ""
-sleep 3
 }
-
-
-
-
-function ProgressBar {
-    let _progress=(${1}*100/${2}*100)/100
-    let _done=(${_progress}*6)/10
-    let _left=60-$_done
-    _fill=$(printf "%${_done}s")
-    _empty=$(printf "%${_left}s")
-# 1.2.1.1 Progreso : [########################################] 100%
-printf "\r   |${_fill// /║}${_empty// /-}| ${_progress}%%"
-
-}
-# Variables
-_start=1
-
-_end=101
-
-for number in $(seq ${_start} ${_end})
-do
-    sleep 0.25
-    ProgressBar ${number} ${_end}
-done
-
 
 
 
@@ -111,7 +44,7 @@ echo -e $red '            `+sso+:-`                 `.-/+oso:    '
 echo -e $red '           `++:.                           `-/+/   '
 echo -e $red '           .`                                 `/   '
 echo ""
-echo -e $red "            Visita el Canal de Youtube de Código Cristo"
+echo -e $red "         Visita el Canal de Youtube de Código Cristo"
 
 sleep 5
 
@@ -158,12 +91,12 @@ sleep 3
 pacman -Sy reflector --noconfirm 
 pacman -Sy python3 --noconfirm 
 pacman -Sy rsync --noconfirm 
-clear
+
 echo -e "\t\t\t| Actualizando mejores listas de Mirrors |"
 echo ""
 reflector --verbose --latest 6 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 sleep 3
-clear
+
 cat /etc/pacman.d/mirrorlist
 sleep 3
-clear
+
