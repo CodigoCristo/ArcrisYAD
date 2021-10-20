@@ -10,6 +10,8 @@
 # https://github.com/offternet/yaddemo
 #
 
+rm datosuser
+
 res1=$(mktemp --tmpdir term-tab1.XXXXXXXX)
 res2=$(mktemp --tmpdir term-tab2.XXXXXXXX)
 res3=$(mktemp --tmpdir term-tab3.XXXXXXXX)
@@ -143,7 +145,7 @@ if [ $? = "1" ]
 fi
 
 
-rm datosuser
+
 clear 
 cat $res1 > datosuser
 cat $res2 >> datosuser
