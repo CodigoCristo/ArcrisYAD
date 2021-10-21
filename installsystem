@@ -43,13 +43,16 @@ echo -e "         Visita el Canal de Youtube de Código Cristo"
 sleep 5
 
 
+######## VARIABLES #############################################################
 kernel_select=$(cat datosuser | awk 'NR>=7&&NR<=7' |  awk '{print $1}')
          disk=$(cat datosuser | awk 'NR>=5&&NR<=5' |  awk '{print $1}')
+     username=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $1}')
       keymapx=$(cat datosuser | awk 'NR>=3&&NR<=3' |  awk '{print $1}')
   zonahoraria=$(cat datosuser | awk 'NR>=2&&NR<=2' |  awk '{print $1}')
-   localefrom=$(cat datosuser | awk 'NR>=1&&NR<=1' |  awk '{print $1 " " $2}') 
+   localefrom=$(cat datosuser | awk 'NR>=1&&NR<=1' |  awk '{print $1}') 
         video=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $1}')
   environment=$(cat datosuser | awk 'NR>=8&&NR<=8' |  awk '{print $1}')
+################################################################################
 
 
 echo -e ""
@@ -149,12 +152,66 @@ echo -e ""
 echo -e "\t\t\t| Agregando Repositorio de Arcris |"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 echo -e ""
-cp pacman.conf /mnt/etc/pacman.conf
+cp pacmancristo.conf /mnt/etc/pacman.conf
 arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
 arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
-clear
 
 
+echo "" 
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Archivo FSTAB |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+genfstab -U /mnt > /mnt/etc/fstab
+echo ""
+arch-chroot /mnt /bin/bash -c "cat /etc/fstab"
+sleep 3
+
+
+
+hostname=ArcriS
+username=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $1}')
+userpasswd=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $2}')
+rootpasswd=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $4}')
+
+echo "" 
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Usuario y Administrador |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+echo "${hostname}" > /mnt/etc/hostname
+echo "127.0.1.1 ${hostname}.localdomain ${hostname}" > /mnt/etc/hosts
+echo ""
+echo "Hostname: $(cat /mnt/etc/hostname)"
+echo ""
+echo "Hosts: $(cat /mnt/etc/hosts)"
+echo ""
+sleep 5
+arch-chroot /mnt /bin/bash -c "(echo ${rootpasswd} ; echo ${rootpasswd}) | passwd root"
+arch-chroot /mnt /bin/bash -c "useradd -m -g users -s /bin/bash ${username}"
+arch-chroot /mnt /bin/bash -c "(echo ${userpasswd} ; echo ${userpasswd}) | passwd ${username}"
+sed -i "80i ${username} ALL=(ALL) NOPASSWD: ALL"  /mnt/etc/sudoers
+
+
+echo "" 
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Actualizando Idioma del Sistema |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+echo "${localefrom} UTF-8" > /mnt/etc/locale.gen
+arch-chroot /mnt /bin/bash -c "locale-gen" 
+echo ""
+echo "LANG=$localefrom" > /mnt/etc/locale.conf && cat /mnt/etc/locale.conf 
+echo "KEYMAP=$keymap" > /mnt/etc/vconsole.conf && cat /mnt/etc/vconsole.conf 
+echo ""
+arch-chroot /mnt /bin/bash -c "export $(cat /mnt/etc/locale.conf)" 
+export $(cat /mnt/etc/locale.conf)
+#arch-chroot /mnt /bin/bash -c "sudo -u $username export $(cat /etc/locale.conf)"
+#export $(cat /mnt/etc/locale.conf)
+sleep 3
 
 
 echo ""
