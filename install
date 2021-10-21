@@ -62,7 +62,7 @@ yad --plug=$KEY --tabnum=2 --align=left \
 --field="Particionado con otro Sistema Operativo:FBTN" 'bash -c "partwindows"' > $res2 &
 
 
-kernels=$(echo "linux,linux-hardened,linux-lts,linux-zen")
+kernels=$(echo "linux-stable,linux-hardened,linux-lts,linux-zen")
 shells=$(echo "zsh,bash,dash,fish,mksh,tcsh")
 
 yad --plug=$KEY --tabnum=3 --align=left --print-uri \

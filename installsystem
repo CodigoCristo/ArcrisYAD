@@ -174,6 +174,7 @@ hostname=ArcriS
 username=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $1}')
 userpasswd=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $2}')
 rootpasswd=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $4}')
+keymap=$( curl https://ipapi.co/languages | awk -F "," '{print $1}' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' )
 
 echo "" 
 echo "" 
@@ -209,9 +210,94 @@ echo "KEYMAP=$keymap" > /mnt/etc/vconsole.conf && cat /mnt/etc/vconsole.conf
 echo ""
 arch-chroot /mnt /bin/bash -c "export $(cat /mnt/etc/locale.conf)" 
 export $(cat /mnt/etc/locale.conf)
-#arch-chroot /mnt /bin/bash -c "sudo -u $username export $(cat /etc/locale.conf)"
-#export $(cat /mnt/etc/locale.conf)
-sleep 3
+arch-chroot /mnt /bin/bash -c "sudo -u $username export $(cat /etc/locale.conf)"
+export $(cat /mnt/etc/locale.conf)
+sleep 5
+
+
+echo "" 
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Actualizando lista de Directoros |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+arch-chroot /mnt /bin/bash -c "xdg-user-dirs-update"
+arch-chroot /mnt /bin/bash -c "sudo -u $username xdg-user-dirs-update"
+echo ""
+arch-chroot /mnt /bin/bash -c "ls -l /root/"
+echo ""
+echo ""
+arch-chroot /mnt /bin/bash -c "ls -l /home/$username/"
+echo ""
+sleep 5
+
+
+
+echo "" 
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Actualizando Zona Horaria |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+ln -sf /usr/share/zoneinfo/${zonahoraria} /mnt/etc/localtime
+arch-chroot /mnt /bin/bash -c "timedatectl set-timezone ${zonahoraria}"
+arch-chroot /mnt /bin/bash -c "hwclock -w"
+arch-chroot /mnt /bin/bash -c "hwclock --hctosys"
+arch-chroot /mnt /bin/bash -c "hwclock --systohc"
+sleep 2
+arch-chroot /mnt /bin/bash -c "timedatectl status"
+echo ""
+arch-chroot /mnt /bin/bash -c "date +' %A, %B %d, %Y - %I:%M %p'"
+sleep 5
+
+
+
+echo "" 
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Instalando Kernel Seleccionado |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+source bash/installkernel
+installkernel
+
+
+echo "" 
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Instalando GRUB |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+source bash/installgrub
+installgrub
+
+
+
+echo "" 
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Agregando Repositorio de Arcris |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+cp pacman.conf /mnt/etc/pacman.conf
+arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+
+
+echo ""
+echo ""
+arch-chroot /mnt /bin/bash -c "sudo -u $username alsi -l"
+
+arch-chroot /mnt /bin/bash -c "systemctl enable dhcpcd NetworkManager"
+clear
+arch-chroot /mnt /bin/bash -c "systemctl start dhcpcd NetworkManager"
+clear
+echo "noipv6rs" >> /mnt/etc/dhcpcd.conf
+echo "noipv6" >> /mnt/etc/dhcpcd.conf
+
+sed -i '80d' /mnt/etc/sudoers
+sed -i "80i $nombre_usuario ALL=(ALL) ALL" /mnt/etc/sudoers
+clear
 
 
 echo ""
