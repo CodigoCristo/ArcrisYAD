@@ -116,7 +116,43 @@ echo ""
 echo "" 
 
 
+echo "" 
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Instalando: Base y Base-devel |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+sleep 3
+pacstrap /mnt base
+pacstrap /mnt base-devel
+pacstrap /mnt reflector python3 rsync
+pacstrap /mnt nano 
+pacstrap /mnt xdg-user-dirs
 
+
+echo "" 
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Actualizando mejores listas de Mirrors del sistema instalado |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+arch-chroot /mnt /bin/bash -c "reflector --verbose --latest 6 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+cat /mnt/etc/pacman.d/mirrorlist
+sleep 3
+echo ""
+arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+
+
+echo "" 
+echo "" 
+echo -e ""
+echo -e "\t\t\t| Agregando Repositorio de Arcris |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+cp pacman.conf /mnt/etc/pacman.conf
+arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+clear
 
 
 

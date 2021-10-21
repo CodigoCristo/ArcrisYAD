@@ -73,7 +73,7 @@ yad --plug=$KEY --tabnum=3 --align=left --print-uri \
 --field="Selecciona los modulos que necesitas:LBL" \
 --field="Microcode del Procesador (Actualizaciones):CHK" \
 --field="Driver para Touchpad - Panel táctil (Laptop):CHK" \
---field="<span color='white'><b>\n\t\t\t\tApóyame en Patreon: https://www.patreon.com/codigocristo</b></span>:LBL" > $res3 &
+--field="<span color='white'><b>\n\t\t\t\t\tApóyame en Patreon: </b></span><span color='#07BFFF'><b>patreon.com/codigocristo</b></span>:LBL" > $res3 &
 
 
 source bash/num4
@@ -83,7 +83,7 @@ export -f winmanager
 
 yad --plug=$KEY --tabnum=4 --align=left \
 --form --separator=" " --item-separator=","  \
---text="<span color='white'><b>\n\n\t\t\t\tApóyame en Patreon: https://www.patreon.com/codigocristo\n</b></span>" \
+--text="<span color='white'><b>\n\n\t\t\t\t\t\tDonaciones en: </b></span><span color='#07BFFF'><b>paypal.me/codigocristo\n</b></span>" \
 --field="Elige entre un DE o WM o TTY :FBTN" 'bash -c "deorwm"' \
 --field="<span color='white'><b>\nDesktop Environment (DE)</b></span>\nUn entorno de escritorio proporciona una completa interfaz gráfica de usuario:LBL" \
 --field="<span color='white'><b>\nWindow Manager (WM)</b></span>\nUn gestor de ventanas proporciona al usuario una interfaz gráfica minimalista:LBL" \
