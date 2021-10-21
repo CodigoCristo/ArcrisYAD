@@ -47,7 +47,7 @@ kernel_select=$(cat datosuser | awk 'NR>=7&&NR<=7' |  awk '{print $1}')
          disk=$(cat datosuser | awk 'NR>=5&&NR<=5' |  awk '{print $1}')
       keymapx=$(cat datosuser | awk 'NR>=3&&NR<=3' |  awk '{print $1}')
   zonahoraria=$(cat datosuser | awk 'NR>=2&&NR<=2' |  awk '{print $1}')
-   localefrom=$(cat datosuser | awk 'NR>=1&&NR<=1' |  awk '{print $1}')
+   localefrom=$(cat datosuser | awk 'NR>=1&&NR<=1' |  awk '{print $1 " " $2}') 
         video=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $1}')
   environment=$(cat datosuser | awk 'NR>=8&&NR<=8' |  awk '{print $1}')
 
@@ -165,7 +165,7 @@ echo -e '            `+sso+:-`                 `.-/+oso:    '
 echo -e '           `++:.                           `-/+/   '
 echo -e '           .`                                 `/   '
 echo ""
-echo -e "                    Instalación Completa            " 
+echo -e "       Instalación Completa - Reinicia tu Computadora     " 
 echo ""
 mensaje_install
 
