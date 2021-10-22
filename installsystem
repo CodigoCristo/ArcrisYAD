@@ -136,7 +136,7 @@ pacstrap /mnt xdg-user-dirs
 echo "" 
 echo "" 
 echo -e ""
-echo -e "\t\t\t| Actualizando mejores listas de Mirrors del sistema instalado |"
+echo -e "\t| Actualizando mejores listas de Mirrors del sistema instalado |"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 echo -e ""
 arch-chroot /mnt /bin/bash -c "reflector --verbose --latest 6 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
@@ -170,7 +170,7 @@ sleep 3
 
 
 
-hostname=ArcriS
+hostname=Arcris
 username=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $1}')
 userpasswd=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $2}')
 rootpasswd=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $4}')
@@ -252,23 +252,54 @@ sleep 5
 
 
 
+kernel_select=$(cat datosuser | awk 'NR>=7&&NR<=7' |  awk '{print $1}')
+shell_select=$(cat datosuser | awk 'NR>=7&&NR<=7' |  awk '{print $2}')
+ucode_select=$(cat datosuser | awk 'NR>=7&&NR<=7' |  awk '{print $3}')
+touchpad_select=$(cat datosuser | awk 'NR>=7&&NR<=7' |  awk '{print $4}')
+
+source bash/installkernel
 echo "" 
 echo "" 
 echo -e ""
 echo -e "\t\t\t| Instalando Kernel Seleccionado |"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 echo -e ""
-source bash/installkernel
 installkernel
+echo -e ""
+echo -e "\t\t\t| Instalando Shell del Sistema |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+installshell
+echo -e ""
+installucode
+echo -e ""
+installtouchpad
 
 
+video=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $1}')
+echo -e ""
+echo -e "\t\t\t| Instalando Shell del Sistema |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+installvideo
+
+
+environment=$(cat datosuser | awk 'NR>=8&&NR<=8' |  awk '{print $1}')
+echo -e ""
+echo -e "\t\t\t| Instalando Shell del Sistema |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+installenvironment
+
+
+
+source bash/installgrub
 echo "" 
 echo "" 
 echo -e ""
 echo -e "\t\t\t| Instalando GRUB |"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 echo -e ""
-source bash/installgrub
 installgrub
 
 
@@ -276,28 +307,26 @@ installgrub
 echo "" 
 echo "" 
 echo -e ""
-echo -e "\t\t\t| Agregando Repositorio de Arcris |"
+echo -e "\t\t\t| Quitando Repositorio de Arcris |"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 echo -e ""
 cp pacman.conf /mnt/etc/pacman.conf
 arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
 arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
-
-
 echo ""
 echo ""
 arch-chroot /mnt /bin/bash -c "sudo -u $username alsi -l"
-
+echo ""
 arch-chroot /mnt /bin/bash -c "systemctl enable dhcpcd NetworkManager"
-clear
+echo ""
 arch-chroot /mnt /bin/bash -c "systemctl start dhcpcd NetworkManager"
-clear
+echo ""
 echo "noipv6rs" >> /mnt/etc/dhcpcd.conf
 echo "noipv6" >> /mnt/etc/dhcpcd.conf
-
+echo ""
 sed -i '80d' /mnt/etc/sudoers
 sed -i "80i ${username} ALL=(ALL) ALL" /mnt/etc/sudoers
-clear
+
 
 
 echo ""

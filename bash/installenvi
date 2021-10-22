@@ -1,0 +1,211 @@
+#!/bin/bash
+
+
+installvideo () {
+
+
+
+case $video in
+
+  Automático)
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* 
+# Instalación de drivers de video 
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* 
+echo "" 
+echo "Se estan instalando los drivers de video Automático" 
+sleep 3 
+case $(systemd-detect-virt) in 
+	oracle)
+		arch-chroot /mnt /bin/bash -c "pacman -S virtualbox-guest-utils --noconfirm" 
+		arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vmware virtualbox-host-modules-arch mesa --noconfirm" 
+		arch-chroot /mnt /bin/bash -c "pacman -S virtualbox-host-modules-arch mesa --noconfirm" 
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm" 
+	;; 
+	vmware) 
+		arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vmware --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S xf86-input-vmmouse --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S open-vm-tools --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S net-tools --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S gtkmm --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+	;; 
+	qemu) 
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa-libgl --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-fbdev --noconfirm"
+	;; 
+	kvm) 
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa-libgl --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-fbdev --noconfirm"
+	;; 
+	microsoft) 
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa-libgl --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-fbdev --noconfirm"
+	;; 
+	xen) 
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa-libgl --noconfirm"
+		arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-fbdev --noconfirm" 
+	;; 
+	*) 
+		if (lspci | grep VGA | grep "NVIDIA\|nVidia" &>/dev/null); then 
+
+			arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-nouveau --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-mesa --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S mesa-vdpau --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libva-mesa-driver --noconfirm"
+
+		elif (lspci | grep VGA | grep "Radeon R\|R2/R3/R4/R5" &>/dev/null); then 
+
+			arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-amdgpu --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-mesa --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S vulkan-radeon --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-vulkan-radeon --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S mesa-vdpau --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libva-mesa-driver --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-mesa-vdpau --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-libva-mesa-driver --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libva-vdpau-driver --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libvdpau-va-gl --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libva-utils --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S vdpauinfo --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S opencl-mesa --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S clinfo --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S ocl-icd --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-ocl-icd --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S opencl-headers --noconfirm"
+
+		elif (lspci | grep VGA | grep "ATI\|AMD/ATI" &>/dev/null); then 
+
+			arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-ati --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-mesa --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S mesa-vdpau --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libva-mesa-driver --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-mesa-vdpau --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-libva-mesa-driver --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libva-vdpau-driver --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libvdpau-va-gl --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libva-utils --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S vdpauinfo --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S opencl-mesa --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S clinfo --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S ocl-icd --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-ocl-icd --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S opencl-headers --noconfirm"
+
+		elif (lspci | grep VGA | grep "Intel" &>/dev/null); then 
+
+			arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-intel --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S vulkan-intel --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-mesa --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S intel-media-driver --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libva-intel-driver --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libva-vdpau-driver --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libvdpau-va-gl --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S libva-utils --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S vdpauinfo --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S intel-compute-runtime --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S clinfo --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S ocl-icd --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S lib32-ocl-icd --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S opencl-headers --noconfirm"
+
+		else
+
+			arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+	fi 
+	;; 
+esac 
+sleep 2 
+
+# -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* 
+  ;;
+
+
+  Video vesa (Generic All))
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+  ;;
+
+  Intel (Open Source))
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video Intel (Open Source)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-intel --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S vulkan-intel --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S lib32-mesa --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S intel-media-driver --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S libva-intel-driver --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S libva-vdpau-driver --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S libvdpau-va-gl --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S libva-utils --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S vdpauinfo --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S intel-compute-runtime --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S clinfo --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S ocl-icd --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S lib32-ocl-icd --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S opencl-headers --noconfirm"
+
+  ;;
+
+
+esac
+
+}
+
+
+
+
+installenvironment () {
+
+	case $environment in
+
+  tty)
+	echo "" 
+	echo "Se esta instalando el entorno TTY:" 
+	echo "" 
+	arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+
+  ;;
+
+
+  Xfce4)
+	echo "" 
+	echo "Se esta instalando el entorno Xfce4:" 
+	echo "" 
+
+
+  ;;
+
+  Gnome)
+	echo "" 
+	echo "Se esta instalando el entorno Gnome:" 
+	echo "" 
+
+  ;;
+
+
+  KDE Plasma)
+	echo "" 
+	echo "Se esta instalando el entorno KDE Plasma:" 
+	echo "" 
+
+  ;;
+
+esac
+
+}
+
+
+
