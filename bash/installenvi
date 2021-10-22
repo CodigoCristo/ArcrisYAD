@@ -7,7 +7,7 @@ installvideo () {
 
 case $video in
 
-  Automático)
+  "Automático")
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* 
 # Instalación de drivers de video 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* 
@@ -129,7 +129,7 @@ sleep 2
   ;;
 
 
-  Video vesa (Generic All))
+  "Video vesa (Generic All)")
 	
 	echo "" 
 	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
@@ -137,7 +137,7 @@ sleep 2
 
   ;;
 
-  Intel (Open Source))
+  "Intel (Open Source)")
 	
 	echo "" 
 	echo "Se estan instalando los drivers de Video Intel (Open Source)" 
@@ -171,7 +171,7 @@ installenvironment () {
 
 	case $environment in
 
-  tty)
+  "tty")
 	echo "" 
 	echo "Se esta instalando el entorno TTY:" 
 	echo "" 
@@ -180,7 +180,7 @@ installenvironment () {
   ;;
 
 
-  Xfce4)
+  "Xfce4")
 	echo "" 
 	echo "Se esta instalando el entorno Xfce4:" 
 	echo "" 
@@ -218,10 +218,10 @@ installenvironment () {
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libgsf --noeditmenu --noconfirm --needed"
 
 	arch-chroot /mnt /bin/bash -c "systemctl enable lightdm"
-	
+
   ;;
 
-  Gnome)
+  "Gnome")
 	echo "" 
 	echo "Se esta instalando el entorno Gnome:" 
 	echo "" 
@@ -260,7 +260,7 @@ installenvironment () {
   ;;
 
 
-  KDE Plasma)
+  "KDE Plasma")
 	echo "" 
 	echo "Se esta instalando el entorno KDE Plasma:" 
 	echo "" 
