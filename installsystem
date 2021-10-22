@@ -276,6 +276,7 @@ echo -e ""
 installtouchpad
 
 
+source bash/installenvi
 video=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $1}')
 echo -e ""
 echo -e "\t\t\t| Instalando Shell del Sistema |"
@@ -284,12 +285,26 @@ echo -e ""
 installvideo
 
 
+source bash/installenvi
 environment=$(cat datosuser | awk 'NR>=8&&NR<=8' |  awk '{print $1}')
 echo -e ""
 echo -e "\t\t\t| Instalando Shell del Sistema |"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 echo -e ""
 installenvironment
+
+
+
+keymapx=$(cat datosuser | awk 'NR>=3&&NR<=3' |  awk '{print $1}')
+arch-chroot /mnt /bin/bash -c "localectl --no-convert set-x11-keymap ${keymapx}"
+echo -e 'Section "InputClass"' > /mnt/etc/X11/xorg.conf.d/00-keyboard.conf 
+echo -e 'Identifier "system-keyboard"' >> /mnt/etc/X11/xorg.conf.d/00-keyboard.conf 
+echo -e 'MatchIsKeyboard "on"' >> /mnt/etc/X11/xorg.conf.d/00-keyboard.conf 
+echo -e 'Option "XkbLayout" "'$keymapx'"' >> /mnt/etc/X11/xorg.conf.d/00-keyboard.conf 
+echo -e 'EndSection' >> /mnt/etc/X11/xorg.conf.d/00-keyboard.conf            
+echo "" 
+cat /mnt/etc/X11/xorg.conf.d/00-keyboard.conf 
+sleep 3
 
 
 

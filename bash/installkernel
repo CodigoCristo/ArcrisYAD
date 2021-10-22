@@ -298,9 +298,9 @@ mkdir /mnt/etc/pacman.d/hooks/
 cp mirrorupgrade.hook /mnt/etc/pacman.d/hooks/mirrorupgrade.hook 
 chmod +x /mnt/etc/pacman.d/hooks/mirrorupgrade.hook
 
-cp zshrc /mnt/home/$username/.zshrc
+cp .zshrc /mnt/home/$username/.zshrc
 arch-chroot /mnt /bin/bash -c "chown -hR $username:users /home/$username/.zshrc"
-cp zshrc /mnt/root/.zshrc
+cp .zshrc /mnt/root/.zshrc
 
 cp .bashrc /mnt/home/$username/.bashrc
 cp .bashrc-root /mnt/root/.bashrc
@@ -324,7 +324,6 @@ microcode=$(lspci -k | grep 'Host bridge: Intel')
 lspci -k | grep 'Host bridge:'  > procesador
 if [[ $microcode  = *Intel* || $microcode = *intel* || $microcode = *INTEL* ]]
 then
-clear    
 echo ""
 echo ""     
 cat procesador
@@ -332,7 +331,6 @@ echo ""
 arch-chroot /mnt /bin/bash -c "pacman -S intel-ucode --noconfirm"
 
 else
-clear
 echo ""
 echo ""     
 cat procesador
