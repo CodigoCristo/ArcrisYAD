@@ -118,6 +118,21 @@ lsblk ${disco} | yad --center --geometry="100x300" --window-icon="drive-harddisk
 
 
 partauto () {
+
+lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{if (NR!=0) {print}}' | sed '/sr/d' | sed '/fd/d' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
+sed -i ':a;N;$!ba;s/\n/ !/g' devices
+sed -i "$d" devices
+
+devices=$(awk '{print $0 " " }' devices )
+
+disk=$(yad --skip-taskbar --center --geometry=400x100 --window-icon=drive-harddisk \
+--button="Seleccionar:0" --buttons-layout="center" --borders="10" \
+--title "Selecciona tu Disco Duro" --form \
+--field="Selección de Disco: :CB" "$devices")
+
+disco=$(echo $disk | awk '{print $1}')
+
+
 OUT=$(yad --skip-taskbar --on-top  --center --window-icon="drive-harddisk" \
 --image="drive-harddisk" --text="Selecciona tu preferencia de configurar tu disco"  --title "Tipo de particionado"  \
 --width="400" --height="250"  --list --radiolist --columns="3" \
@@ -139,18 +154,6 @@ export -f partautoSwap
 export -f partautoHome
 export -f partautoHomeSwap
 
-lsblk -lno NAME,TYPE,SIZE | grep 'disk' | awk '{if (NR!=0) {print}}' | sed '/sr/d' | sed '/fd/d' | awk '{print "/dev/" $1 " "  $3}' | sort -iu | sed "$d"  > devices
-sed -i ':a;N;$!ba;s/\n/ !/g' devices
-sed -i "$d" devices
-
-devices=$(awk '{print $0 " " }' devices )
-
-disk=$(yad --skip-taskbar --center --geometry=400x100 --window-icon=drive-harddisk \
---button="Seleccionar:0" --buttons-layout="center" --borders="10" \
---title "Selecciona tu Disco Duro" --form \
---field="Selección de Disco: :CB" "$devices")
-
-disco=$(echo $disk | awk '{print $1}')
 
 echo $disco
 
