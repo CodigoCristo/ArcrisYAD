@@ -279,7 +279,7 @@ installtouchpad
 source bash/installenvi
 video=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $1}')
 echo -e ""
-echo -e "\t\t\t| Instalando Shell del Sistema |"
+echo -e "\t\t\t| Instalando Driver de Vídeo |"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 echo -e ""
 installvideo
@@ -288,7 +288,7 @@ installvideo
 source bash/installenvi
 environment=$(cat datosuser | awk 'NR>=8&&NR<=8' |  awk '{print $1}')
 echo -e ""
-echo -e "\t\t\t| Instalando Shell del Sistema |"
+echo -e "\t\t\t| Instalando Entorno de Escritorio |"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 echo -e ""
 installenvironment
