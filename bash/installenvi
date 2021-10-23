@@ -512,6 +512,14 @@ installaudio () {
 
   ;;
 
+
+
+  "Ninguno")
+	echo "" 
+
+  ;;
+
+
 esac
 
 }

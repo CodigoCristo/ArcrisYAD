@@ -93,7 +93,7 @@ yad --plug=$KEY --tabnum=4 --align=left \
 
 
 drivideo=$(echo "Automático,Video_vesa_(Generic_All),Intel_(Open_Source),AMD/ATI_(Open_Source),AMD/Radeon_(Open_Source),Nvidia_(Open_Source),Nvidia_Privativo_440xx_(Linux_Stable),Nvidia_Privativo_390xx_(Linux_Stable),Nvidia_Privativo_440xx_(Linux_LTS),Nvidia_Privativo_390xx_(Linux_LTS),Nvidia_Privativo_440xx_(Linux_Hardened_-_Zen),Nvidia_Privativo_390xx_(Linux_Hardened_-_Zen),Nvidia_Privativo_440xx_(Linux_Stable_+_Intel)")
-driaudio=$(echo "Pulse-Audio,Alsa-Audio,Jack-Audio,Pipewire-Audio")
+driaudio=$(echo "Pulse-Audio,Alsa-Audio,Jack-Audio,Pipewire-Audio,Ninguno")
 driaur=$(echo "yay-(Terminal),paru-(Terminal),pamac-(Graphical),Octopi-(Graphical),Ninguno")
 webs=$(echo "Ninguno,Firefox,Chromium,Brave,Google-Chrome,Opera,Vivaldi")
 driofi=$(echo "Ninguno,LibreOffice,WPS-Office,SoftMaker-Office")
