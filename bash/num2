@@ -54,13 +54,13 @@ partautoHome () {
 
 maxvalue=$(sudo fdisk -l ${disco} | grep "bytes," | awk '{print $5}' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' )
 
-let maxvalue=$maxvalue-30
+let maxvalue=$maxvalue-20
 
-homeauto=$(yad --scale --text "  Define el tamaño en GiB para Home" --value="10" --step="10" --min-value="1" --max-value=${maxvalue} \
---inc-buttons --mark=[GiB]:10 \
+rootauto=$(yad --scale --text "  Define el tamaño en GiB para Root" --value="25" --min-value="25" --max-value=${maxvalue} \
+--inc-buttons --mark=[GiB]:25 \
 --button="Confirmar:0" --buttons-layout="center" --borders="20" \
 --image="drive-harddisk" --window-icon="drive-harddisk" \
---title="Partición Home" --width=330)
+--title="Partición Root" --width=330)
 
 partautoHome1 | yad --progress --title="Discos" --width=430 --height=100 \
 --text="\tFormateando y Montando discos, Porfavor espere ..." \
