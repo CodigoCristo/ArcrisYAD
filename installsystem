@@ -312,6 +312,11 @@ ofimatica=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $5}')
 installofi
 
 
+wifi=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $6}')
+installwifi
+
+bluetooth=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $7}')
+installblue
 
 
 

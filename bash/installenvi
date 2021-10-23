@@ -701,7 +701,6 @@ esac
 
 
 
-WPS-Office
 
 
 installofi () {
@@ -765,10 +764,166 @@ installofi () {
 	echo "Se esta instalando SoftMaker Office:" 
 	echo "" 
 
-	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S brave-bin --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S freeoffice --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hunspell --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hunspell-es_es --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hunspell-es_any --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hyphen --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hyphen-es --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S mythes-es --noconfirm --needed"
+
+  ;;
+
+
+
+esac
+
+}
+
+
+
+
+installwifi () {
+
+	case $wifi in
+
+  "Ninguno")
+
+	echo ""
+
+  ;;
+
+
+  "Automático")
+	echo -e ""
+	echo -e "\t\t| Instalando Driver de Wifi |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
+
+		if [ "$kernel_select" == "linux-stable" ]; then
+        
+			broadcom=$(/bin/bash -c "lspci -k | grep 'Network controller: Broadcom' ")
+			if [[ $broadcom  = *Broadcom* || $broadcom = *broadcom* || $broadcom = *BROADCOM* ]]
+			then            
+			arch-chroot /mnt /bin/bash -c "pacman -S broadcom-wl --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S wireless-regdb --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S wpa_supplicant --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S wireless_tools --noconfirm"
+			arch-chroot /mnt /bin/bash -c 'modprobe wl' 
+			arch-chroot /mnt /bin/bash -c 'rmmod b43'
+			arch-chroot /mnt /bin/bash -c 'rmmod ssb' 
+			echo Listo
+			else  
+			arch-chroot /mnt /bin/bash -c "pacman -S iw wireless_tools wpa_supplicant dialog wireless-regdb --noconfirm"
+			fi
+
+		else
+
+			broadcom=$(arch-chroot /mnt /bin/bash -c "lspci -k | grep 'Network controller: Broadcom' ")
+			if [[ $broadcom  = *Broadcom* || $broadcom = *broadcom* || $broadcom = *BROADCOM* ]]
+			then      
+			arch-chroot /mnt /bin/bash -c "pacman -S broadcom-wl-dkms --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S wireless-regdb --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S wpa_supplicant --noconfirm"
+			arch-chroot /mnt /bin/bash -c "pacman -S wireless_tools --noconfirm"			
+			arch-chroot /mnt /bin/bash -c 'modprobe wl' 
+			arch-chroot /mnt /bin/bash -c 'rmmod b43' 
+			arch-chroot /mnt /bin/bash -c 'rmmod ssb' 
+			echo listo
+			else
+			arch-chroot /mnt /bin/bash -c "pacman -S iw wireless_tools wpa_supplicant dialog wireless-regdb --noconfirm"
+			fi
+
+		fi
+
+  ;;
+
+  "Broadcom-802.11-Linux-Stable")
+	echo -e ""
+	echo -e "\t\t| Instalando Driver de Wifi |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
+
+	arch-chroot /mnt /bin/bash -c "pacman -S broadcom-wl --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S wireless-regdb --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S wpa_supplicant --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S wireless_tools --noconfirm"
+	arch-chroot /mnt /bin/bash -c 'modprobe wl' 
+	arch-chroot /mnt /bin/bash -c 'rmmod b43'
+	arch-chroot /mnt /bin/bash -c 'rmmod ssb' 
 
 
   ;;
+
+
+  "Broadcom-802.11-Others-Kernels")
+	echo -e ""
+	echo -e "\t\t| Instalando Driver de Wifi |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
+
+	arch-chroot /mnt /bin/bash -c "pacman -S broadcom-wl-dkms --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S wireless-regdb --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S wpa_supplicant --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S wireless_tools --noconfirm"			
+	arch-chroot /mnt /bin/bash -c 'modprobe wl' 
+	arch-chroot /mnt /bin/bash -c 'rmmod b43' 
+	arch-chroot /mnt /bin/bash -c 'rmmod ssb' 
+
+  ;;
+
+
+
+esac
+
+}
+
+
+
+
+
+
+
+installblue () {
+
+	case $bluetooth in
+
+  "Ninguno")
+
+	echo ""
+
+  ;;
+
+
+  "bluetoothctl-(Terminal)")
+	echo -e ""
+	echo -e "\t\t| Instalando Driver de Bluetooth |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
+
+	arch-chroot /mnt /bin/bash -c "pacman -S bluez --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S bluez-utils --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S pulseaudio-bluetooth --noconfirm"
+	arch-chroot /mnt /bin/bash -c "systemctl enable bluetooth.service"
+
+
+  ;;
+
+  "blueman-(Graphical)")
+	echo -e ""
+	echo -e "\t\t| Instalando Driver de Bluetooth |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
+
+	arch-chroot /mnt /bin/bash -c "pacman -S bluez --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S bluez-utils --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S pulseaudio-bluetooth --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S blueman --noconfirm"
+	arch-chroot /mnt /bin/bash -c "systemctl enable bluetooth.service"
+
+
+  ;;
+
 
 
 
