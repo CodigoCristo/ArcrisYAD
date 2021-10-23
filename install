@@ -328,8 +328,9 @@ val=$(yad  --geometry=200x20 --center --align="left" \
 ret=$?
 
 [[ $ret -eq 1 ]] && \
-echo "No clicked"  \
-&& exit 0
+umount -R /mnt && \
+swapoff -a  && \
+&& reboot
 
 if [[ $ret -eq 0 ]]; then
     echo "Continuar"
