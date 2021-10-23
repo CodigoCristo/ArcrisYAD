@@ -1,6 +1,11 @@
 #! /bin/bash
 
 partautoRoot1 () {
+
+uefi=$( ls /sys/firmware/efi/ | grep -ic efivars )
+
+	if [ $uefi == 1 ]; then
+        
 umount -R /mnt
 swapoff -a
 
@@ -30,6 +35,41 @@ mkdir -p /mnt/efi
 mkfs.fat -F 32 $(cat boot-efi) 
 mount $(cat boot-efi) /mnt/efi	
 rm boot-efi && rm root-efi
+
+		else
+
+umount -R /mnt
+swapoff -a
+
+sgdisk --zap-all ${disco}
+(echo o; echo n; echo p; echo 1; echo ""; echo +150M; echo n; echo p; echo 2; echo ""; echo "";  echo a; echo 1; echo w; echo q) | fdisk ${disco}
+fdisk -l ${disco} > partition
+echo ""
+cat partition
+sleep 3
+#
+partition="$(cat partition | grep /dev/ | awk '{if (NR!=1) {print}}' | sed 's/*//g' | awk -F ' ' '{print $1}')"
+rm partition
+#
+echo $partition | awk -F ' ' '{print $1}' >  boot-bios
+echo $partition | awk -F ' ' '{print $2}' >  root-bios
+#
+clear
+echo ""
+echo "Formateando Particiones"
+echo ""
+mkfs.ext4 $(cat root-boot) 
+mount $(cat root-boot) /mnt 
+
+mkdir -p /mnt/boot 
+mkfs.ext4 $(cat boot-boot) 
+mount $(cat boot-boot) /mnt/boot
+rm boot-efi && rm root-efi
+
+		fi
+
+
+
 		}
 
 
