@@ -534,7 +534,7 @@ echo -e ""
 	echo "" 
 	echo "Se esta instalando AUR Yay:" 
 	echo "" 
-	arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -Syu --noeditmenu --noconfirm --needed"
 
   ;;
 
@@ -543,8 +543,7 @@ echo -e ""
 	echo "" 
 	echo "Se esta instalando AUR Paru:" 
 	echo "" 
-	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
-
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S paru-bin --noconfirm --needed"
 
   ;;
 
@@ -553,8 +552,9 @@ echo -e ""
 	echo "Se esta instalando AUR Pamac Gráfico:" 
 	echo "" 
 
-	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
-
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pamac-aur --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libpamac-aur --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S archlinux-appstream-data-pamac --noconfirm --needed"
 
   ;;
 
@@ -564,8 +564,7 @@ echo -e ""
 	echo "Se esta instalando AUR Octopi Gráfico:" 
 	echo "" 
 
-	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
-
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S octopi --noconfirm --needed"
 
   ;;
 
@@ -590,84 +589,188 @@ esac
 
 installwebs () {
 
-echo -e ""
-echo -e "\t\t| Instalando Navegador Web |"
-printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
-echo -e ""
 
 	case $web in
 
   "Ninguno")
-	echo "" 
-	echo "Se esta instalando AUR Yay:" 
-	echo "" 
-	arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+
+	echo ""
 
   ;;
 
 
   "Firefox")
+	echo -e ""
+	echo -e "\t\t| Instalando Navegador Web |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
 	echo "" 
 	echo "Se esta instalando AUR Paru:" 
 	echo "" 
-	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
-
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S firefox --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S firefox-i18n-es-mx --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S firefox-i18n-es-es --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S passff-host --noconfirm --needed"
 
   ;;
 
   "Chromium")
+	echo -e ""
+	echo -e "\t\t| Instalando Navegador Web |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
 	echo "" 
 	echo "Se esta instalando AUR Pamac Gráfico:" 
 	echo "" 
 
-	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S chromium --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S passff-host --noconfirm --needed"
 
 
   ;;
 
 
   "Brave")
+	echo -e ""
+	echo -e "\t\t| Instalando Navegador Web |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
 	echo "" 
 	echo "Se esta instalando AUR Octopi Gráfico:" 
 	echo "" 
 
-	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S brave-bin --noconfirm --needed"
 
 
   ;;
 
 
   "Google-Chrome")
+	echo -e ""
+	echo -e "\t\t| Instalando Navegador Web |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
 	echo "" 
 	echo "Se esta eliminando el asistente AUR:" 
 	echo "" 
 
-	arch-chroot /mnt /bin/bash -c "pacman -R yay-bin --noconfirm"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S google-chrome --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S passff-host --noconfirm --needed"
 
 
   ;;
 
 
   "Opera")
+	echo -e ""
+	echo -e "\t\t| Instalando Navegador Web |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
 	echo "" 
 	echo "Se esta eliminando el asistente AUR:" 
 	echo "" 
 
-	arch-chroot /mnt /bin/bash -c "pacman -R yay-bin --noconfirm"
-
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S opera --noconfirm --needed"
 
   ;;
 
 
   "Vivaldi")
+	echo -e ""
+	echo -e "\t\t| Instalando Navegador Web |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
 	echo "" 
 	echo "Se esta eliminando el asistente AUR:" 
 	echo "" 
 
-	arch-chroot /mnt /bin/bash -c "pacman -R yay-bin --noconfirm"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vivaldi --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S passff-host --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vivaldi-ffmpeg-codecs --noconfirm --needed"
+
+  ;;
+
+esac
+
+}
+
+
+
+
+
+
+
+
+WPS-Office
+
+
+installofi () {
+
+	case $ofimatica in
+
+  "Ninguno")
+
+	echo ""
+
+  ;;
+
+
+  "LibreOffice")
+	echo -e ""
+	echo -e "\t\t| Instalando Ofimatica |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
+	echo "" 
+	echo "Se esta instalando Libre Office:" 
+	echo "" 
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libreoffice-fresh --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libreoffice-fresh-es --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hunspell --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hunspell-es_es --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hunspell-es_any --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hyphen --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hyphen-es --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S mythes-es --noconfirm --needed"
+
+  ;;
+
+  "WPS-Office")
+	echo -e ""
+	echo -e "\t\t| Instalando Ofimatica |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
+	echo "" 
+	echo "Se esta instalando WPS Office:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S wps-office --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ttf-wps-fonts --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hunspell --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hunspell-es_es --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hunspell-es_any --noconfirm --needed"
+
+	cp -r wps/interfaz/es_ES/  /mnt/usr/lib/office6/mui/  
+	cp -r wps/diccionario/es_ES/   /mnt/home/$username/.local/share/Kingsoft/office6/dicts/
 
 
   ;;
+
+
+  "SoftMaker-Office")
+	echo -e ""
+	echo -e "\t\t| Instalando Ofimatica |"
+	printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+	echo -e ""
+	echo "" 
+	echo "Se esta instalando SoftMaker Office:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S brave-bin --noconfirm --needed"
+
+
+  ;;
+
+
 
 esac
 
