@@ -16,10 +16,34 @@ echo "Se estan instalando los drivers de video Automático"
 sleep 3 
 case $(systemd-detect-virt) in 
 	oracle)
+
+		if [ "$kernel_select" == "linux-stable" ]; then
+        
+        arch-chroot /mnt /bin/bash -c "pacman -S virtualbox-guest-utils --noconfirm" 
+		arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vmware --noconfirm" 
+		arch-chroot /mnt /bin/bash -c "pacman -S virtualbox-host-modules-arch --noconfirm" 
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+		arch-chroot /mnt /bin/bash -c "modprobe -a vboxdrv"
+		arch-chroot /mnt /bin/bash -c "modprobe -a vboxguest vboxsf vboxvideo"
+		arch-chroot /mnt /bin/bash -c "modprobe -a vboxnetadp vboxnetflt vboxnetadp"
+		arch-chroot /mnt /bin/bash -c "VBoxClient-all"
+		arch-chroot /mnt /bin/bash -c "systemctl enable vboxservice.service"
+		arch-chroot /mnt /bin/bash -c "systemctl enable systemd-modules-load.service"
+
+		else
+
 		arch-chroot /mnt /bin/bash -c "pacman -S virtualbox-guest-utils --noconfirm" 
-		arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vmware virtualbox-host-modules-arch mesa --noconfirm" 
-		arch-chroot /mnt /bin/bash -c "pacman -S virtualbox-host-modules-arch mesa --noconfirm" 
-		arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm" 
+		arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vmware --noconfirm" 
+		arch-chroot /mnt /bin/bash -c "pacman -S virtualbox-host-dkms --noconfirm" 
+		arch-chroot /mnt /bin/bash -c "pacman -S mesa --noconfirm"
+		arch-chroot /mnt /bin/bash -c "modprobe -a vboxdrv"
+		arch-chroot /mnt /bin/bash -c "modprobe -a vboxguest vboxsf vboxvideo"
+		arch-chroot /mnt /bin/bash -c "modprobe -a vboxnetadp vboxnetflt vboxnetadp"
+		arch-chroot /mnt /bin/bash -c "VBoxClient-all"
+		arch-chroot /mnt /bin/bash -c "systemctl enable vboxservice.service"
+		arch-chroot /mnt /bin/bash -c "systemctl enable systemd-modules-load.service"
+
+		fi
 	;; 
 	vmware) 
 		arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vmware --noconfirm"
@@ -158,6 +182,26 @@ sleep 2
 	arch-chroot /mnt /bin/bash -c "pacman -S opencl-headers --noconfirm"
 
   ;;
+
+
+  "AMD/ATI_(Open_Source)")
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+  ;;
+
+
+AMD/Radeon_(Open_Source)
+Nvidia_(Open_Source)
+Nvidia_Privativo_440xx_(Linux_Stable)
+Nvidia_Privativo_390xx_(Linux_Stable)
+Nvidia_Privativo_440xx_(Linux_LTS)
+Nvidia_Privativo_390xx_(Linux_LTS)
+Nvidia_Privativo_440xx_(Linux_Hardened_-_Zen)
+Nvidia_Privativo_390xx_(Linux_Hardened_-_Zen)
+Nvidia_Privativo_440xx_(Linux_Stable_+_Intel)
 
 
 esac

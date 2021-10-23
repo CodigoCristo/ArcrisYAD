@@ -105,7 +105,7 @@ pacman -Sy rsync --noconfirm
 echo "" 
 echo "" 
 echo -e ""
-echo -e "\t\t\t| Actualizando mejores listas de Mirrors |"
+echo -e "\t\t| Actualizando mejores listas de Mirrors |"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 echo -e ""
 sleep 3

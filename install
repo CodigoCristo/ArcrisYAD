@@ -8,6 +8,7 @@
 # https://sanana.kiev.ua/index.php/yad
 # http://smokey01.com/yad/
 # https://github.com/offternet/yaddemo
+# http://rpm.pbone.net/manpage_idpl_17003956_numer_1_nazwa_yad.html
 #
 
 rm datosuser
@@ -310,6 +311,30 @@ sudo sh installsystem | yad  --geometry=690x455 --center --align="left" \
 --text-info --tail --window-icon="gtk-execute" --title="Instalando Arch Linux - Arcris" \
 --no-buttons --borders="10"
 
+
+
+####### FINAL $$$$$$$$$$$$$$$$$ 
+### ACA RECIBO MUCHAS DONACIONES Y DEJO MI EMPLEO
+#################################################
+
+yad  --geometry=400x10 --center  --selectable-labels --text-align="center" \
+--timeout="20" --timeout-indicator="top" --skip-taskbar --text="<span color='white'><b>\nPorfavor Apoya este proyecto enviando tu donación: </b></span>\n\n<span color='#07BFFF'><b>paypal.me/codigocristo</b></span>\n\n<span color='white'><b>Con esa donación crearemos mejores programas</b></span>" --window-icon="gtk-dialog-info" --title="Arcris" \
+--borders="10" --no-buttons
+
+val=$(yad  --geometry=200x20 --center --align="left" \
+--window-icon="gtk-dialog-question" --skip-taskbar --title="Arcris" \
+--borders="10" --button="  Reiniciar computador !gtk-refresh:1" --button="  Salir de Arcris!gtk-quit:0" \
+--buttons-layout="center")
+ret=$?
+
+[[ $ret -eq 1 ]] && \
+echo "No clicked"  \
+&& exit 0
+
+if [[ $ret -eq 0 ]]; then
+    echo "Continuar"
+    exit 0
+fi
 
 
 #sudo pacman -Sy --noconfirm  | yad --geometry=400x500 --text-info --tail  --text="\nInstalando\n"
