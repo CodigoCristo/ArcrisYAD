@@ -51,8 +51,8 @@ sleep 3
 partition="$(cat partition | grep /dev/ | awk '{if (NR!=1) {print}}' | sed 's/*//g' | awk -F ' ' '{print $1}')"
 rm partition
 #
-echo $partition | awk -F ' ' '{print $1}' >  boot-bios
-echo $partition | awk -F ' ' '{print $2}' >  root-bios
+echo $partition | awk -F ' ' '{print $1}' >  boot-boot
+echo $partition | awk -F ' ' '{print $2}' >  root-boot
 #
 clear
 echo ""
