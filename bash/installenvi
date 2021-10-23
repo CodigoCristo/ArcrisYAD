@@ -129,7 +129,7 @@ sleep 2
   ;;
 
 
-  "Video vesa (Generic All)")
+  "Video_vesa_(Generic_All)")
 	
 	echo "" 
 	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
@@ -137,7 +137,7 @@ sleep 2
 
   ;;
 
-  "Intel (Open Source)")
+  "Intel_(Open_Source)")
 	
 	echo "" 
 	echo "Se estan instalando los drivers de Video Intel (Open Source)" 
@@ -163,6 +163,7 @@ sleep 2
 esac
 
 }
+
 
 
 
@@ -260,7 +261,7 @@ installenvironment () {
   ;;
 
 
-  "KDE Plasma")
+  "KDE-Plasma")
 	echo "" 
 	echo "Se esta instalando el entorno KDE Plasma:" 
 	echo "" 
