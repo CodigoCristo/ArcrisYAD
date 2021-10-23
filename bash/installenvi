@@ -415,6 +415,87 @@ installenvironment () {
 
   ;;
 
+
+
+  "i3wm")
+	echo "" 
+	echo "Se esta instalando el entorno i3wm:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S i3-gaps --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S i3blocks --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S i3lock --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S i3status --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S rofi --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S dmenu --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ly-git --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S thunar --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S network-manager-applet --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S polkit-gnome --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gnome-keyring --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lxappearance --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S rxvt-unicode --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gnome-themes-extra --noeditmenu --noconfirm --needed"
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gnu-free-fonts --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ttf-hack --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ttf-inconsolata --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ttf-font-awesome --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S awesome-terminal-fonts --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S noto-fonts --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S noto-fonts-emoji --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S nerd-fonts-hack --noeditmenu --noconfirm --needed"
+
+	arch-chroot /mnt /bin/bash -c "systemctl enable ly"
+
+  ;;
+
+
+  "bspwm")
+	echo "" 
+	echo "Se esta instalando el entorno Bspwm:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S bspwm --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S sxhkd --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S rofi --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S dmenu --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S st --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ly-git --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S thunar --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S network-manager-applet --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S polkit-gnome --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gnome-keyring --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lxappearance --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S rxvt-unicode --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gnome-themes-extra --noeditmenu --noconfirm --needed"
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gnu-free-fonts --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ttf-hack --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ttf-inconsolata --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ttf-font-awesome --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S awesome-terminal-fonts --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S noto-fonts --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S noto-fonts-emoji --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S nerd-fonts-hack --noeditmenu --noconfirm --needed"
+
+	arch-chroot /mnt /bin/bash -c "systemctl enable ly"
+
+  ;;
+
+
 esac
 
 }
