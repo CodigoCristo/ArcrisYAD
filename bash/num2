@@ -54,7 +54,7 @@ partautoHome () {
 
 maxvalue=$(sudo fdisk -l ${disco} | grep "bytes," | awk '{print $5}' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' | sed -e's/.$//' )
 
-let maxvalue=$maxvalue-20
+let maxvalue=$maxvalue-25
 
 rootauto=$(yad --scale --text "  Define el tamaño en GiB para Root" --value="25" --min-value="25" --max-value=${maxvalue} \
 --inc-buttons --mark=[GiB]:25 \
