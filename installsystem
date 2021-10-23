@@ -307,10 +307,8 @@ installaudio
 web=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $4}')
 installwebs
 
-
 ofimatica=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $5}')
 installofi
-
 
 wifi=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $6}')
 installwifi
