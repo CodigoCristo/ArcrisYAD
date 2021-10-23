@@ -1,0 +1,344 @@
+#!/bin/bash
+
+
+installutil () {
+
+
+if [ "$util1" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S android-file-transfer --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S android-tools --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S android-udev msmtp libmtp --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libcddb --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gvfs --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gvfs-afc --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gvfs-smb --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gvfs-gphoto2 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gvfs-mtp --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gvfs-goa --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gvfs-nfs --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gvfs-google --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gst-libav --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S dosfstools --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S f2fs-tools --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S exfat-utils --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ntfs-3g --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S udftools --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S nilfs-utils --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S polkit --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gpart --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S mtools --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S cifs-utils --noconfirm --needed"
+
+    fi
+
+
+if [ "$util2" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S xarchiver --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S unarchiver --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S binutils --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gzip --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lha --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lrzip --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lzip --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lz4 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S p7zip --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S tar --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S xz --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S bzip2 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S p7zip --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lbzip2 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S arj --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lzop --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S cpio --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S unrar --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S unzip --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S zstd --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S zip --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lzip --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S unarj --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S zstd --noconfirm --needed"
+
+
+    fi
+
+
+if [ "$util3" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ffmpeg --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S aom --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libde265 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S x265 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S x264 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libmpeg2 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S xvidcore --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libtheora --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libvpx --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S schroedinger --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S sdl --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gstreamer --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gst-plugins-bad --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gst-plugins-base --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gst-plugins-base-libs --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gst-plugins-good --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gst-plugins-ugly --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S xine-lib --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libdvdcss --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libdvdread --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S dvd+rw-tools --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lame --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S jasper --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libmng --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libraw --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libkdcraw --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vcdimager --noconfirm --needed"
+
+
+    fi
+
+
+if [ "$util4" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gufw --noconfirm --needed"
+
+    fi
+
+
+if [ "$util5" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hardinfo --noconfirm --needed"
+
+    fi
+
+
+if [ "$util6" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gparted --noconfirm --needed"
+
+    fi
+
+
+if [ "$util7" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S viewnior --noconfirm --needed"
+
+    fi
+
+
+
+if [ "$util8" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vlc --noconfirm --needed"
+
+    fi
+
+
+if [ "$util9" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S audacious --noconfirm --needed"
+
+    fi
+
+
+if [ "$util10" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | gpg --import -"
+	arch-chroot /mnt /bin/bash -c "curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | gpg --import"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S spotify --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S spotify-adblock-git --noconfirm --needed"
+
+    fi
+
+
+
+if [ "$util11" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gnome-system-monitor --noconfirm --needed"
+
+    fi
+
+
+
+if [ "$util12" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S htop --noconfirm --needed"
+
+    fi
+
+
+
+if [ "$util13" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S telegram-desktop --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S aspell-es --noconfirm --needed"
+
+    fi
+
+
+
+if [ "$util14" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S steam  --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S proton  --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S steam-fonts  --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S wine-staging --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S winetricks --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S zenity --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S kdialog --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S dosbox --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S cups --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S samba --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S giflib --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-giflib --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libpng --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libpng --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libldap --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libldap --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gnutls --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-gnutls --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S mpg123 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-mpg123 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S openal --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-openal --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S v4l-utils --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-v4l-utils --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libpulse --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libpulse --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libgpg-error --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libgpg-error --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S alsa-plugins --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-alsa-plugins --noconfirm --needed" 
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S alsa-lib --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-alsa-lib --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libjpeg-turbo --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libjpeg-turbo --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S sqlite --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-sqlite --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libxcomposite --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libxcomposite --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libxinerama --noconfirm --needed" 
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libxinerama --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libgcrypt --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libgcrypt --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ncurses --noconfirm --needed" 
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-ncurses --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S opencl-icd-loader --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-opencl-icd-loader --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libxslt --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libxslt --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libva --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libva --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gtk3 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-gtk3 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gst-plugins-base-libs --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-gst-plugins-base-libs --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S sdl --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S sdl2 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-sdl2 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vkd3d --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-vkd3d --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vulkan-headers --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vulkan-tools --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vulkan-icd-loader --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-vulkan-icd-loader --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ocl-icd --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-ocl-icd --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S opencl-headers --noconfirm --needed"
+
+    fi
+
+
+
+if [ "$util15" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lutris  --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S wine-staging --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S winetricks --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S zenity --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S kdialog --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S dosbox --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S cups --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S samba --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S giflib --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-giflib --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libpng --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libpng --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libldap --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libldap --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gnutls --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-gnutls --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S mpg123 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-mpg123 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S openal --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-openal --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S v4l-utils --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-v4l-utils --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libpulse --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libpulse --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libgpg-error --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libgpg-error --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S alsa-plugins --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-alsa-plugins --noconfirm --needed" 
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S alsa-lib --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-alsa-lib --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libjpeg-turbo --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libjpeg-turbo --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S sqlite --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-sqlite --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libxcomposite --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libxcomposite --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libxinerama --noconfirm --needed" 
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libxinerama --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libgcrypt --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libgcrypt --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ncurses --noconfirm --needed" 
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-ncurses --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S opencl-icd-loader --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-opencl-icd-loader --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libxslt --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libxslt --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libva --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libva --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gtk3 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-gtk3 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gst-plugins-base-libs --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-gst-plugins-base-libs --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S sdl --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S sdl2 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-sdl2 --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vkd3d --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-vkd3d --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vulkan-headers --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vulkan-tools --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vulkan-icd-loader --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-vulkan-icd-loader --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ocl-icd --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-ocl-icd --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S opencl-headers --noconfirm --needed"
+
+
+    fi
+
+
+if [ "$util16" == "TRUE" ]; then
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S obs-studio --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gconf --noconfirm --needed"
+
+    fi
+
+
+}
+
+
+
+
+
+
+
+if [ "$REPRO_condicion" == "true" ]; then
+
+
+
+    fi

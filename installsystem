@@ -316,7 +316,25 @@ installwifi
 bluetooth=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $7}')
 installblue
 
-
+echo ""
+source bash/installutilerias
+util1=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $1}')
+util2=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $2}')
+util3=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $3}')
+util4=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $4}')
+util5=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $5}')
+util6=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $6}')
+util7=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $7}')
+util8=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $8}')
+util9=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $9}')
+util10=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $10}')
+util11=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $11}')
+util12=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $12}')
+util13=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $13}')
+util14=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $14}')
+util15=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $15}')
+util16=$(cat datosuser | awk 'NR>=11&&NR<=11' |  awk '{print $16}')
+installutil
 
 
 aur=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $3}')

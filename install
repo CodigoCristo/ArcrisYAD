@@ -327,10 +327,7 @@ val=$(yad  --geometry=200x20 --center --align="left" \
 --buttons-layout="center")
 ret=$?
 
-[[ $ret -eq 1 ]] && \
-umount -R /mnt && \
-swapoff -a  && \
-&& reboot
+[[ $ret -eq 1 ]] && umount -R /mnt && swapoff -a  && reboot
 
 if [[ $ret -eq 0 ]]; then
     echo "Continuar"

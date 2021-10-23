@@ -748,10 +748,6 @@ installofi () {
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hunspell-es_es --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S hunspell-es_any --noconfirm --needed"
 
-	cp -r wps/interfaz/es_ES/  /mnt/usr/lib/office6/mui/  
-	cp -r wps/diccionario/es_ES/   /mnt/home/$username/.local/share/Kingsoft/office6/dicts/
-
-
   ;;
 
 
