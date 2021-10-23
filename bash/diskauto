@@ -162,7 +162,7 @@ swapoff -a
 sgdisk --zap-all ${disco}
 parted ${disco} mklabel gpt
 sgdisk ${disco} -n=1:0:+150M -t=1:ef00
-sgdisk ${disco} -n=2:0:+${homeauto}G -t=2:8300
+sgdisk ${disco} -n=2:0:+${rootauto}G -t=2:8300
 sgdisk ${disco} -n=3:0:0
 fdisk -l ${disco} > partition
 echo ""
@@ -173,8 +173,8 @@ partition="$(cat partition | grep /dev/ | awk '{if (NR!=1) {print}}' | sed 's/*/
 rm partition
 
 echo $partition | awk -F ' ' '{print $1}' >  boot-efi
-echo $partition | awk -F ' ' '{print $2}' >  home-efi
-echo $partition | awk -F ' ' '{print $3}' >  root-efi
+echo $partition | awk -F ' ' '{print $2}' >  root-efi
+echo $partition | awk -F ' ' '{print $3}' >  home-efi
 
 mkfs.ext4 $(cat root-efi) 
 mount $(cat root-efi) /mnt 
