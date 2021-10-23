@@ -193,15 +193,85 @@ sleep 2
   ;;
 
 
-AMD/Radeon_(Open_Source)
-Nvidia_(Open_Source)
-Nvidia_Privativo_440xx_(Linux_Stable)
-Nvidia_Privativo_390xx_(Linux_Stable)
-Nvidia_Privativo_440xx_(Linux_LTS)
-Nvidia_Privativo_390xx_(Linux_LTS)
-Nvidia_Privativo_440xx_(Linux_Hardened_-_Zen)
-Nvidia_Privativo_390xx_(Linux_Hardened_-_Zen)
-Nvidia_Privativo_440xx_(Linux_Stable_+_Intel)
+  "AMD/Radeon_(Open_Source)")
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+  ;;
+
+
+  "Nvidia_(Open_Source)")
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+  ;;
+
+  "Nvidia_Privativo_440xx_(Linux_Stable)")
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+  ;;
+
+
+  "Nvidia_Privativo_390xx_(Linux_Stable)")
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+  ;;
+
+
+  "Nvidia_Privativo_440xx_(Linux_LTS)")
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+  ;;
+
+
+  "Nvidia_Privativo_390xx_(Linux_LTS)")
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+  ;;
+
+
+  "Nvidia_Privativo_440xx_(Linux_Hardened_-_Zen)")
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+  ;;
+
+
+  "Nvidia_Privativo_390xx_(Linux_Hardened_-_Zen)")
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+  ;;
+
+
+  "Nvidia_Privativo_440xx_(Linux_Stable_+_Intel)")
+	
+	echo "" 
+	echo "Se estan instalando los drivers de Video vesa (Generic All)" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xf86-video-vesa --noconfirm"
+
+  ;;
+
 
 
 esac
@@ -351,3 +421,254 @@ esac
 
 
 
+
+
+
+
+
+installaudio () {
+
+	case $audio in
+
+  "Pulse-Audio")
+	echo "" 
+	echo "Se esta instalando Pulse Audio:" 
+	echo "" 
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pulseaudio --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pulseaudio-alsa --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pavucontrol --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pamixer --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pulseaudio-equalizer --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pulseaudio-equalizer-ladspa --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pulseeffects --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libcanberra-pulse --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libcanberra-gstreamer --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-alsa-plugins --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libpulse --noeditmenu --noconfirm --needed"
+        
+  ;;
+
+
+  "Alsa-Audio")
+	echo "" 
+	echo "Se esta instalando Alsa Audio:" 
+	echo "" 
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S alsa-utils --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S alsa-plugins --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S alsa-oss --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S alsa-firmware --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pamixer --noeditmenu --noconfirm --needed"
+
+  ;;
+
+  "Jack-Audio")
+	echo "" 
+	echo "Se esta instalando Jack Audio:" 
+	echo "" 
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S realtime-privileges --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S jack2 --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-jack2 --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S a2jmidid --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libffado --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S python-dbus --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S waf --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pro-audio --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lv2-plugins --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S ladspa-plugins --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S dssi-plugins --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S vst-plugins --noeditmenu --noconfirm --needed"
+     
+  ;;
+
+
+  "Pipewire-Audio")
+	echo "" 
+	echo "Se esta instalando Pipewire Audio:" 
+	echo "" 
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pipewire --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pipewire-alsa --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pipewire-pulse --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pipewire-jack --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gst-plugin-pipewire --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pipewire-media-session --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pipewire-zeroconf --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S pipewire-jack-dropin --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-pipewire --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-pipewire-jack --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S helvum --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username systemctl start --user pipewire-pulse.service"
+	arch-chroot /mnt /bin/bash -c "systemctl start pipewire-pulse.service"
+	arch-chroot /mnt /bin/bash -c "systemctl start pipewire.service"
+	arch-chroot /mnt /bin/bash -c "systemctl start pipewire-media-session.service"
+	arch-chroot /mnt /bin/bash -c "systemctl start pipewire.service"
+	arch-chroot /mnt /bin/bash -c "systemctl start pipewire-media-session.service"
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S wireplumber --noeditmenu --noconfirm --needed"
+
+	arch-chroot /mnt /bin/bash -c "systemctl disable pipewire-media-session"
+	arch-chroot /mnt /bin/bash -c "systemctl start --user wireplumber.service"
+	arch-chroot /mnt /bin/bash -c "systemctl start wireplumber.service"
+	arch-chroot /mnt /bin/bash -c "pactl info"
+
+  ;;
+
+esac
+
+}
+
+
+
+
+
+
+installaur () {
+
+echo -e ""
+echo -e "\t\t| Instalando AUR - Arch User Repository |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+
+	case $aur in
+
+  "yay-(Terminal)")
+	echo "" 
+	echo "Se esta instalando AUR Yay:" 
+	echo "" 
+	arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+
+  ;;
+
+
+  "paru-(Terminal)")
+	echo "" 
+	echo "Se esta instalando AUR Paru:" 
+	echo "" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+
+
+  ;;
+
+  "pamac-(Graphical)")
+	echo "" 
+	echo "Se esta instalando AUR Pamac Gráfico:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+
+
+  ;;
+
+
+  "Octopi-(Graphical)")
+	echo "" 
+	echo "Se esta instalando AUR Octopi Gráfico:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+
+
+  ;;
+
+
+  "Ninguno")
+	echo "" 
+	echo "Se esta eliminando el asistente AUR:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "pacman -R yay-bin --noconfirm"
+
+
+  ;;
+
+esac
+
+}
+
+
+
+
+
+installwebs () {
+
+echo -e ""
+echo -e "\t\t| Instalando Navegador Web |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+
+	case $web in
+
+  "Ninguno")
+	echo "" 
+	echo "Se esta instalando AUR Yay:" 
+	echo "" 
+	arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
+
+  ;;
+
+
+  "Firefox")
+	echo "" 
+	echo "Se esta instalando AUR Paru:" 
+	echo "" 
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+
+
+  ;;
+
+  "Chromium")
+	echo "" 
+	echo "Se esta instalando AUR Pamac Gráfico:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+
+
+  ;;
+
+
+  "Brave")
+	echo "" 
+	echo "Se esta instalando AUR Octopi Gráfico:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+
+
+  ;;
+
+
+  "Google-Chrome")
+	echo "" 
+	echo "Se esta eliminando el asistente AUR:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "pacman -R yay-bin --noconfirm"
+
+
+  ;;
+
+
+  "Opera")
+	echo "" 
+	echo "Se esta eliminando el asistente AUR:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "pacman -R yay-bin --noconfirm"
+
+
+  ;;
+
+
+  "Vivaldi")
+	echo "" 
+	echo "Se esta eliminando el asistente AUR:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "pacman -R yay-bin --noconfirm"
+
+
+  ;;
+
+esac
+
+}

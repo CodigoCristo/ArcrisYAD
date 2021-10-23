@@ -295,6 +295,30 @@ installenvironment
 
 
 
+source bash/installenvi
+audio=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $2}')
+echo -e ""
+echo -e "\t\t\t| Instalando Sistema de Audio |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+installaudio
+
+
+web=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $4}')
+installwebs
+
+
+
+
+
+
+
+
+
+aur=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $3}')
+installaur
+
+
 keymapx=$(cat datosuser | awk 'NR>=3&&NR<=3' |  awk '{print $1}')
 arch-chroot /mnt /bin/bash -c "localectl --no-convert set-x11-keymap ${keymapx}"
 echo -e 'Section "InputClass"' > /mnt/etc/X11/xorg.conf.d/00-keyboard.conf 
@@ -329,8 +353,6 @@ cp pacman.conf /mnt/etc/pacman.conf
 arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
 arch-chroot /mnt /bin/bash -c "pacman -Syu --noconfirm"
 echo ""
-echo ""
-arch-chroot /mnt /bin/bash -c "sudo -u $username alsi -l"
 echo ""
 arch-chroot /mnt /bin/bash -c "systemctl enable dhcpcd NetworkManager"
 echo ""
@@ -388,8 +410,7 @@ echo -e '            `+sso+:-`                 `.-/+oso:    '
 echo -e '           `++:.                           `-/+/   '
 echo -e '           .`                                 `/   '
 echo ""
-echo -e "       Instalación Completa - Reinicia tu Computadora     " 
-echo ""
+echo -e "                    Instalación Completa     " 
 mensaje_install
 
 sleep 5
