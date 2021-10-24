@@ -45,7 +45,7 @@ sleep 5
 
 ######## VARIABLES #############################################################
 kernel_select=$(cat datosuser | awk 'NR>=7&&NR<=7' |  awk '{print $1}')
-         disk=$(cat datosuser | awk 'NR>=5&&NR<=5' |  awk '{print $1}')
+        disco=$(cat datosuser | awk 'NR>=5&&NR<=5' |  awk '{print $1}')
      username=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $1}')
       keymapx=$(cat datosuser | awk 'NR>=3&&NR<=3' |  awk '{print $1}')
   zonahoraria=$(cat datosuser | awk 'NR>=2&&NR<=2' |  awk '{print $1}')
@@ -353,7 +353,7 @@ cat /mnt/etc/X11/xorg.conf.d/00-keyboard.conf
 sleep 3
 
 
-
+disco=$(cat datosuser | awk 'NR>=5&&NR<=5' |  awk '{print $1}')
 source bash/installgrub
 echo "" 
 echo "" 

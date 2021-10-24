@@ -309,10 +309,7 @@ arch-chroot /mnt /bin/bash -c "chown -hR $username:users /home/$username/.bashrc
 
 installucode () {
 
-echo -e ""
-echo -e "\t\t\t| Instalando Ucode del Sistema |"
-printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
-echo -e ""
+
 
 if [ "$ucode_select" == "TRUE" ]; then
     
@@ -320,6 +317,10 @@ microcode=$(lspci -k | grep 'Host bridge: Intel')
 lspci -k | grep 'Host bridge:'  > procesador
 if [[ $microcode  = *Intel* || $microcode = *intel* || $microcode = *INTEL* ]]
 then
+echo -e ""
+echo -e "\t\t\t| Instalando Ucode del Sistema |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
 echo ""
 echo ""     
 cat procesador
@@ -327,6 +328,10 @@ echo ""
 arch-chroot /mnt /bin/bash -c "pacman -S intel-ucode --noconfirm"
 
 else
+echo -e ""
+echo -e "\t\t\t| Instalando Ucode del Sistema |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
 echo ""
 echo ""     
 cat procesador
@@ -343,13 +348,14 @@ fi
 
 installtouchpad () {
 
+
+
+if [ "$touchpad_select" == "TRUE" ]; then
+    
 echo -e ""
 echo -e "\t\t| Instalando Driver Touchpad del Sistema |"
 printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
 echo -e ""
-
-if [ "$touchpad_select" == "TRUE" ]; then
-    
 
 arch-chroot /mnt /bin/bash -c "pacman -S xf86-input-synaptics --noconfirm"
 arch-chroot /mnt /bin/bash -c "pacman -S xf86-input-libinput --noconfirm"
