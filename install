@@ -133,7 +133,7 @@ yad --plug=$KEY --tabnum=6 --align=left \
 --field="OBS-Studio - Software de código abierto:CHK" > $res6 &
 
 
-inxi -CDGNm >> devicespc.txt
+sudo inxi -CDGNm -y 90 >> devicespc.txt
 cat devicespc.txt | yad --image="cpu"  --plug=$KEY --tabnum=7 --align="left" \
 --text-info --fontname="Hack bold 10" --text="\nInformación del Sistema\n" > $res7 &
 
