@@ -133,9 +133,9 @@ yad --plug=$KEY --tabnum=6 --align=left \
 --field="OBS-Studio - Software de código abierto:CHK" > $res6 &
 
 
-inxi -CDGNm -y 90
+sudo lshw -short | egrep 'processor|memory|display|network|disk|bridge\(s\)' > devicespc.txt 
 
-cat /home/arcris/devicespc.txt | yad --image="cpu"  --plug=$KEY --tabnum=7 --text="Good Morning" --text-align=center \
+cat devicespc.txt | yad --image="cpu"  --plug=$KEY --tabnum=7  \
 --text-info --fontname="Hack 10" --text="\nInformación del Sistema\n" > $res7 &
 
 
