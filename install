@@ -10,7 +10,13 @@
 # https://github.com/offternet/yaddemo
 # http://rpm.pbone.net/manpage_idpl_17003956_numer_1_nazwa_yad.html
 #
-sudo pacman -Sy lshw --noconfirm
+sudo pacman -Sy lshw --noconfirm | yad --progress --title="Arcris" --width=330 --height=100 \
+--text="Cargando, Porfavor espere ..." \
+--image="gtk-disconnect" --window-icon="gtk-execute" \
+--pulsate --buttons-layout="center" --borders="10" \
+--auto-close --hide-text \
+--button="Cancelar (No recomendado):0"
+
 rm datosuser
 
 res1=$(mktemp --tmpdir term-tab1.XXXXXXXX)
