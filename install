@@ -133,9 +133,10 @@ yad --plug=$KEY --tabnum=6 --align=left \
 --field="OBS-Studio - Software de código abierto:CHK" > $res6 &
 
 
+inxi -CDGNm -y 90
 
-sudo inxi -CDGNm -y 90 | yad --image="cpu"  --plug=$KEY --tabnum=7 --text="Good Morning" --text-align=center \
---text-info --fontname="Hack bold 10" --text="\nInformación del Sistema\n" > $res7 &
+inxi -CDGNm -y 90 | yad --image="cpu"  --plug=$KEY --tabnum=7 --text="Good Morning" --text-align=center \
+--text-info --fontname="Hack 10" --text="\nInformación del Sistema\n" > $res7 &
 
 
 yad --center --window-icon="cuadroicon.png" --image="unnamed.jpg" --image-on-top --title="Instalador Arcris" \
