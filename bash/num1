@@ -18,6 +18,12 @@ case $? in
 0)
 
 zonahoraria=$(curl https://ipapi.co/timezone)
+
+yad --center --width="400" --height="10" --window-icon="gtk-connect"  \
+--image="gtk-connect" --align="center" --text-align="center" \
+--text="\n<span size='large' color='#FFFFFF'><b>Tu Zona Horaria es</b></span>\n   <span size='large' color='#07BFFF'><b> ${zonahoraria}\n</b></span>" \
+--title "Zona Horaria" --button="Confirmar:0" --buttons-layout="center" --borders="10" 
+
 printf "$zonahoraria \n"
     ;;
 
@@ -29,7 +35,14 @@ zone=$(zenity --list --radiolist --height=500 --width=450 --title="$title" --tex
 subzones=$(cat /usr/share/zoneinfo/zone.tab | awk '{print $3}' | grep "$zone/" | sed "s/$zone\///g" | sort -ud | sort | awk '{ printf " FALSE ""\0"$0"\0" }')
 subzone=$(zenity --list --radiolist --height=500 --width=450 --title="$title" --text "Select your sub-zone." --column Select --column Zone $subzones)
 
+
 zonahoraria=$zone/$subzone
+
+yad --center --width="400" --height="10" --window-icon="gtk-connect"  \
+--image="gtk-connect" --align="center" --text-align="center" \
+--text="\n<span size='large' color='#FFFFFF'><b>Tu Zona Horaria es</b></span>\n   <span size='large' color='#07BFFF'><b> ${zonahoraria}\n</b></span>" \
+--title "Zona Horaria" --button="Confirmar:0" --buttons-layout="center" --borders="10" 
+
 printf "$zonahoraria \n"
     ;;
 
