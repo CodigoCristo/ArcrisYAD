@@ -134,12 +134,8 @@ yad --plug=$KEY --tabnum=6 --align=left \
 
 
 
-info=$(inxi -CDGNm -y 90)
-yad --image="cpu" --plug=$KEY --tabnum=7 --text-align="left"  --selectable-labels \
---fontname="Hack bold 10" --text="\nInformación del Sistema\n\n${info}" > $res7 &
-
-#inxi -CDGNm -y 90 | yad --image="cpu"  --plug=$KEY --tabnum=7 --text="Good Morning" --text-align=center \
-#--text-info --fontname="Hack bold 10" --text="\nInformación del Sistema\n" > $res7 &
+sudo inxi -CDGNm -y 90 | yad --image="cpu"  --plug=$KEY --tabnum=7 --text="Good Morning" --text-align=center \
+--text-info --fontname="Hack bold 10" --text="\nInformación del Sistema\n" > $res7 &
 
 
 yad --center --window-icon="cuadroicon.png" --image="unnamed.jpg" --image-on-top --title="Instalador Arcris" \
