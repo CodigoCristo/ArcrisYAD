@@ -133,9 +133,13 @@ yad --plug=$KEY --tabnum=6 --align=left \
 --field="OBS-Studio - Software de código abierto:CHK" > $res6 &
 
 
-sudo inxi -CDGNm -y 90 >> devicespc.txt
-cat devicespc.txt | yad --image="cpu"  --plug=$KEY --tabnum=7 --align="left" \
---text-info --fontname="Hack bold 10" --text="\nInformación del Sistema\n" > $res7 &
+
+info=$(inxi -CDGNm -y 90)
+yad --image="cpu" --plug=$KEY --tabnum=7 --text-align="left"  --selectable-labels \
+--fontname="Hack bold 10" --text="\nInformación del Sistema\n\n${info}" > $res7 &
+
+#inxi -CDGNm -y 90 | yad --image="cpu"  --plug=$KEY --tabnum=7 --text="Good Morning" --text-align=center \
+#--text-info --fontname="Hack bold 10" --text="\nInformación del Sistema\n" > $res7 &
 
 
 yad --center --window-icon="cuadroicon.png" --image="unnamed.jpg" --image-on-top --title="Instalador Arcris" \
@@ -298,7 +302,6 @@ echo "" >> final
 echo "" >> final
 echo "  Arcris Instalación fácil de ArchLinux - Donaciones en: www.patreon.com/codigocristo" >> final
 
-rm devicespc.txt
 
 cat final | yad  --geometry=775x455 --center --align="left" \
 --text-info --window-icon="gtk-execute" --title="Información de Instalación" \
