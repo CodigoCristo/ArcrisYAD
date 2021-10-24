@@ -179,14 +179,12 @@ if [ "$util13" == "TRUE" ]; then
 
 if [ "$util14" == "TRUE" ]; then
 
-	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S steam  --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S steam vulkan-intel lib32-vulkan-intel --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S wine-staging --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S winetricks --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S zenity --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S kdialog --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S dosbox --noconfirm --needed"
-	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S cups --noconfirm --needed"
-	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S samba --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S giflib --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-giflib --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libpng --noconfirm --needed"
@@ -227,7 +225,6 @@ if [ "$util14" == "TRUE" ]; then
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libxslt --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S libva --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-libva --noconfirm --needed"
-	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gtk3 --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-gtk3 --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S gst-plugins-base-libs --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lib32-gst-plugins-base-libs --noconfirm --needed"
