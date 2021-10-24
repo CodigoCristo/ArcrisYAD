@@ -307,7 +307,7 @@ if [ $? = "1" ]
   	then killall yad
 fi
 
-sudo #sh installsystem | yad  --geometry=690x455 --center --align="left" \
+sudo sh installsystem | yad  --geometry=690x455 --center --align="left" \
 --text-info --tail --window-icon="gtk-execute" --title="Instalando Arch Linux - Arcris" \
 --no-buttons --borders="10"
 
