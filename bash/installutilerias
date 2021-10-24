@@ -180,8 +180,6 @@ if [ "$util13" == "TRUE" ]; then
 if [ "$util14" == "TRUE" ]; then
 
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S steam  --noconfirm --needed"
-	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S proton  --noconfirm --needed"
-	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S steam-fonts  --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S wine-staging --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S winetricks --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S zenity --noconfirm --needed"

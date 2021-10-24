@@ -1,0 +1,19 @@
+Memory:    RAM: total: 15.50 GiB used: 7.39 GiB (47.7%) 
+           RAM Report: permissions: Unable to run dmidecode. Root privileges required. 
+CPU:       Topology: Quad Core model: Intel Core i7-4790 bits: 64 type: MT MCP 
+           L2 cache: 8192 KiB 
+           Speed: 3808 MHz min/max: 800/4000 MHz Core speeds (MHz): 1: 3842 2: 3844 
+           3: 3824 4: 3841 5: 3837 6: 3841 7: 3828 8: 3833 
+Graphics:  Device-1: Intel Xeon E3-1200 v3/4th Gen Core Processor Integrated Graphics 
+           driver: i915 v: kernel 
+           Device-2: NVIDIA GF119 [GeForce GT 610] driver: nouveau v: kernel 
+           Display: x11 server: X.Org 1.20.13 driver: nouveau resolution: 1360x768~60Hz 
+           OpenGL: renderer: NVD9 v: 4.3 Mesa 21.2.4 
+Network:   Device-1: Qualcomm Atheros AR9485 Wireless Network Adapter driver: ath9k 
+           Device-2: Realtek RTL8111/8168/8411 PCI Express Gigabit Ethernet 
+           driver: r8168 
+Drives:    Local Storage: total: 2.04 TiB used: 232.02 GiB (11.1%) 
+           ID-1: /dev/sda vendor: Kingston model: SUV400S37240G size: 223.57 GiB 
+           ID-2: /dev/sdb vendor: Seagate model: ST2000DM001-1ER164 size: 1.82 TiB 
+           ID-3: /dev/sdc type: USB vendor: Kingston model: DataTraveler SE9 
+           size: 7.27 GiB 
