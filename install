@@ -135,7 +135,7 @@ yad --plug=$KEY --tabnum=6 --align=left \
 
 inxi -CDGNm -y 90
 
-inxi -CDGNm -y 90 | yad --image="cpu"  --plug=$KEY --tabnum=7 --text="Good Morning" --text-align=center \
+cat /home/arcris/devicespc.txt | yad --image="cpu"  --plug=$KEY --tabnum=7 --text="Good Morning" --text-align=center \
 --text-info --fontname="Hack 10" --text="\nInformación del Sistema\n" > $res7 &
 
 
