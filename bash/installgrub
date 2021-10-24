@@ -5,7 +5,7 @@ installgrub () {
 ######
 #GRUB
 ######
-uefi=$( parted $disco print | grep -ic gpt )
+uefi=$( ls /sys/firmware/efi/ | grep -ic efivars )
 
 if [ $uefi == 1 ] && [ -d /sys/firmware/efi ]; then
 
