@@ -10,7 +10,7 @@
 # https://github.com/offternet/yaddemo
 # http://rpm.pbone.net/manpage_idpl_17003956_numer_1_nazwa_yad.html
 #
-
+sudo pacman -Sy lshw --noconfirm
 rm datosuser
 
 res1=$(mktemp --tmpdir term-tab1.XXXXXXXX)
@@ -133,7 +133,20 @@ yad --plug=$KEY --tabnum=6 --align=left \
 --field="OBS-Studio - Software de código abierto:CHK" > $res6 &
 
 
-sudo lshw -short | egrep 'processor|memory|display|network|disk|bridge\(s\)' > devicespc.txt 
+#sudo lshw -short | egrep 'processor|memory|display|network|disk|bridge\(s\)' > devicespc.txt 
+
+sudo lshw -short | egrep 'processor' | awk '{print $2 " | " $3,$4,$5,$6,$7,$8,$9,$10}' > devicespc.txt
+echo "" >> devicespc.txt
+sudo lshw -short | egrep 'bridge' | awk '{print $2 " | " $3,$4,$5,$6,$7,$8}' >> devicespc.txt
+echo "" >> devicespc.txt
+sudo lshw -short | egrep 'memory' | awk '{print $2 " | " $3,$4,$5,$6,$7,$8,$9,$10}' >> devicespc.txt
+echo "" >> devicespc.txt
+sudo lshw -short | egrep 'display' | awk '{print $2 " | " $3,$4,$5,$6,$7,$8,$9,$10}' >> devicespc.txt
+echo "" >> devicespc.txt
+sudo lshw -short | egrep 'network' | awk '{print $2 " | " $3,$4,$5,$6,$7,$8}' >> devicespc.txt
+echo "" >> devicespc.txt
+sudo lshw -short | egrep 'disk' | awk '{print $2 " | " $3,$4,$5,$6,$7,$8,$9}' >> devicespc.txt
+echo "" >> devicespc.txt
 
 cat devicespc.txt | yad --image="cpu"  --plug=$KEY --tabnum=7  \
 --text-info --fontname="Hack 10" --text="\nInformación del Sistema\n" > $res7 &
