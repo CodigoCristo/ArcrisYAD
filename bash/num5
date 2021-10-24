@@ -1,5 +1,8 @@
 #! /bin/bash
 
-
-
-
+yad --progress --title="Arcris" --width=330 --height=100 \
+--text="Revisando conexión, Porfavor espere ..." \
+--image="gtk-disconnect" --window-icon="gtk-execute" \
+--pulsate --buttons-layout="center" --borders="10" \
+--auto-close --hide-text \
+--button="Cancelar (No recomendado):0"

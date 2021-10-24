@@ -168,7 +168,7 @@ username=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $1}')
 
 if [[ $numerodelineas != 11 ]]; then
 	zenity --warning --width="250" --height="50"  --text "\nInformación incompleta\n"
-	sh install
+	#sh install
 else 
 	if printf "%s" "$username" | grep -Eoq "^[a-z][a-z0-9-]*$" && [ "${#username}" -lt 30 ]; then
 		  echo $username
@@ -181,12 +181,12 @@ else
             if [ -z "$input" ]; then
 
               zenity --error --width="350" --height="50"  --text "\nNo se le permite tener una contraseña vacía.\n"
-            	sh install
+            	#sh install
 
             elif [ "$input" != "$confirm_input" ]; then
               
               zenity --error --width="400" --height="50"  --text "\nLas dos contraseñas de usuario que ha introducido no coinciden.\n"
-              	sh install
+              	#sh install
 
             else
               userpasswd="$input"
@@ -204,12 +204,12 @@ else
 		    if [ -z "$input" ]; then
 		      
 		      zenity --error --width="350" --height="50"  --text "\nNo se le permite tener una contraseña vacía.\n"
-		      	sh install
+		      	#sh install
 
 		    elif [ "$input" != "$confirm_input" ]; then
 
 		      zenity --error --width="400" --height="50"  --text "\nLas dos contraseñas de usuario que ha introducido no coinciden.\n"
-		    	sh install
+		    	#sh install
 
 		    else
 		      rootpasswd="$input"
@@ -220,12 +220,12 @@ else
 	#zenity --warning --width="250" --height="50"  --text "\nUSUARIO BIEN\n"
 	if grep -Fxq "$username" reserved_usernames ; then
 	zenity --error --width="350" --height="50"  --text "\nNOMBRE DE USUARIO RESERVADO PARA EL SISTEMA\n"
-		sh install
+		#sh install
 	fi
 	else
 
 		zenity --error --width="450" --height="100"  --text "\nNOMBRE DE USUARIO CONTIENE CARACTERES ESPECIALES\nVUELVE A LLENAR LOS CAMPOS DEL INSTALADOR\n"
-		sh install
+		#sh install
 
 	fi
 fi
@@ -307,7 +307,7 @@ if [ $? = "1" ]
   	then killall yad
 fi
 
-sudo sh installsystem | yad  --geometry=690x455 --center --align="left" \
+sudo #sh installsystem | yad  --geometry=690x455 --center --align="left" \
 --text-info --tail --window-icon="gtk-execute" --title="Instalando Arch Linux - Arcris" \
 --no-buttons --borders="10"
 

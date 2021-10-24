@@ -22,6 +22,7 @@ arch-chroot /mnt /bin/bash -c "pacman -S grub efibootmgr os-prober --noconfirm"
 
 echo ""
 echo '>>> Su disco es GPT | UEFI es el sistema Moderno <<<'
+cat partitions | grep gpt 
 sleep 3
 echo '' 
 echo 'Instalando EFI System >> bootx64.efi' 
@@ -61,11 +62,12 @@ arch-chroot /mnt /bin/bash -c "pacman -S grub os-prober --noconfirm"
 echo "" 
 echo '>>> Su disco es DOS MBR | BIOS Legacy es un sistema antiguo <<<' 
 echo "" 
+cat partitions | grep dos 
 sleep 3
 echo '' 
-arch-chroot /mnt /bin/bash -c "grub-install --target=i386-pc $disco"
+arch-chroot /mnt /bin/bash -c "grub-install --target=i386-pc ${disco}"
 ########
-sed -i "6iGRUB_CMDLINE_LINUX_DEFAULT="loglevel=3"" /mnt/etc/default/grub
+sed -i '6iGRUB_CMDLINE_LINUX_DEFAULT="loglevel=3"' /mnt/etc/default/grub
 sed -i '7d' /mnt/etc/default/grub
 echo "GRUB_DISABLE_OS_PROBER=false" >>  /mnt/etc/default/grub
 ########
