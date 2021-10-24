@@ -1,1 +1,3 @@
 #! /bin/bash
+inxi -CDGNm -y 90 | yad --image="cpu"  --fontname="Hack bold 10" --align="left" \
+--text-info --text="\nInformación del Sistema\n"
