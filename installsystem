@@ -286,6 +286,15 @@ installvideo
 
 
 source bash/installenvi
+audio=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $2}')
+echo -e ""
+echo -e "\t\t\t| Instalando Sistema de Audio |"
+printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
+echo -e ""
+installaudio
+
+
+source bash/installenvi
 environment=$(cat datosuser | awk 'NR>=8&&NR<=8' |  awk '{print $1}')
 echo -e ""
 echo -e "\t\t\t| Instalando Entorno de Escritorio |"
@@ -295,13 +304,6 @@ installenvironment
 
 
 
-source bash/installenvi
-audio=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $2}')
-echo -e ""
-echo -e "\t\t\t| Instalando Sistema de Audio |"
-printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' _
-echo -e ""
-installaudio
 
 
 web=$(cat datosuser | awk 'NR>=10&&NR<=10' |  awk '{print $4}')
