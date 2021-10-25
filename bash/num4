@@ -3,7 +3,7 @@
 
 desktop () {
 
-DE=$(echo "Xfce4,Gnome_Completo,Gnome_Minimalista,KDE-Plasma_Completo,KDE-Plasma_Minimalista,Deepin")
+DE=$(echo "Xfce4,Gnome_Completo,Gnome_Minimalista,KDE-Plasma_Completo,KDE-Plasma_Minimalista,Deepin,MATE")
 
 yad --align=left --form  --separator=" " --item-separator="," \
 --skip-taskbar --on-top  --center --window-icon="gtk-execute" --title "Entorno de escritorio" \
