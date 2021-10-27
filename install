@@ -32,7 +32,7 @@ export -f keyX11
 # --field="<span color='#07BFFF'><b>Contraseña de Usuario</b></span>:H" "Clave" \
 yad --plug=$KEY --tabnum=1 \
 --form  --separator=" " --item-separator="," \
---text="<b>\nEvite ingresar caracteres especiales ! # $ % ( ) * +, -. / \nTendrá que volver a llenar todos los campos nuevamente.  Por favor ingrese sus datos:\n</b>" \
+--text="<b>\nSu usuario debe ser en minusculas, Evite ingresar caracteres especiales ! # $ % ( ) * +, -. / \nTendrá que volver a llenar todos los campos nuevamente.  Por favor ingrese sus datos:\n</b>" \
 --field="<b>Usuario Nuevo</b>" "usuario" \
 --field="<span color='#07BFFF'><b>Contraseña de Usuario</b></span>" "Clave" \
 --field="<span color='#07BFFF'>Repita Contraseña</span>" "Clave" \
@@ -184,6 +184,7 @@ username=$(cat datosuser | awk 'NR>=4&&NR<=4' |  awk '{print $1}')
 
 if [[ $numerodelineas != 11 ]]; then
 	zenity --warning --width="250" --height="50"  --text "\nInformación incompleta\n"
+	exit
 	#sh install
 else 
 	if printf "%s" "$username" | grep -Eoq "^[a-z][a-z0-9-]*$" && [ "${#username}" -lt 30 ]; then
@@ -197,11 +198,13 @@ else
             if [ -z "$input" ]; then
 
               zenity --error --width="350" --height="50"  --text "\nNo se le permite tener una contraseña vacía.\n"
+            	exit
             	#sh install
 
             elif [ "$input" != "$confirm_input" ]; then
               
               zenity --error --width="400" --height="50"  --text "\nLas dos contraseñas de usuario que ha introducido no coinciden.\n"
+              	exit
               	#sh install
 
             else
@@ -220,11 +223,13 @@ else
 		    if [ -z "$input" ]; then
 		      
 		      zenity --error --width="350" --height="50"  --text "\nNo se le permite tener una contraseña vacía.\n"
+		      	exit
 		      	#sh install
 
 		    elif [ "$input" != "$confirm_input" ]; then
 
 		      zenity --error --width="400" --height="50"  --text "\nLas dos contraseñas de usuario que ha introducido no coinciden.\n"
+		    	exit
 		    	#sh install
 
 		    else
@@ -236,11 +241,13 @@ else
 	#zenity --warning --width="250" --height="50"  --text "\nUSUARIO BIEN\n"
 	if grep -Fxq "$username" reserved_usernames ; then
 	zenity --error --width="350" --height="50"  --text "\nNOMBRE DE USUARIO RESERVADO PARA EL SISTEMA\n"
+		exit
 		#sh install
 	fi
 	else
 
 		zenity --error --width="450" --height="100"  --text "\nNOMBRE DE USUARIO CONTIENE CARACTERES ESPECIALES\nVUELVE A LLENAR LOS CAMPOS DEL INSTALADOR\n"
+		exit
 		#sh install
 
 	fi
