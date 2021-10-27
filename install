@@ -32,7 +32,7 @@ export -f keyX11
 # --field="<span color='#07BFFF'><b>Contraseña de Usuario</b></span>:H" "Clave" \
 yad --plug=$KEY --tabnum=1 \
 --form  --separator=" " --item-separator="," \
---text="<b>\nSu usuario debe ser en minusculas, Evite ingresar caracteres especiales ! # $ % ( ) * +, -. / \nTendrá que volver a llenar todos los campos nuevamente.  Por favor ingrese sus datos:\n</b>" \
+--text="<b>\nSu usuario debe ser en minusculas y numeros\nEvite ingresar caracteres especiales ! # $ % ( ) * +, -. / \nTendrá que volver a llenar todos los campos nuevamente.  Por favor ingrese sus datos:\n</b>" \
 --field="<b>Usuario Nuevo</b>" "usuario" \
 --field="<span color='#07BFFF'><b>Contraseña de Usuario</b></span>" "Clave" \
 --field="<span color='#07BFFF'>Repita Contraseña</span>" "Clave" \
