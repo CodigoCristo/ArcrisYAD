@@ -158,7 +158,7 @@ yad --center --window-icon="cuadroicon.png" --image="unnamed.jpg" --image-on-top
 --button="  Cancelar!gtk-no:1" --button="  Confirmar!gtk-ok:0"  --notebook --key=$KEY --tab="Información" --tab="Disco" --tab="Kernel" --tab="DE o WM" --tab="Programas" --tab="Extras" --tab="Detalles del Sistema"
 
 if [ $? = "1" ] 
-  	then killall yad
+  	then killall yad ; exit
 fi
 
 
@@ -319,7 +319,7 @@ cat final | yad  --geometry=775x455 --center --align="left" \
 --button=" Cancelar!gtk-no:1" --button=" Instalar Arch Linux!gtk-ok:0" --buttons-layout="center" --borders="10"
 
 if [ $? = "1" ] 
-  	then sudo killall yad
+  	then sudo killall yad ; exit
 fi
 
 sudo sh installsystem | yad  --geometry=690x455 --center --align="left" \
