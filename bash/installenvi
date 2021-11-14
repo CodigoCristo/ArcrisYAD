@@ -763,7 +763,7 @@ installenvironment () {
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lxqt --noeditmenu --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S papirus-icon-theme --noeditmenu --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S arc-gtk-theme --noeditmenu --noconfirm --needed"
-	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S xscreensaver-arch-logo --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S xscreensaver --noeditmenu --noconfirm --needed"
 
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S sddm --noeditmenu --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S light-locker --noeditmenu --noconfirm --needed"
