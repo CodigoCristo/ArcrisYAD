@@ -764,12 +764,16 @@ installenvironment () {
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S papirus-icon-theme --noeditmenu --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S arc-gtk-theme --noeditmenu --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S xscreensaver --noeditmenu --noconfirm --needed"
-
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S connman --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lxqt-connman-applet --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S connman-gtk --noeditmenu --noconfirm --needed"
+	
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S sddm --noeditmenu --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S light-locker --noeditmenu --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S accountsservice --noeditmenu --noconfirm --needed"
 	
 	arch-chroot /mnt /bin/bash -c "systemctl enable sddm"
+	arch-chroot /mnt /bin/bash -c "systemctl enable connman"
 
   ;;
 
