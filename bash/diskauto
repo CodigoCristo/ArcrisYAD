@@ -31,9 +31,9 @@ echo ""
 mkfs.ext4 $(cat root-efi) 
 mount $(cat root-efi) /mnt 
 #
-mkdir -p /mnt/efi 
+mkdir -p /mnt/boot/efi
 mkfs.fat -F 32 $(cat boot-efi) 
-mount $(cat boot-efi) /mnt/efi	
+mount $(cat boot-efi) /mnt/boot/efi	
 rm boot-efi && rm root-efi
 
 		else
@@ -102,9 +102,9 @@ echo $partition | awk -F ' ' '{print $3}' >  root-efi
 mkfs.ext4 $(cat root-efi) 
 mount $(cat root-efi) /mnt 
 
-mkdir -p /mnt/efi 
+mkdir -p /mnt/boot/efi
 mkfs.fat -F 32 $(cat boot-efi) 
-mount $(cat boot-efi) /mnt/efi 
+mount $(cat boot-efi) /mnt/boot/efi
 
 mkswap $(cat swap-efi) 
 swapon $(cat swap-efi)
@@ -183,9 +183,9 @@ mkdir -p /mnt/home
 mkfs.ext4 $(cat home-efi) 
 mount $(cat home-efi) /mnt/home
 
-mkdir -p /mnt/efi 
+mkdir -p /mnt/boot/efi
 mkfs.fat -F 32 $(cat boot-efi) 
-mount $(cat boot-efi) /mnt/efi 
+mount $(cat boot-efi) /mnt/boot/efi
 rm boot-efi && rm root-efi && rm home-efi
 
 else
@@ -262,9 +262,9 @@ echo $partition | awk -F ' ' '{print $4}' >  home-efi
 mkfs.ext4 $(cat root-efi) 
 mount $(cat root-efi) /mnt 
 
-mkdir -p /mnt/efi 
+mkdir -p /mnt/boot/efi
 mkfs.fat -F 32 $(cat boot-efi) 
-mount $(cat boot-efi) /mnt/efi 
+mount $(cat boot-efi) /mnt/boot/efi
 
 mkdir -p /mnt/home
 mkfs.ext4 $(cat home-efi) 

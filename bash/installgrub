@@ -26,10 +26,10 @@ cat partitions | grep gpt
 sleep 3
 echo '' 
 echo 'Instalando EFI System >> bootx64.efi' 
-arch-chroot /mnt /bin/bash -c 'grub-install --target=x86_64-efi --efi-directory=/efi --removable' 
+arch-chroot /mnt /bin/bash -c 'grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable' 
 echo '' 
 echo 'Instalando UEFI System >> grubx64.efi' 
-arch-chroot /mnt /bin/bash -c 'grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Arch'
+arch-chroot /mnt /bin/bash -c 'grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=Arch'
 ######
 sed -i '6iGRUB_CMDLINE_LINUX_DEFAULT="loglevel=3"' /mnt/etc/default/grub
 sed -i '7d' /mnt/etc/default/grub
