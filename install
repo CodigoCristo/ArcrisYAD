@@ -34,10 +34,10 @@ yad --plug=$KEY --tabnum=1 \
 --form  --separator=" " --item-separator="," \
 --text="<b>\nSu usuario debe iniciar en minusculas seguido de numeros.\nEvite ingresar caracteres especiales ! # $ % ( ) * +, -. / - Por favor ingrese sus datos:\n</b>" \
 --field="<b>Usuario Nuevo</b>" "usuario" \
---field="<span color='#07BFFF'><b>Contraseña de Usuario</b></span>" "Clave" \
---field="<span color='#07BFFF'>Repita Contraseña</span>" "Clave" \
---field="<span color='#FF3333'><b>Contraseña de Root</b></span>" "Clave" \
---field="<span color='#FF3333'>Repita Contraseña</span>" "Clave" \
+--field="<span color='#07BFFF'><b>Contraseña de Usuario</b></span>:H" "Clave" \
+--field="<span color='#07BFFF'>Repita Contraseña</span>:H" "Clave" \
+--field="<span color='#FF3333'><b>Contraseña de Root</b></span>:H" "Clave" \
+--field="<span color='#FF3333'>Repita Contraseña</span>:H" "Clave" \
 --field="Idioma:FBTN" 'bash -c "idioma"' \
 --field="Zona Horaria:FBTN" 'bash -c "zone"' \
 --field="Teclado:FBTN" 'bash -c "keyX11"' > $res1 &
