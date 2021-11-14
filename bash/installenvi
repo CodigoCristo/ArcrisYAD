@@ -446,8 +446,10 @@ installenvironment () {
 	echo "" 
 	echo "Se esta instalando el entorno Xfce4:" 
 	echo "" 
+
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-server--noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
@@ -490,6 +492,7 @@ installenvironment () {
 
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-server--noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
@@ -533,6 +536,7 @@ installenvironment () {
 
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-server--noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
@@ -573,6 +577,7 @@ installenvironment () {
 
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-server--noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
@@ -632,6 +637,7 @@ installenvironment () {
 
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-server--noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
@@ -673,6 +679,7 @@ installenvironment () {
 
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-server--noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
@@ -712,6 +719,13 @@ installenvironment () {
 	echo "Se esta instalando el entorno MATE:" 
 	echo "" 
 
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-server--noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
+
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S mate --noeditmenu --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S mate-extra --noeditmenu --noconfirm --needed"
 	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S mate-applet-dock --noeditmenu --noconfirm --needed"
@@ -734,6 +748,31 @@ installenvironment () {
   ;;
 
 
+"LXQt")
+	echo "" 
+	echo "Se esta instalando el entorno LXQt:" 
+	echo "" 
+
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-server--noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S lxqt --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S papirus-icon-theme --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S arc-gtk-theme --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S xscreensaver-arch-logo --noeditmenu --noconfirm --needed"
+
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S sddm --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S light-locker --noeditmenu --noconfirm --needed"
+	arch-chroot /mnt /bin/bash -c "sudo -u $username yay -S accountsservice --noeditmenu --noconfirm --needed"
+	
+	arch-chroot /mnt /bin/bash -c "systemctl enable sddm"
+
+  ;;
+
   "i3wm")
 	echo "" 
 	echo "Se esta instalando el entorno i3wm:" 
@@ -741,6 +780,7 @@ installenvironment () {
 
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-server--noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
@@ -781,6 +821,7 @@ installenvironment () {
 
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-apps --noconfirm"
+	arch-chroot /mnt /bin/bash -c "pacman -S xorg-server--noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-xinit --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xorg-twm --noconfirm"
 	arch-chroot /mnt /bin/bash -c "pacman -S xterm --noconfirm"
