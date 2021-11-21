@@ -64,7 +64,7 @@ timedatectl set-timezone ${zonahoraria}
 hwclock -w
 hwclock --hctosys
 hwclock --systohc
-ntpd -qg
+# ntpd -qg
 echo "" 
 echo "" 
 echo -e ""

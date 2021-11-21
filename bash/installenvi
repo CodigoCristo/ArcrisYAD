@@ -774,6 +774,7 @@ installenvironment () {
 	
 	arch-chroot /mnt /bin/bash -c "systemctl enable sddm"
 	arch-chroot /mnt /bin/bash -c "systemctl enable connman"
+	arch-chroot /mnt /bin/bash -c "systemctl disable NetworkManager"
 
   ;;
 
